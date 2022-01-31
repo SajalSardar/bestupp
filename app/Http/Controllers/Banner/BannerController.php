@@ -17,7 +17,8 @@ class BannerController extends Controller
      */
     public function index()
     {
-        return view('backend.banner.index');
+        $datas = Banner::all();
+        return view('backend.banner.index', compact('datas'));
     }
 
 
@@ -38,18 +39,17 @@ class BannerController extends Controller
             $_photo_name = Str::slug($request->banner_title).'.'. $banner_photo->getClientOriginalExtension();
             $photo_url   = URL::asset('storage/uploads/banner/' . $_photo_name);
 
-            $photo_uploades = $banner_photo->move(public_path('storage/uploads/banner/'), $_photo_name);
+            $photo_uploades = $banner_photo->move(public_path('storage/uploads/banner/'), $_photo_name); 
 
-            
-            
-        }
-
-        if($photo_uploades){
-            $banner = new Banner();
-            $banner->banner_title = $request->banner_title;
-            $banner->banner_image = $photo_url;
-        }
-        return back()->with('success', "Successfully Uploaded Banner Image!");
+            if($photo_uploades){
+                $data = new Banner();
+                $data->banner_title = $request->banner_title;
+                $data->banner_image = $photo_url;
+                $data->save();
+                return back()->with('success', "Successfully Uploaded Banner Image!");
+            }
+                
+        }  
     
     }
 

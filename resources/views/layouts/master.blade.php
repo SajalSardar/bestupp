@@ -286,9 +286,8 @@
     <!-- ########## END: MAIN PANEL ########## -->
     @include('message.flash-message')
 
-    <script src="{{ asset("backend/js/jquery.js")}}"></script>
-    <script src="{{ asset("backend/js/popper.js")}}"></script>
-    <script src="{{ asset("backend/js/bootstrap.js")}}"></script>
+    <script src="{{ asset("backend/js/jquery-1.12.4.min.js")}}"></script>
+    <script src="{{ asset("backend/js/bootstrap.bundle.min.js")}}"></script>
     <script src="{{ asset("backend/js/jquery-ui.js")}}"></script>
     <script src="{{ asset("backend/js/perfect-scrollbar.jquery.js")}}"></script>
     <script src="{{ asset("backend/js/jquery.sparkline.min.js")}}"></script>
@@ -304,5 +303,6 @@
     <script src="{{ asset("backend/js/ResizeSensor.js")}}"></script>
     <script src="{{ asset("backend/js/dashboard.js")}}"></script>
     @yield('dashboard_js')
+    
   </body>
 </html>

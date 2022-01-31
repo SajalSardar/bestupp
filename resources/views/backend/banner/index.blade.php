@@ -39,11 +39,42 @@
       </div> 
     </div>
 
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h2>All Banners</h2>
+              </div>
+              <div class="card-body">
+                <table class="table">
+                  <tr>
+                    <th>id</th>
+                    <th>Title</th>
+                    <th>Image</th>
+                    <th>Action</th>
+                  </tr>
+                  @foreach ($datas as $data)
+                    <td >{{ $data->id }}</td>
+                    <td >{{ $data->banner_title }}</td>
+                    <td ><img src="{{ $data->banner_image}}" width="100" alt="{{ $data->banner_title }}"></td>
+                    <td>
+                      <a href="">Delete</a>
+                    </td>
+                  @endforeach
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     
 @endsection
 
 @section('dashboard_js')
-  <script>
-    $('.toast').toast('show')
-  </script>
+<script>
+  $('.toast').toast('show');
+</script>
 @endsection
