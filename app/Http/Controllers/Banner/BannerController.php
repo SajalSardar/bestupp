@@ -19,8 +19,8 @@ class BannerController extends Controller
     {
         $datas = Banner::all();
         return view('backend.banner.index', compact('datas'));
+        
     }
-
 
     /**
      * Store a newly created resource in storage.

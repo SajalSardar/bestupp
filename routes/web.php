@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Banner\BannerController;
+use App\Http\Controllers\Course\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,5 @@ Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 Route::name('dashboard.')->prefix('dashboard')->group(function () {
     Route::resource('/banner', BannerController::class)->except(['show','create']);
+    Route::resource('/course', CourseController::class);
 });
