@@ -10,6 +10,16 @@ use App\Http\Controllers\Controller;
 
 class CourseController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +27,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('backend.banner.index');
+        $datas = Course::orderBy('id', 'DESC')->get();
+        return view('backend.course.index', compact('datas'));
     }
 
     /**
@@ -39,9 +50,6 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $banner_photo   = $request->file('banner_image');
-
-        
-
         $this->validate($request,[
             "name" => "required",
             "description" => "required",
@@ -56,7 +64,7 @@ class CourseController extends Controller
         ]);
 
         if ($banner_photo) {
-            $_photo_name = Str::slug($request->name) . '-' . time() . '.' . $banner_photo->getClientOriginalExtension();
+            $_photo_name = Str::slug($request->name) . '_' . time() . '.' . $banner_photo->getClientOriginalExtension();
             $photo_url   = URL::asset('storage/uploads/course/' . $_photo_name);
 
             $photo_uploades = $banner_photo->move(public_path('storage/uploads/course/'), $_photo_name);
@@ -73,7 +81,7 @@ class CourseController extends Controller
                 $course->installments = json_encode($request->installments);
                 $course->banner_image = $photo_url;
                 $course->save();
-                return back()->with('success', "Course Add Success!");
+                return redirect(route('dashboard.course.index'))->with('success', "Course Add Success!");
             }else{
                 return back()->with('error', "Photo Not uploaded!");
             }
@@ -81,16 +89,7 @@ class CourseController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Course  $course
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Course $course)
-    {
-        //
-    }
+   
 
     /**
      * Show the form for editing the specified resource.
@@ -100,7 +99,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        return view('backend.course.edit', compact('course'));
     }
 
     /**

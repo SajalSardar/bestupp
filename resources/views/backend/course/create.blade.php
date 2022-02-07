@@ -24,7 +24,7 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label">Description:</label>
+                    <label class="form-control-label">Titile Bottom Description:</label>
                     <textarea name="description" class="form-control" placeholder="Description">{{ old('description') }}</textarea>
                     @error('description')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label">Course Overview:</label>
-                    <textarea name="overview" class="form-control" placeholder="overview">{{ old('overview') }}</textarea>
+                    <textarea name="overview" class="form-control" placeholder="overview" style="height: 150px">{{ old('overview') }}</textarea>
                     @error('overview')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -60,7 +60,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label">Course Fee:</label>
-                    <input type="text"placeholder="Course Fee For BDT" name="course_fee" class="form-control">
+                    <input type="number"placeholder="Course Fee For BDT" name="course_fee" class="form-control">
                     @error('course_fee')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -72,23 +72,22 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="form-group after-add-more">
+                <div class="form-group">
                     <label class="form-control-label">Installment</label>
                     <input type="text" name="installments[] " class="form-control " placeholder="Enter Installment">
 
                     @error('installment')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-
-                    <div class="copy d-none">  
-                        <div class="control-group input-group mt-2">  
-                          <input type="text" name="installments[]" class="form-control" placeholder="Enter Installment" value="{{ old('installment_one') }}">  
-                          <div class="input-group-btn">   
-                            <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>  
-                          </div>  
-                        </div>  
-                    </div>
-
+                </div>
+                <div class="after-add-more"></div>
+                <div class="copy d-none">  
+                    <div class="control-group input-group mt-2">  
+                      <input type="text" name="installments[]" class="form-control" placeholder="Enter Installment" value="{{ old('installment_one') }}" disabled>  
+                      <div class="input-group-btn">   
+                        <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>  
+                      </div>  
+                    </div>  
                 </div>
                 <p class="btn btn-primary btn-sm mt-2 add-more">Add Installment</p>
                 <div class="form-group">
@@ -112,10 +111,10 @@
 @section('dashboard_js')
 <script>
   $('.toast').toast('show');
-
-  $(".add-more").click(function(){   
+    $(".add-more").click(function(){   
           var html = $(".copy").html();  
-          $(".after-add-more").after(html);  
+          $(".after-add-more").append(html);
+          $(".after-add-more input").prop('disabled', false);   
       });  
   
       $("body").on("click",".remove",function(){   
