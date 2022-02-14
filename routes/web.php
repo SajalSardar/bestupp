@@ -21,6 +21,16 @@ use App\Http\Controllers\frontend\FrontendController;
 */
 Route::name('frontend.')->group(function () {
     Route::get('/', [FrontendController::class, 'index'])->name('home');
+    Route::post('/student/registration', [FrontendController::class, 'studentRegistration'])->name('student.registration');
+
+    Route::get('/teacher/registration', [FrontendController::class, 'teacheRegistrationView'])->name('teacher.registration.view');
+    Route::get('/student/registration', [FrontendController::class, 'studentRegistrationView'])->name('student.registration.view');
+    Route::get('/all/course', [FrontendController::class, 'allCourse'])->name('all.course');
+    Route::get('/course/{slug}', [FrontendController::class, 'viewCourse'])->name('view.course');
+    
+    Route::get('/aboutss', [FrontendController::class, 'about'])->name('about');
+    Route::get('/contacts', [FrontendController::class, 'contact'])->name('contact');
+    Route::get('/payments', [FrontendController::class, 'payment'])->name('payment');
 });
 
 Auth::routes();

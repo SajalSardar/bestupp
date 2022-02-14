@@ -69,8 +69,8 @@
   <!-- Navbar Part Start -->
   <nav class="navbar navbar-expand-lg header">
     <div class="container">
-      <a class="navbar-brand logo" href="index.html">
-        <img class="img-fluid" src="{{asset('frontend/images/logo.png')}}" alt="Brand Logo">
+      <a class="navbar-brand logo" href="{{ route('frontend.home') }}">
+        <img class="img-fluid" src="{{asset('frontend/images/logo.png')}}" alt="{{ config('app.name'); }}">
       </a>
       <button class="navbar-toggler toggle_btn" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -84,31 +84,31 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav m-auto mb-2 mb-lg-0 menu" id="navbar-example3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('frontend.home') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="course.html">Courses</a>
+            <a class="nav-link" href="{{ route('frontend.all.course') }}">Courses</a>
           </li>
           <li class="nav-item drop_down">
             <a class="nav-link">
               Registration <i class="fa fa-angle-down"></i>
             </a>
             <ul class="dropdown_menu">
-              <li><a class="nav-link drop-item" href="teacher-registration.html">Teacher registration</a></li>
-              <li><a class="nav-link drop_item" href="student-registration.html">Student registration</a></li>
+              <li><a class="nav-link drop-item" href="{{ route('frontend.teacher.registration.view') }}">Teacher registration</a></li>
+              <li><a class="nav-link drop_item" href="{{ route('frontend.student.registration.view') }}">Student registration</a></li>
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="payment.html">Payment</a>
+            <a class="nav-link" href="{{ route('frontend.payment') }}">Payment</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about_us.html">About us</a>
+            <a class="nav-link" href="{{ route('frontend.about') }}">About us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="{{ route('frontend.contact') }}">Contact</a>
           </li>
         </ul>
-        <a class="enroll_btn" href="student-registration.html">Enroll Now</a>
+        <a class="enroll_btn" href="{{ route('frontend.student.registration.view') }}">Enroll Now</a>
       </div>
     </div>
   </nav>

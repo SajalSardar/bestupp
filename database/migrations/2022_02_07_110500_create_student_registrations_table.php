@@ -15,6 +15,19 @@ class CreateStudentRegistrationsTable extends Migration
     {
         Schema::create('student_registrations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('course_id')->constrained();
+            $table->string('name');
+            $table->date('birthday');
+            $table->integer('mobile');
+            $table->string('nationality');
+            $table->string('studentDay');
+            $table->string('guardianname')->nullable();
+            $table->string('fathername');
+            $table->string('gender');
+            $table->text('address');
+            $table->time('stime');
+            $table->integer('gnumber')->nullable();
+            $table->string('status')->default(1);
             $table->timestamps();
         });
     }

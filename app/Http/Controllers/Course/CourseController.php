@@ -71,6 +71,7 @@ class CourseController extends Controller
             if($photo_uploades){
                 $course = new Course();
                 $course->name = $request->name;
+                $course->slug = Str::slug($request->name);
                 $course->description = $request->description;
                 $course->overview = $request->overview;
                 $course->duration = $request->duration;
