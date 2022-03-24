@@ -298,8 +298,6 @@
   </section>
   <!-- Footer Part End -->
 
-
-
   <!-- All script Js Here -->
   <script src="{{ asset('frontend/js/jquery-1.12.4.min.js') }}"></script>
   <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
@@ -308,6 +306,8 @@
   <script src="{{ asset('frontend/js/venobox.min.js') }}"></script>
   <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
   <script src="{{ asset('frontend/js/script.js') }}"></script>
+
+@yield('frontend_js')
 </body>
 
 </html>

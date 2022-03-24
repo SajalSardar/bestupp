@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\backend\ConfigurationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -8,6 +7,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Banner\BannerController;
 use App\Http\Controllers\Course\CourseController;
 use App\Http\Controllers\frontend\FrontendController;
+use App\Http\Controllers\backend\ConfigurationController;
+use App\Http\Controllers\backend\education\TeacherEducationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,16 +22,20 @@ use App\Http\Controllers\frontend\FrontendController;
 */
 Route::name('frontend.')->group(function () {
     Route::get('/', [FrontendController::class, 'index'])->name('home');
-    Route::post('/student/registration', [FrontendController::class, 'studentRegistration'])->name('student.registration');
+    
 
     Route::get('/teacher/registration', [FrontendController::class, 'teacheRegistrationView'])->name('teacher.registration.view');
+    Route::post('/teacher/registration', [FrontendController::class, 'teacheRegistrationStore'])->name('teacher.registration.store');
+
     Route::get('/student/registration', [FrontendController::class, 'studentRegistrationView'])->name('student.registration.view');
+    Route::post('/student/registration', [FrontendController::class, 'studentRegistration'])->name('student.registration');
     Route::get('/all/course', [FrontendController::class, 'allCourse'])->name('all.course');
     Route::get('/course/{slug}', [FrontendController::class, 'viewCourse'])->name('view.course');
     
-    Route::get('/aboutss', [FrontendController::class, 'about'])->name('about');
+    Route::get('/abouts', [FrontendController::class, 'about'])->name('about');
     Route::get('/contacts', [FrontendController::class, 'contact'])->name('contact');
     Route::get('/payments', [FrontendController::class, 'payment'])->name('payment');
+    Route::get('/payments/course/{id}', [FrontendController::class, 'paymentCourse'])->name('payment.course');
 });
 
 Auth::routes();
@@ -45,5 +50,7 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
     Route::get('/day-schedul', [ConfigurationController::class, 'DaySchedul'])->name('day.schedul');
     Route::post('/day-schedul', [ConfigurationController::class, 'DaySchedulStore'])->name('day.schedul.store');
     Route::get('/day-schedul-delete/{id}', [ConfigurationController::class, 'DaySchedulDelete'])->name('day.schedul.delete');
-    
+
+    //Teacher education
+    Route::resource('/teachereducation', TeacherEducationController::class)->except(['show','create','edit']);
 });

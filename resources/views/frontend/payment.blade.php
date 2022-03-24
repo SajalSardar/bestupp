@@ -31,6 +31,7 @@
             <h3 class="pay_headline">Online Payment</h3>
 
             <form action="#">
+              @csrf
             <div class="form-floating admission_input">
               <input type="text" class="form-control" id="payFullName" placeholder="Frist Name">
               <label for="payFullName">Full Name</label>
@@ -38,23 +39,10 @@
 
             <div class="form-floating admission_input">
               <select class="form-select" id="studentCourse" aria-label="Floating label select example">
-                <option selected>-Select One-</option>
-                <option value="Kid's learning">Kid's learning</option>
-                <option value="Kid's English">Kid's English</option>
-                <option value="Spoken English">Spoken English</option>
-                <option value="Arabic Shikkha">Arabic Shikkha</option>
-                <option value="Quran Shikkha">Quran Shikkha</option>
-                <option value="Foreign Language">Foreign Language</option>
-                <option value="General Knowledge">General Knowledge</option>
-                <option value="Basic Computer">Basic Computer</option>
-                <option value="Official Computer">Official Computer</option>
-                <option value="Video Editing">Video Editing</option>
-                <option value="Freelancing">Freelancing</option>
-                <option value="Web Design">Web Design</option>
-                <option value="Digital Marketing">Digital Marketing</option>
-                <option value="App Development">App Development</option>
-                <option value="General Knowledge">Graphic Design</option>
-                <option value="Other">Other</option>
+                <option selected disabled>-Select Course-</option>
+                @foreach ($courses as $course)
+                  <option value="{{ $course->id }}">{{ $course->name }}</option>
+                @endforeach
               </select>
               <label for="studentCourse">Course Name</label>
             </div>
@@ -66,11 +54,7 @@
 
             <div class="form-floating admission_input">
               <select class="form-select " id="bloodGroup" aria-label="Floating label select example">
-                <option selected>Please select</option>
-                <option value="1">1st Installment</option>
-                <option value="2">2nd Installment</option>
-                <option value="3">3rd Installment</option>
-                <option value="7">Others</option>
+                <option selected disabled>Please select</option>
               </select>
               <label for="bloodGroup">Pay For</label>
             </div>
@@ -96,4 +80,33 @@
 
   <!-- Online Payment Part End -->
 
+@endsection
+
+@section('frontend_js')
+  <script>
+    $(function(){
+      $('#studentCourse').change(function() {
+        
+        var studentCourse = $("#studentCourse").val();
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+        var _token = $("input[name='_token']").val();
+        let Url = "/payments/course/" + studentCourse;
+        $.ajax({
+          url: Url,
+          type: "GET",
+          data: {
+            _token: _token,
+          },
+          datatype: 'json',
+          success: function(data) {
+            $("#bloodGroup").append(data);
+          }
+        });
+      });
+    });
+  </script>
 @endsection

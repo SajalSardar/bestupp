@@ -127,4 +127,30 @@
     </div>
   </section>
   <!-- Student Ragistration Part End -->
+
+  @if (session('success'))
+  <div class="toast-container position-absolute top-0 end-0 p-3 " style="z-index: 9999">
+    <div id="myToast" class="toast" data-bs-autohide="true">
+      <div class="toast-header">
+        <img src="..." class="rounded me-2" alt="...">
+        <strong class="me-auto">Bootstrap</strong>
+        <small class="text-muted">2 seconds ago</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        {{ session('success') }}
+      </div>
+    </div>
+  </div>
+  @endif
+@endsection
+
+@section('frontend_js')
+  <script>
+    window.onload = (event)=> {
+      let myAlert = document.querySelector('.toast');
+      let bsAlert = new  bootstrap.Toast(myAlert);
+      bsAlert.show();
+      }
+  </script>
 @endsection
