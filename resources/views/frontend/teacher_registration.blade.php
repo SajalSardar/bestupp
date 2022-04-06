@@ -8,7 +8,6 @@
         <h1>Teacher Registration</h1>
         <ul>
           <li><a href="{{ route('frontend.home') }}">Home</a></li>
-          <li><a href="{{ route('frontend.all.course') }}"><span>/</span>All Courses</a></li>
           <li class="diseble"><span>/</span> Registration</li>
         </ul>
       </div>
@@ -69,6 +68,14 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
+
+                      <div class="form-floating admission_input">
+                        <input type="text" class="form-control" id="tpassword" placeholder="Password" name="password">
+                        <label for="tpassword">Password</label>
+                        @error('password')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                      </div>
     
                       <div class="form-floating admission_input">
                         <input type="text" class="form-control" id="regPreAddress" placeholder="Present Address" name="address">
@@ -82,19 +89,6 @@
                           <input type="text" class="form-control" id="teacherNationality" placeholder="Nationality" name="national">
                           <label for="studentNationality">Nationality</label>
                           @error('national')
-                            <p class="text-danger">{{ $message }}</p>
-                        @enderror
-                      </div>
-    
-                      <div class="form-floating admission_input">
-                        <select class="form-select" id="regEducation" aria-label="Floating label select example" name="education">
-                          <option selected disabled>-Select One-</option>
-                          @foreach ($edus as  $edu)
-                            <option value="{{ $edu->id }}">{{ $edu->name }}</option>
-                          @endforeach
-                        </select>
-                        <label for="regEducation">Education</label>
-                        @error('education')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
@@ -138,9 +132,22 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
+
+                      <div class="form-floating admission_input">
+                        <select class="form-select" id="regEducation" aria-label="Floating label select example" name="education">
+                          <option selected disabled>-Select One-</option>
+                          @foreach ($edus as  $edu)
+                            <option value="{{ $edu->id }}">{{ $edu->name }}</option>
+                          @endforeach
+                        </select>
+                        <label for="regEducation">Education</label>
+                        @error('education')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                      </div>
     
                       <div class="form-floating admission_input">
-                        <select class="form-select" id="regNameCourse" aria-label="Floating label select example" class="course" name="course">
+                        <select class="form-select" id="regNameCourse" aria-label="Floating label select example" class="course" name="course[]">
                           <option selected disabled>-Select One-</option>
                           @foreach ($courses as $course)
                           <option value="{{ $course->id }}">{{ $course->name }}</option>

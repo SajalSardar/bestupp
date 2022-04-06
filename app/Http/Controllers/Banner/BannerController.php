@@ -2,35 +2,31 @@
 
 namespace App\Http\Controllers\Banner;
 
-use App\Models\Banner;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
-class BannerController extends Controller
-{
+class BannerController extends Controller {
 
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $datas = Banner::all();
         return view('backend.banner.index', compact('datas'));
-        
+
     }
 
     /**
@@ -39,32 +35,29 @@ class BannerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $banner_photo   = $request->file('banner_image');
-        $this->validate($request,[
+    public function store(Request $request) {
+        $banner_photo = $request->file('banner_image');
+        $this->validate($request, [
             'banner_title' => 'required',
-            'banner_image' => 'mimes:jpeg,jpg,png|required|max:5120'
+            'banner_image' => 'mimes:jpeg,jpg,png|required|max:5120',
         ]);
         if ($banner_photo) {
-            $_photo_name = Str::slug($request->banner_title).'.'. $banner_photo->getClientOriginalExtension();
-            $photo_url   = URL::asset('storage/uploads/banner/' . $_photo_name);
+            $_photo_name = Str::slug($request->banner_title) . '.' . $banner_photo->getClientOriginalExtension();
+            //$photo_url   = URL::asset('storage/uploads/banner/' . $_photo_name);
 
-            $photo_uploades = $banner_photo->move(public_path('storage/uploads/banner/'), $_photo_name); 
+            $photo_uploades = $banner_photo->move(public_path('storage/uploads/banner/'), $_photo_name);
 
-            if($photo_uploades){
-                $data = new Banner();
+            if ($photo_uploades) {
+                $data               = new Banner();
                 $data->banner_title = $request->banner_title;
-                $data->banner_image = $photo_url;
+                $data->banner_image = $_photo_name;
                 $data->save();
                 return back()->with('success', "Successfully Uploaded Banner Image!");
             }
-                
-        }  
-    
-    }
 
-    
+        }
+
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -72,8 +65,7 @@ class BannerController extends Controller
      * @param  \App\Models\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function edit(Banner $banner)
-    {
+    public function edit(Banner $banner) {
         //
     }
 
@@ -84,8 +76,7 @@ class BannerController extends Controller
      * @param  \App\Models\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Banner $banner)
-    {
+    public function update(Request $request, Banner $banner) {
         //
     }
 
@@ -95,8 +86,7 @@ class BannerController extends Controller
      * @param  \App\Models\Banner  $banner
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Banner $banner)
-    {
+    public function destroy(Banner $banner) {
         //
     }
 }

@@ -1,8 +1,7 @@
-
 $(function () {
   "use strict"
   // Navbar Toggle Line Style add
-  $('.toggle_btn').click(function () {
+  $('.toggle_btn').on('click',function () {
     $('.line1').toggleClass("active_line1");
     $('.line2').toggleClass("line_none");
     $('.line3').toggleClass("line_none");
@@ -10,7 +9,7 @@ $(function () {
   });
 
   // Sticky Menu
-  $(window).scroll(function () {
+  $(window).on('scroll',function () {
     var sticky = $(this).scrollTop();
     if (sticky > 100) {
       $('.header').addClass('add');
@@ -18,14 +17,6 @@ $(function () {
       $('.header').removeClass('add');
     }
   });
-
-
-  //Back to Top Scroll
-  $(".back_to_top").click(function () {
-    $("html,body").animate({
-      scrollTop: 0
-    }, 1500)
-  })
 
 
 
@@ -67,7 +58,7 @@ $(function () {
   });
 
   // Back To Top Button
-  $(window).scroll(function () {
+  $(window).on('scroll',function () {
     var top = $(this).scrollTop();
     if (top > 100) {
       $(".back_to_top").addClass('show');
@@ -76,10 +67,10 @@ $(function () {
     }
   })
 
-  $(".back_to_top").click(function () {
+  $(".back_to_top").on('click',function () {
     $("html,body").animate({
       scrollTop: 0
-    }, 1000)
+    }, 500)
   })
 // Modal
 var myModal = document.getElementById('myModal')
@@ -88,11 +79,6 @@ var myInput = document.getElementById('myInput')
 myModal.addEventListener('shown.bs.modal', function () {
   myInput.focus()
 })
-
-
-
-
-});
 
 var swiper = new Swiper(".mySwiper", {
   loop: true,
@@ -114,7 +100,7 @@ var swiper = new Swiper(".mySwiper", {
     el: '.swiper-scrollbar',
   },
 });
-$(".swiper-container").hover(function() {
+$(".swiper-container").on('hover',function() {
   (this).swiper.autoplay.stop();
 }, function() {
   (this).swiper.autoplay.start();
@@ -131,3 +117,9 @@ function resetFile() {
   nationalId.value = '';
   eduCartificat.value = '';
 }
+
+
+
+});
+
+

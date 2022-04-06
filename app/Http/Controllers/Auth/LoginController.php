@@ -6,8 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
     /*
     |--------------------------------------------------------------------------
     | Login Controller
@@ -17,24 +16,32 @@ class LoginController extends Controller
     | redirecting them to your home screen. The controller uses a trait
     | to conveniently provide its functionality to your applications.
     |
-    */
+     */
 
     use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
      *
-     * @var string
+     * @//var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
+
+    // public function authenticated() {
+    //     if (auth()->user()->hasRole('user')) {
+    //         return redirect(route('user.dashboard'));
+    //     } else {
+    //         return redirect(route('backend.home'));
+    //     }
+
+    // }
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest')->except('logout');
     }
 }

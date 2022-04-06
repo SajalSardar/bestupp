@@ -7,7 +7,7 @@
       <div class="single_banner_text">
         <h1>All Courses</h1>
         <ul>
-          <li><a href="index.html">Home</a></li>
+          <li><a href="{{ route('frontend.home') }}">Home</a></li>
           <li class="diseble"><span>/</span>All Courses</a></li>
         </ul>
       </div>
@@ -20,8 +20,8 @@
   <section id="courses">
     <div class="container">
       <div class="section_heading text-center">
-        <h2>Our <span>Courses</span></h2>
-        <p>Every moment of life should be used properly</p>
+        {!! themeoptions()->course_title !!}
+        <p>{{ themeoptions()->course_subtitle }}</p>
       </div>
       <div class="row">
 
@@ -30,11 +30,10 @@
           <div class="courses_item_main">
             <div class="courses_item text-center">
               <div class="course_img">
-                <img src="{{asset('frontend/images/kids-learning.png')}}" alt="courses-image" class="img-fluid w-100">
+                <img src="{{asset('storage/uploads/course/'.$course->banner_image)}}" alt="{{ $course->name }}" class="img-fluid w-100">
               </div>
               <div class="course_text">
                 <h3>{{ $course->name }}</h3>
-                <!-- <h4><span>Class : 48</span> <span>Duration : Six-Month</span></h4> -->
                 {!! Str::limit($course->overview, 180, '...') !!} </p>
                 <a href="{{ route('frontend.view.course',$course->slug) }}">Read More</a>
               </div>

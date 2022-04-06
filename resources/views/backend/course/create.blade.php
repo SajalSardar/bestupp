@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label">Course Overview:</label>
-                    <textarea name="overview" class="form-control" placeholder="overview" style="height: 150px">{{ old('overview') }}</textarea>
+                    <textarea id="summernote" name="overview">{{ old('overview') }}</textarea>
                     @error('overview')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -72,24 +72,37 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label">Installment</label>
-                    <input type="text" name="installments[] " class="form-control " placeholder="Enter Installment">
-
-                    @error('installment')
+                <div class="form-group ">
+                    <label class="form-control-label">1st Installment</label>
+                    <div class="input-group">
+                        <input type="number" name="installment[pay]" class="form-control" placeholder="Enter Installment" > 
+                        <input type="hidden" name="installment[day]" class="form-control" value="1"> 
+                    </div>
+                    @error('installment1')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-                </div>
-                <div class="after-add-more"></div>
-                <div class="copy d-none">  
-                    <div class="control-group input-group mt-2">  
-                      <input type="text" name="installments[]" class="form-control" placeholder="Enter Installment" value="{{ old('installment_one') }}" disabled>  
-                      <div class="input-group-btn">   
-                        <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>  
-                      </div>  
-                    </div>  
-                </div>
-                <p class="btn btn-primary btn-sm mt-2 add-more">Add Installment</p>
+                </div> 
+
+                <div class="form-group ">
+                    <label class="form-control-label">2nd Installment</label>
+                    <div class="input-group">
+                        <input type="number" name="installment2[pay]" class="form-control" placeholder="Enter Installment" >
+                        <input type="number" name="installment2[day]" class="form-control" placeholder="Ex: 10 days after join course" >  
+
+                    </div>
+                    
+                </div> 
+
+                <div class="form-group ">
+                    <label class="form-control-label">3rd Installment</label>
+                    <div class="input-group">
+                        <input type="number" name="installment3[pay]" class="form-control" placeholder="Enter Installment" >
+                        <input type="number" name="installment3[day]" class="form-control" placeholder="Ex: 10 days after join course" >  
+
+                    </div>
+                    
+                </div> 
+
                 <div class="form-group">
                     <label class="form-control-label">Banner Image: <span class="tx-danger">*</span></label>
                     <input class="form-control" type="file" name="banner_image">
@@ -108,19 +121,27 @@
     
 @endsection
 
+@section('dashboard_css')
+<link rel="stylesheet" href="{{ asset("backend/css/summernote-bs4.min.css")}}">
+@endsection
 @section('dashboard_js')
+<script src="{{ asset("backend/js/summernote-bs4.min.js")}}"></script>
 <script>
   $('.toast').toast('show');
-    $(".add-more").click(function(){   
-          var html = $(".copy").html();  
-          $(".after-add-more").append(html);
-          $(".after-add-more input").prop('disabled', false);   
-      });  
-  
-      $("body").on("click",".remove",function(){   
-          $(this).parents(".control-group").remove();  
-      });
 
-
+  $('#summernote').summernote({
+      tabsize: 2,
+      height: 200,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link']],
+        ['view', ['fullscreen', 'codeview']]
+      ]
+    });
 </script>
 @endsection
+
+

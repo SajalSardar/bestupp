@@ -26,7 +26,7 @@
       <div class="row align-items-center">
         <div class="col-lg-6">
           <div class="course_detiles_pic">
-            <img src="{{ $data->banner_image }}" alt="{{ $data->name }}" class="img-fluid w-100">
+            <img src="{{ asset('storage/uploads/course/'.$data->banner_image )}}" alt="{{ $data->name }}" class="img-fluid w-100">
           </div>
         </div>
         <div class="col-lg-6">
@@ -78,7 +78,7 @@
                 <div class="marketplaces course_inner_item">
                   <h3>Payment method</h3>
                   <ul>
-                      @foreach (json_decode($data->installments) as $installment)
+                      {{-- @foreach (json_decode($data->installments) as $installment)
                       <li>
                         <div class="icon">
                           <i class="fa fa-hand-o-right" aria-hidden="true"></i>
@@ -87,7 +87,7 @@
                           <p>{{ $installment }}</p>
                         </div>
                       </li>
-                      @endforeach
+                      @endforeach --}}
 
                   </ul>
                 </div>

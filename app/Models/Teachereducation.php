@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Teachereducation extends Model
-{
+class Teachereducation extends Model {
     use HasFactory;
 
     /**
@@ -14,7 +13,5 @@ class Teachereducation extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name'
-    ];
+    protected $guarded = ['id'];
 }

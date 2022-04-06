@@ -7,8 +7,7 @@
       <div class="single_banner_text">
         <h1>Payment</h1>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="course.html"><span>/</span>All Courses</a></li>
+          <li><a href="{{ route('frontend.home') }}">Home</a></li>
           <li class="diseble"><span>/</span>Payment</li>
         </ul>
       </div>
@@ -30,15 +29,15 @@
           <div class="admission_form">
             <h3 class="pay_headline">Online Payment</h3>
 
-            <form action="#">
+            <form action="{{ url('/example1') }}" method="POST">
               @csrf
             <div class="form-floating admission_input">
-              <input type="text" class="form-control" id="payFullName" placeholder="Frist Name">
+              <input type="text" class="form-control" name="name" id="payFullName" placeholder="Frist Name">
               <label for="payFullName">Full Name</label>
             </div>
 
             <div class="form-floating admission_input">
-              <select class="form-select" id="studentCourse" aria-label="Floating label select example">
+              <select class="form-select" id="studentCourse" name="course_id">
                 <option selected disabled>-Select Course-</option>
                 @foreach ($courses as $course)
                   <option value="{{ $course->id }}">{{ $course->name }}</option>
@@ -48,28 +47,33 @@
             </div>
 
             <div class="form-floating admission_input">
-              <input type="text" class="form-control" id="payMobNumber" placeholder="Mobile Number">
+              <input type="text" class="form-control" name="phone" id="payMobNumber" placeholder="Mobile Number">
               <label for="payMobNumber">Mobile Number</label>
             </div>
 
             <div class="form-floating admission_input">
-              <select class="form-select " id="bloodGroup" aria-label="Floating label select example">
+              <select class="form-select " id="bloodGroup" name="pay_installment">
                 <option selected disabled>Please select</option>
               </select>
               <label for="bloodGroup">Pay For</label>
             </div>
 
             <div class="form-floating admission_input">
-              <input type="number" class="form-control" id="payAmount" placeholder="Amount">
+              <input type="number" class="form-control" name="amount" id="payAmount" placeholder="Amount">
               <label for="payAmount">Amount</label>
             </div>
 
             <div class="form-floating admission_input">
-              <textarea class="form-control" placeholder="Leave a comment here" id="payNote"></textarea>
+              <textarea class="form-control" name="note" placeholder="Leave a comment here" id="payNote"></textarea>
               <label for="payNote">Notes</label>
             </div>
 
-            <button class="main_btn payment_btn" type="submit">Submit</button>
+                <button class="main_btn payment_btn" id="sslczPayBtn"
+                token="if you have any token validation"
+                postdata="your javascript arrays or objects which requires in backend"
+                order="If you already have the transaction generated for current order"
+                endpoint="/pay-via-ajax"> Pay Now
+        </button>
           </form>
           </div>
         </div>
@@ -88,19 +92,13 @@
       $('#studentCourse').change(function() {
         
         var studentCourse = $("#studentCourse").val();
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
+       
         var _token = $("input[name='_token']").val();
         let Url = "/payments/course/" + studentCourse;
         $.ajax({
           url: Url,
           type: "GET",
-          data: {
-            _token: _token,
-          },
+          
           datatype: 'json',
           success: function(data) {
             $("#bloodGroup").append(data);
@@ -108,5 +106,15 @@
         });
       });
     });
-  </script>
+
+  (function (window, document) {
+      var loader = function () {
+          var script = document.createElement("script"), tag = document.getElementsByTagName("script")[0];
+          script.src = "https://sandbox.sslcommerz.com/embed.min.js?" + Math.random().toString(36).substring(7);
+          tag.parentNode.insertBefore(script, tag);
+      };
+
+      window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+  })(window, document);
+</script>
 @endsection

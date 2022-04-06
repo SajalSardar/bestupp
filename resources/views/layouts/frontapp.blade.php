@@ -8,7 +8,7 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title') | {{ config('app.name') }} </title>
-  <link type="image/png" rel="shortcut icon" href="{{asset('frontend/images/fev_icon.png')}}">
+  <link type="image/png" rel="shortcut icon" href="{{ asset('storage/uploads/logo/'.themeoptions()->logo_icon) }}">
   <!-- Google Fonts Strat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,24 +40,22 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="more_info">
-            <h3>Contact us <i class="fa fa-phone"></i><a href="tel:+88 01601600405">+88 01601600405</a></h3>
+            <h3>Contact us <i class="fa fa-phone"></i> <a href="tel:{{ themeoptions()->header_contact }}">{{ themeoptions()->header_contact }}</a></h3>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="slogan">
             <ul>
-              <li>Learning</li>
-              <li>for</li>
-              <li>Careers</li>
+              {!! themeoptions()->header_slogan !!}
             </ul>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="social_link_top">
             <ul>
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-              <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+              @foreach (socilas() as $media)
+              <li><a href="{{ $media->link }}"><i class="fa fa-{{ $media->name }}"></i></a></li>
+              @endforeach
             </ul>
           </div>
         </div>
@@ -70,7 +68,7 @@
   <nav class="navbar navbar-expand-lg header">
     <div class="container">
       <a class="navbar-brand logo" href="{{ route('frontend.home') }}">
-        <img class="img-fluid" src="{{asset('frontend/images/logo.png')}}" alt="{{ config('app.name'); }}">
+        <img class="img-fluid" style="width: 160px"  src="{{ asset('storage/uploads/logo/'. themeoptions()->logo) }}" alt="{{ config('app.name'); }}">
       </a>
       <button class="navbar-toggler toggle_btn" type="button" data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -84,13 +82,13 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav m-auto mb-2 mb-lg-0 menu" id="navbar-example3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ route('frontend.home') }}">Home</a>
+            <a class="nav-link {{ Request::routeIs('frontend.home') ? "active" : ""}} " aria-current="page" href="{{ route('frontend.home') }}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('frontend.all.course') }}">Courses</a>
+          <li class="nav-item ">
+            <a class="nav-link {{ Request::routeIs('frontend.all.course') ? "active" : ""}}" href="{{ route('frontend.all.course') }}">Courses</a>
           </li>
           <li class="nav-item drop_down">
-            <a class="nav-link">
+            <a class="nav-link {{ Request::routeIs('frontend.teacher.registration.view') ||Request::routeIs('frontend.student.registration.view') ? "active" : ""}}">
               Registration <i class="fa fa-angle-down"></i>
             </a>
             <ul class="dropdown_menu">
@@ -99,13 +97,13 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('frontend.payment') }}">Payment</a>
+            <a class="nav-link {{ Request::routeIs('frontend.payment') ? "active" : ""}}" href="{{ route('frontend.payment') }}">Payment</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('frontend.about') }}">About us</a>
+            <a class="nav-link {{ Request::routeIs('frontend.about') ? "active" : ""}}" href="{{ route('frontend.about') }}">About us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('frontend.contact') }}">Contact</a>
+            <a class="nav-link {{ Request::routeIs('frontend.contact') ? "active" : ""}}" href="{{ route('frontend.contact') }}">Contact</a>
           </li>
         </ul>
         <a class="enroll_btn" href="{{ route('frontend.student.registration.view') }}">Enroll Now</a>
@@ -124,11 +122,10 @@
         <div class="col-lg-3 col-md-6">
           <div class="footer_item item_left">
             <a href="#">
-              <img src="{{asset('frontend/images/logo.png')}}" alt="Logo">
+              <img src="{{ asset('storage/uploads/logo/'.themeoptions()->logo) }}" alt="{{ config('app.name') }}" style="width:200px">
             </a>
             <div class="join_free_seminar">
-              <button class="main_btn" type="submit" data-bs-target="#myModal" data-bs-toggle="modal">Join free
-                learning</button>
+              <button class="main_btn" data-bs-target="#myModal" data-bs-toggle="modal">Join free  learning</button>
               <div class="modal" tabindex="-1" id="myModal">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -187,16 +184,14 @@
             </div>
             <div class="social_links">
               <ul>
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                @foreach (socilas() as $media)
+                <li><a href="{{ $media->link }}"><i class="fa fa-{{ $media->name }}"></i></a></li>
+                @endforeach
               </ul>
             </div>
             <div class="play_store">
               <div class="play_store_img">
-                <a href="#"><img class="img-fluid" src="{{asset('frontend/images/Play-store.png')}}" alt="Play Store image"></a>
+                <a href="{{  themeoptions()->footer_google_store_link }}"><img class="img-fluid" src="{{ asset('frontend/images/Play-store.png') }}" alt="Play Store image"></a>
               </div>
             </div>
 
@@ -259,9 +254,7 @@
               </div>
               <div class="contact_info">
                 <ul>
-                  <li><a href="tel:+8801601600405">+88 01601600405</a></li>
-                  <li><a href="whatsapp://tel:+8801786600486">+88 01786600486</a> <i class="fa fa-whatsapp"
-                      aria-hidden="true"></i></li>
+                    {!! themeoptions()->footer_number !!}
                 </ul>
               </div>
             </div>
@@ -271,8 +264,7 @@
               </div>
               <div class="contact_info">
                 <ul>
-                  <li><a href="mailto:bestupplearning@gmail.com">bestupplearning@gmail.com</a></li>
-                  <li><a href="mailto:bestupplearning@gmail.com">bestupplearning@gmail.com</a></li>
+                  {!! themeoptions()->footer_email !!}
                 </ul>
               </div>
             </div>
@@ -282,8 +274,7 @@
               </div>
               <div class="contact_info">
                 <ul>
-                  <li><a href="https://bestupp.com/" target="_blank">www.bestupp.com</a>
-                  </li>
+                  {!! themeoptions()->footer_site_link !!}
                 </ul>
               </div>
             </div>
@@ -292,8 +283,7 @@
       </div>
     </div>
     <div class="copy">
-      <p>Copyright <i class="fa fa-copyright" aria-hidden="true"></i>
-        2021. All Rights Reserved by <a href="#">bestupp.</a></p>
+      {!! themeoptions()->footer_copy !!}
     </div>
   </section>
   <!-- Footer Part End -->

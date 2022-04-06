@@ -4,33 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class TeacherRegistration extends Model
-{
-    use HasFactory;
+class TeacherRegistration extends Model {
+    use HasFactory, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        "name",
-        "birthday",
-        "mobile",
-        "address",
-        "national",
-        "education",
-        "father_name",
-        "gender",
-        "email",
-        "parmanet_address",
-        "course",
-        "university",
-        "nid",
-        "photo",
-        "certificate",
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be cast.
@@ -40,4 +24,8 @@ class TeacherRegistration extends Model
     protected $casts = [
         'birthday' => 'datetime',
     ];
+
+    function user() {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -4,15 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCoursesTable extends Migration
-{
+class CreateCoursesTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -24,9 +22,9 @@ class CreateCoursesTable extends Migration
             $table->string('class_info')->nullable();
             $table->integer('course_fee');
             $table->string('usdeuro')->nullable();
-            $table->string('installments');
             $table->string('banner_image');
             $table->integer('status')->default(1);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -36,8 +34,7 @@ class CreateCoursesTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::dropIfExists('courses');
     }
 }

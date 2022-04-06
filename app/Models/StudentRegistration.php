@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class StudentRegistration extends Model
-{
-    use HasFactory;
+class StudentRegistration extends Model {
+    use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be cast.
@@ -18,6 +18,10 @@ class StudentRegistration extends Model
      */
     protected $casts = [
         'birthday' => 'datetime',
-        'stime' => 'datetime',
+        'stime'    => 'datetime',
     ];
+
+    function user() {
+        return $this->belongsTo(User::class);
+    }
 }

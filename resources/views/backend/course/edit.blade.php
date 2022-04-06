@@ -73,12 +73,7 @@
                     @enderror
                 </div>
                 
-                <div class="form-group">
-                    <label class="form-control-label">Installment</label>
-                    @foreach (json_decode($course->installments) as $item)
-                    <input type="text" name="installments[] " class="form-control mb-2" placeholder="Enter Installment" value="{{ $item }}">
-                    @endforeach
-                </div>
+                
                 <div class="after-add-more"></div>
                 <div class="copy d-none">  
                     <div class="control-group input-group mt-2">  
