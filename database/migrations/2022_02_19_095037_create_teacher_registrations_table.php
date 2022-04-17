@@ -14,8 +14,8 @@ class CreateTeacherRegistrationsTable extends Migration {
         Schema::create('teacher_registrations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('course_id')->constrained();
-            $table->foreignId('teachereducation_id')->constrained();
+            $table->string('courses');
+            $table->string('teachereducations');
             $table->date('birthday');
             $table->string('mobile');
             $table->string('address');

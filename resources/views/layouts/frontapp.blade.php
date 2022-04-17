@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="{{ asset('frontend/css/slick.css')}}">
   <link rel="stylesheet" href="{{ asset('frontend/css/style.css')}}">
   <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css')}}">
+  @yield('frontend_css')
 </head>
 
 <body>
@@ -97,9 +98,6 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link {{ Request::routeIs('frontend.payment') ? "active" : ""}}" href="{{ route('frontend.payment') }}">Payment</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link {{ Request::routeIs('frontend.about') ? "active" : ""}}" href="{{ route('frontend.about') }}">About us</a>
           </li>
           <li class="nav-item">
@@ -134,49 +132,42 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form action="#">
+                      <form method="POST" id="free_leed">
+                        @csrf
                         <div class="form-floating admission_input">
-                          <input type="text" class="form-control" id="joinName" placeholder="Enter Name">
+                          <input type="text" name="name" class="form-control" id="joinName" placeholder="Enter Name">
                           <label for="joinName">Enter Name</label>
+                          <p class="text-danger name_err" ></p>
                         </div>
                         <div class="form-floating admission_input">
-                          <input type="text" class="form-control" id="joinMobile" placeholder="Enter Mobile">
+                          <input type="text" name="mobile" class="form-control" id="joinMobile" placeholder="Enter Mobile">
                           <label for="joinMobile">Enter Mobile</label>
+                          <p class="text-danger mobile_err" ></p>
                         </div>
                         <div class="form-floating admission_input">
-                          <input type="text" class="form-control" id="joinEmail" placeholder="Enter Email">
+                          <input type="text" name="email" class="form-control" id="joinEmail" placeholder="Enter Email">
                           <label for="joinEmail">Enter Email</label>
+                          <p class="text-danger email_err" ></p>
                         </div>
                         <div class="form-floating admission_input">
-                          <input type="text" class="form-control" id="joinAddress" placeholder="Enter Address">
+                          <input type="text" name="address" class="form-control" id="joinAddress" placeholder="Enter Address">
                           <label for="joinAddress">Enter Address</label>
                         </div>
                         <div class="form-floating admission_input">
-                          <select class="form-select" id="studentCourse" aria-label="Floating label select example">
-                            <option selected>-Select One-</option>
-                            <option value="Kid's learning">Kid's learning</option>
-                            <option value="Kid's English">Kid's English</option>
-                            <option value="Spoken English">Spoken English</option>
-                            <option value="Arabic Shikkha">Arabic Shikkha</option>
-                            <option value="Quran Shikkha">Quran Shikkha</option>
-                            <option value="Foreign Language">Foreign Language</option>
-                            <option value="General Knowledge">General Knowledge</option>
-                            <option value="Basic Computer">Basic Computer</option>
-                            <option value="Official Computer">Official Computer</option>
-                            <option value="Video Editing">Video Editing</option>
-                            <option value="Freelancing">Freelancing</option>
-                            <option value="Web Design">Web Design</option>
-                            <option value="Digital Marketing">Digital Marketing</option>
-                            <option value="App Development">App Development</option>
-                            <option value="General Knowledge">Graphic Design</option>
-                            <option value="Other">Other</option>
+                          <select class="form-select" name="course" id="studentCourse" aria-label="Floating label select example">
+                            <option selected disabled>-Select One-</option>
+                            @foreach(courses() as $course)
+                            <option value="{{ $course->id }}">{{ $course->name }}</option>
+                            @endforeach
+                            
                           </select>
                           <label for="studentCourse">Name of Course</label>
+                          <p class="text-danger course_err" ></p>
                         </div>
                       </form>
                     </div>
                     <div class="modal-footer text-center">
-                      <button type="button" class="modal_btn main_btn">Submit</button>
+                      <button type="button" class="modal_btn main_btn free_submit">Submit</button>
                     </div>
                   </div>
                 </div>
@@ -202,12 +193,12 @@
           <div class="footer_item">
             <h3>Quick Links</h3>
             <ul class="links">
-              <li><a href="about_us.html"><i class="fa fa-caret-right"></i> About us</a></li>
+              <li><a href="{{ route('frontend.about') }}"><i class="fa fa-caret-right"></i> About us</a></li>
               <li><a href="#"><i class="fa fa-caret-right"></i> Students' Feedback</a></li>
               <li><a href="#"><i class="fa fa-caret-right"></i> Job Placement</a></li>
               <li><a href="#"><i class="fa fa-caret-right"></i> Freelancing Success</a></li>
               <li><a href="#"><i class="fa fa-caret-right"></i> Gallery</a></li>
-              <li><a href="contact.html"><i class="fa fa-caret-right"></i> Contact us</a></li>
+              <li><a href="{{ route('frontend.contact') }}"><i class="fa fa-caret-right"></i> Contact us</a></li>
             </ul>
           </div>
         </div>
@@ -218,27 +209,16 @@
             <div class="row">
               <div class="col-6">
                 <ul class="links">
-                  <li><a href="kids_learning.html"><i class="fa fa-caret-right"></i> Kid's Learning</a>
-                  <li><a href="kids_english.html"><i class="fa fa-caret-right"></i> Kid's English</a>
-                  <li><a href="spoken_english.html"><i class="fa fa-caret-right"></i> Spoken English</a>
-                  <li><a href="arabic_shikkha.html"><i class="fa fa-caret-right"></i> Arabic Shikkha</a>
-                  <li><a href="quran-shikkha.html"><i class="fa fa-caret-right"></i> Quran Shikkha</a>
-                  <li><a href="bangla_language.html"><i class="fa fa-caret-right"></i> Bangla Language</a>
-                  <li><a href="foreign_language.html"><i class="fa fa-caret-right"></i> Foreign Language</a>
-                  <li><a href="general_knowledge.html"><i class="fa fa-caret-right"></i> General Knowledge</a>
-                  
+                  @foreach (courseTitieOne() as $titleOne)
+                    <li><a href="{{ route('frontend.view.course',$titleOne->slug) }}"><i class="fa fa-caret-right"></i> {{ $titleOne->name }}</a>
+                  @endforeach
                 </ul>
               </div>
               <div class="col-6">
                 <ul class="links">
-                  <li><a href="basic_computer.html"><i class="fa fa-caret-right"></i> Basic Computer</a>
-                  <li><a href="official_computer.html"><i class="fa fa-caret-right"></i> Official Computer</a>
-                  <li><a href="video_editing.html"><i class="fa fa-caret-right"></i> Video Editing</a>
-                  <li><a href="freelancing.html"><i class="fa fa-caret-right"></i> Freelancing</a>
-                  <li><a href="web_design.html"><i class="fa fa-caret-right"></i> Web Design</a>
-                  <li><a href="digital_marketing.html"><i class="fa fa-caret-right"></i> Digital Marketing</a>
-                  <li><a href="app_development.html"><i class="fa fa-caret-right"></i> App Development</a></li>
-                  <li><a href="graphic_design.html"><i class="fa fa-caret-right"></i> Graphics Design</a></li>
+                  @foreach (courseTitieTwo() as $titleTwo)
+                    <li><a href="{{ route('frontend.view.course',$titleTwo->slug) }}"><i class="fa fa-caret-right"></i> {{ $titleTwo->name }}</a>
+                  @endforeach
                 </ul>
               </div>
             </div>
@@ -286,18 +266,75 @@
       {!! themeoptions()->footer_copy !!}
     </div>
   </section>
+
+  <div class="modal" id="success_modal" style="z-index: 9999;">
+    <div class="modal-dialog">
+        <div class="modal-body bg-success">
+            <p class="text-white">Free Learning Registration Successfull!</p>
+        </div>
+    </div>
+</div>
   <!-- Footer Part End -->
 
   <!-- All script Js Here -->
   <script src="{{ asset('frontend/js/jquery-1.12.4.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
   <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
   <script src="{{ asset('frontend/js/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('frontend/js/venobox.min.js') }}"></script>
   <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
   <script src="{{ asset('frontend/js/script.js') }}"></script>
+  <script>
+    
+    //seminar form
+    $(".free_submit").click(function(e){
+      e.preventDefault();
 
-@yield('frontend_js')
+      $('.name_err').text('');
+      $('.email_err').text('');
+      $('.mobile_err').text('');
+      $('.course_err').text('');
+
+      $.ajaxSetup({
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+      });
+      let _token =$("input[name='_token']").val();
+      var name = $("#joinName").val();
+      var email = $("#joinEmail").val();
+      var mobile = $("#joinMobile").val();
+      var address = $("#joinAddress").val();
+      var course_id = $("#studentCourse").val();
+
+      $.ajax({
+          url: "{{ route('frontend.free.learning') }}",
+          type: "POST",
+          data: {_token:_token, name:name, email:email, mobile:mobile, course_id:course_id, address:address},
+          datatype: 'json',
+          success: function (data) {
+              document.getElementById('free_leed').reset();
+              $('#myModal').modal('hide');
+              $('#success_modal').modal('show');
+                setTimeout(function(){
+                    $('#success_modal').modal('hide');
+                },2500)
+          },
+          error: function (response) {
+              $('.name_err').text(response.responseJSON.errors.name);
+              $('.email_err').text(response.responseJSON.errors.email);
+              $('.mobile_err').text(response.responseJSON.errors.mobile);
+              $('.course_err').text(response.responseJSON.errors.course_id);
+
+          },
+          
+      });
+
+
+    });
+  </script>
+
+  @yield('frontend_js')
 </body>
 
 </html>

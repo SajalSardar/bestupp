@@ -56,12 +56,14 @@
                     <th>Action</th>
                   </tr>
                   @foreach ($datas as $data)
-                    <td >{{ $data->id }}</td>
-                    <td >{{ $data->banner_title }}</td>
-                    <td ><img src="{{ $data->banner_image}}" width="100" alt="{{ $data->banner_title }}"></td>
-                    <td>
-                      <a href="">Delete</a>
-                    </td>
+                    <tr>
+                      <td >{{ $data->id }}</td>
+                      <td >{{ $data->banner_title }}</td>
+                      <td ><img src="{{ asset('storage/uploads/banner/'.$data->banner_image)}}" width="100" alt="{{ $data->banner_title }}"></td>
+                      <td>
+                        <a href="">Delete</a>
+                      </td>
+                    </tr>
                   @endforeach
                 </table>
               </div>

@@ -15,4 +15,8 @@ class Course extends Model {
      * @var array<int, string>
      */
     protected $guarded = ['id'];
+
+    function installments() {
+        return $this->hasMany(CourseInstallment::class);
+    }
 }

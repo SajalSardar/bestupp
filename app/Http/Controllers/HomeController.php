@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TeacherRegistration;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 class HomeController extends Controller {
     /**
      * Create a new controller instance.
@@ -18,7 +23,42 @@ class HomeController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        return view('backend.dashboard');
+        $teacher = TeacherRegistration::where('user_id', auth()->user()->id)->select('id', 'status')->first();
+        return view('backend.dashboard', compact('teacher'));
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function editProfile() {
+        return view('backend.profile.index');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function updateProfile(Request $request, $id) {
+
+        $userdata = User::find($id);
+        $this->validate($request, [
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|max:255|unique:users,email,' . $userdata->id,
+            'password' => 'confirmed',
+        ]);
+
+        $userdata->name  = $request->name;
+        $userdata->email = $request->email;
+        if ($request->password) {
+            $userdata->password = Hash::make($request->password);
+        }
+        $userdata->save();
+
+        return back()->with('success', "Profile Update Successfull!");
+
     }
 
 }

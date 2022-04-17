@@ -22,8 +22,9 @@
     <div class="d-flex align-items-center justify-content-center bg-sl-primary ht-md-100v">
 
       <div class="login-wrapper wd-300 wd-xs-400 pd-25 pd-xs-40 bg-white">
-        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">starlight <span class="tx-info tx-normal">admin</span></div>
-        <div class="tx-center mg-b-60">Professional Admin Template Design</div>
+        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">
+          <img src="{{ asset('storage/uploads/logo/'.themeoptions()->logo) }}" alt="{{ config('app.name') }}" style="width: 200px; margin-bottom: 20px">
+        </div>
         <form method="POST" action="{{ route('register') }}">
             @csrf
         <div class="form-group">
@@ -58,9 +59,8 @@
         </div><!-- form-group -->
         <div class="form-group">
             <button type="submit" class="btn btn-info btn-block">
-                {{ __('Register') }}
+                {{ __('Admin Register') }}
             </button>
-        <div class="mg-t-40 tx-center">Already have an account? <a href="{{ route('login') }}" class="tx-info">Sign In</a></div>
       </div><!-- login-wrapper -->
         </form>
     </div><!-- d-flex -->

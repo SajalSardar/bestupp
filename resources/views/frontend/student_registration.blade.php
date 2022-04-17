@@ -71,19 +71,6 @@
                     </div>
 
                     <div class="form-floating admission_input">
-                      <select class="form-select" name="studentDay" id="studentDay" aria-label="Floating label select example">
-                        <option selected disabled>-Select One-</option>
-                        @foreach ($dayschedules as $dayschedule)
-                        <option value="{{ $dayschedule->name }}">{{ $dayschedule->name }}</option>
-                        @endforeach
-                      </select>
-                      <label for="studentDay">Day</label>
-                      @error('studentDay')
-                        <p class="text-danger">{{ $message }}</p>
-                      @enderror
-                    </div>
-
-                    <div class="form-floating admission_input">
                       <input type="text" name="guardianname" class="form-control" id="studentGuardianName" placeholder="Guardian Name">
                       <label for="studentGuardianName">Guardian Name</label>
                       @error('guardianname')
@@ -132,29 +119,6 @@
                     </div>
 
                     <div class="form-floating admission_input">
-                      <select class="form-select" name="course" id="studentCourse" aria-label="Floating label select example">
-                        <option selected disabled>-Select One-</option>
-                        @foreach ($courses as $course)
-                        <option value="{{ $course->id }}">{{ $course->name }}</option>
-                        @endforeach
-                      </select>
-                      <label for="studentCourse">Name of Course</label>
-                      @error('course')
-                        <p class="text-danger">{{ $message }}</p>
-                      @enderror
-                    </div>
-
-                    <div class="form-floating admission_input">
-                      <div class="form-floating admission_input">
-                        <input type="time" name="stime" class="form-control" id="studentTime" placeholder="Time">
-                        <label for="studentTime">Time</label>
-                        @error('stime')
-                        <p class="text-danger">{{ $message }}</p>
-                      @enderror
-                      </div>
-                    </div>
-
-                    <div class="form-floating admission_input">
                       <input type="number" name="gnumber" class="form-control" id="studentGuardianNumber"
                         placeholder="Guardian Phone Number">
                       <label for="studentGuardianNumber">Guardian Phone Number</label>
@@ -179,29 +143,30 @@
   </section>
   <!-- Student Ragistration Part End -->
 
-  @if (session('success'))
-  <div class="toast-container position-absolute top-0 end-0 p-3 " style="z-index: 9999">
-    <div id="myToast" class="toast" data-bs-autohide="true">
-      <div class="toast-header">
-        <img src="..." class="rounded me-2" alt="...">
-        <strong class="me-auto">Bootstrap</strong>
-        <small class="text-muted">2 seconds ago</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        {{ session('success') }}
-      </div>
-    </div>
+  
+@if ($message = Session::get('success'))
+<div class="toast-container position-absolute top-0 end-0 p-3" style="z-index:9999;">
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="10000">
+  <div class="toast-header " style="background: #5BAD3F">
+    <h3 class="pl-2 text-white">{{ config('app.name') }}</h3>
+    <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
   </div>
-  @endif
+  <div class="toast-body">
+    {{ $message }}
+  </div>
+</div>
+</div>
+@endif
+
+
 @endsection
 
 @section('frontend_js')
-  <script>
-    window.onload = (event)=> {
-      let myAlert = document.querySelector('.toast');
-      let bsAlert = new  bootstrap.Toast(myAlert);
-      bsAlert.show();
-      }
-  </script>
+<script>
+window.onload = (event)=> {
+ let myAlert = document.querySelector('.toast');
+ let bsAlert = new  bootstrap.Toast(myAlert);
+ bsAlert.show();
+}
+</script>
 @endsection

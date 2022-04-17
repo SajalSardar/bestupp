@@ -48,6 +48,18 @@
               <span class="menu-item-label">All Students</span></i>
             </div><!-- menu-item -->
           </a>
+          <a href="{{ route('dashboard.free.learning') }}" class="sl-menu-link {{ Request::routeIs('dashboard.free.learning') ? "active" : ""}}">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+              <span class="menu-item-label">Free Learning Student</span></i>
+            </div><!-- menu-item -->
+          </a>
+          <a href="{{ route('dashboard.order.index') }}" class="sl-menu-link {{ Request::routeIs('dashboard.order.index') ? "active" : ""}}">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+              <span class="menu-item-label">Orders</span></i>
+            </div><!-- menu-item -->
+          </a>
           <a href="{{ route('dashboard.show.all.teachers') }}" class="sl-menu-link {{ Request::routeIs('dashboard.show.all.teachers') ? "active" : ""}}">
             <div class="sl-menu-item">
               <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -97,7 +109,7 @@
           <a href="#" class="sl-menu-link">
             <div class="sl-menu-item">
               <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-              <span class="menu-item-label">Theme Settings</span>
+              <span class="menu-item-label">Theme Options</span>
               <i class="menu-item-arrow fa fa-angle-down"></i>
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
@@ -116,29 +128,34 @@
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
           <ul class="sl-menu-sub nav flex-column">
-            <li class="nav-item"><a href="#" class="nav-link">abc</a></li>
-            
+            <li class="nav-item"><a href="{{ route('dashboard.profile.edit') }}" class="nav-link">Edit Profile</a></li>
+            @role('super-admin')
+            <li class="nav-item"><a target="_blank" href="{{ route('register') }}" class="nav-link">Create Another Admin</a></li>
+            @endrole
           </ul>
-
 
         @endrole
 
         @role('teacher')
-        <a href="#" class="sl-menu-link">
+        <a href="{{ route('dashboard.teacher.information.edit') }}" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
             <span class="menu-item-label">Teacher Profile</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
           </div><!-- menu-item -->
         </a>
         @endrole
 
         @role('student')
-        <a href="#" class="sl-menu-link">
+        <a href="{{ route('dashboard.student.order') }}" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-            <span class="menu-item-label">Student Profile</span>
-            <i class="menu-item-arrow fa fa-angle-down"></i>
+            <span class="menu-item-label">Our Course</span>
+          </div><!-- menu-item -->
+        </a>
+        <a href="{{ route('dashboard.student.information.edit') }}" class="sl-menu-link">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Student Information</span>
           </div><!-- menu-item -->
         </a>
         @endrole
@@ -160,12 +177,22 @@
           <div class="dropdown">
             <a href="" class="nav-link nav-link-profile" data-toggle="dropdown">
               <span class="logged-name"> {{ Str::ucfirst(auth()->user()->name) }}</span>
-              <img src="{{ asset('backend/img/img3.jpg') }}" class="wd-32 rounded-circle" alt="">
+              @role('teacher')
+              <img src="{{ asset('storage/uploads/profiles/'.auth()->user()->teacher->photo )  }}" class="wd-32 rounded-circle" alt="{{ auth()->user()->name }}">
+              @endrole
+
+              @role('student')
+              <img src="{{ asset('storage/uploads/profiles/'.auth()->user()->student->profile_photo ) }}" class="wd-32 rounded-circle" alt="{{ auth()->user()->name }}">
+              @endrole
+
+              @role('admin|super-admin')
+              <img src="{{ asset('backend/img/img3.jpg') }}" class="wd-32 rounded-circle" alt="{{ auth()->user()->name }}">
+              @endrole
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
-                <li><a href=""><i class="icon ion-ios-person-outline"></i> Edit Profile</a></li>
-                <li><a href=""><i class="icon ion-ios-gear-outline"></i> Settings</a></li>
+                <li><a href="{{ route('dashboard.profile.edit') }}"><i class="icon ion-ios-person-outline"></i> User Profile</a></li>
+                
                 <li>
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
@@ -249,7 +276,9 @@
    
       <footer class="sl-footer mt-5 pt-5">
         <div class="footer-left">
-          <div class="mg-b-2">Copyright &copy; 2022. Creative IT. All Rights Reserved.</div>
+          <div class="mg-b-2">
+            {!! themeoptions()->footer_copy !!}
+          </div>
         </div>
         
       </footer>
@@ -274,6 +303,7 @@
     <script src="{{ asset("backend/js/ResizeSensor.js")}}"></script>
     <script src="{{ asset("backend/js/dashboard.js")}}"></script>
     @yield('dashboard_js')
+    
     
   </body>
 </html>

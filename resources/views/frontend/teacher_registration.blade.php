@@ -70,7 +70,7 @@
                       </div>
 
                       <div class="form-floating admission_input">
-                        <input type="text" class="form-control" id="tpassword" placeholder="Password" name="password">
+                        <input type="password" class="form-control" id="tpassword" placeholder="Password" name="password">
                         <label for="tpassword">Password</label>
                         @error('password')
                             <p class="text-danger">{{ $message }}</p>
@@ -133,29 +133,30 @@
                         @enderror
                       </div>
 
-                      <div class="form-floating admission_input">
-                        <select class="form-select" id="regEducation" aria-label="Floating label select example" name="education">
-                          <option selected disabled>-Select One-</option>
+                      <div class=" admission_input">
+                        <label for="regEducation">Education</label>
+                        <select class="form-select select_2" id="regEducation" name="education[]" multiple>
+                          <option disabled>Education</option>
                           @foreach ($edus as  $edu)
-                            <option value="{{ $edu->id }}">{{ $edu->name }}</option>
+                            <option value="{{ $edu->name }}">{{ $edu->name }}</option>
                           @endforeach
                         </select>
-                        <label for="regEducation">Education</label>
+                        
                         @error('education')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
     
-                      <div class="form-floating admission_input">
-                        <select class="form-select" id="regNameCourse" aria-label="Floating label select example" class="course" name="course[]">
-                          <option selected disabled>-Select One-</option>
+                      <div class=" admission_input">
+                        <label for="regNameCourse">Name of Course</label>
+                        <select class="form-select select_2" id="regNameCourse"  name="courses[]" multiple>
+                          <option disabled> Name of Course </option>
                           @foreach ($courses as $course)
-                          <option value="{{ $course->id }}">{{ $course->name }}</option>
+                          <option value="{{ $course->name }}">{{ $course->name }}</option>
                           @endforeach
                          
                         </select>
-                        <label for="regNameCourse">Name of Course</label>
-                        @error('course')
+                        @error('courses')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
@@ -167,11 +168,6 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
-
-                      {{-- <div class="form-floating admission_input">
-                        <input type="text" class="form-control" id="regContnumber" placeholder="Contact Number" name="contact_number">
-                        <label for="regContnumber">Contact Number</label>
-                      </div> --}}
 
                     </div>
                   </div>
@@ -212,30 +208,37 @@
   </section>
   <!-- Registration Part End -->
 
-  @if (session('success'))
-  <div class="toast-container position-absolute top-0 end-0 p-3 " style="z-index: 9999">
-    <div id="myToast" class="toast" data-bs-autohide="true">
-      <div class="toast-header">
-        <img src="..." class="rounded me-2" alt="...">
-        <strong class="me-auto">Bootstrap</strong>
-        <small class="text-muted">2 seconds ago</small>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-      </div>
-      <div class="toast-body">
-        {{ session('success') }}
-      </div>
-    </div>
+  
+@if ($message = Session::get('success'))
+<div class="toast-container position-absolute top-0 end-0 p-3" style="z-index:9999;">
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="10000">
+  <div class="toast-header " style="background: #5BAD3F">
+    <h3 class="pl-2 text-white">{{ config('app.name') }}</h3>
+    <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
   </div>
-  @endif
+  <div class="toast-body">
+    {{ $message }}
+  </div>
+</div>
+</div>
+@endif
+
 
 @endsection
 
+@section('frontend_css')
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css">
+@endsection
 @section('frontend_js')
-  <script>
-    window.onload = (event)=> {
-      let myAlert = document.querySelector('.toast');
-      let bsAlert = new  bootstrap.Toast(myAlert);
-      bsAlert.show();
-      }
-  </script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+  
+  $('.select_2').select2();
+
+window.onload = (event)=> {
+ let myAlert = document.querySelector('.toast');
+ let bsAlert = new  bootstrap.Toast(myAlert);
+ bsAlert.show();
+}
+</script>
 @endsection

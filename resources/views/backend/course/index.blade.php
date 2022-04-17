@@ -9,7 +9,7 @@
 
     <div class="sl-pagebody">
       <div class="sl-page-title">
-        <h5>All Course</h5>
+        <h5>All Course </h5>
       </div>
 
       <div class="card pd-20 pd-sm-40">
@@ -26,7 +26,7 @@
                 @forelse ( $datas as $data)
                 <tr>    
                     <td>{{ $data->id }}</td>
-                    <td><img src="{{ $data->banner_image }}" height="50" alt=""></td>
+                    <td><img src="{{ asset('storage/uploads/course/'.$data->banner_image)  }}" height="50" alt=""></td>
                     <td>{{ $data->name }}</td>
                     <td>{{ $data->duration }}</td>
                     <td>{{ $data->total_class }}</td>

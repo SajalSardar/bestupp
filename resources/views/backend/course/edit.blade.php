@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label">Course Overview:</label>
-                    <textarea name="overview" class="form-control " style="height:150px" placeholder="overview">{{ $course->overview }}</textarea>
+                    <textarea name="overview" id="summernote" class="form-control " style="height:150px" placeholder="overview">{{ $course->overview }}</textarea>
                     @error('overview')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -73,22 +73,42 @@
                     @enderror
                 </div>
                 
+                <div class="form-group ">
+                    <label class="form-control-label">1st Installment</label>
+                    <div class="input-group">
+                        <input type="number" name="installment[pay]" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[0]  }}"> 
+                        <input type="hidden" name="installment[day]" class="form-control" value="1"> 
+                    </div>
+                    @error('installment')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                </div> 
+
+                <div class="form-group ">
+                    <label class="form-control-label">2nd Installment</label>
+                    <div class="input-group">
+                        <input type="number" name="installment2[pay]" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[1]  }}">
+                        <input type="number" name="installment2[day]" class="form-control" placeholder="Ex: 10 days after join course" value="{{ $course->installments->pluck('pay_date')[1] }}">  
+
+                    </div>
+                    
+                </div> 
+
+                <div class="form-group ">
+                    <label class="form-control-label">3rd Installment</label>
+                    <div class="input-group">
+                        <input type="number" name="installment3[pay]" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[2] }}">
+                        <input type="number" name="installment3[day]" class="form-control" placeholder="Ex: 10 days after join course" value="{{ $course->installments->pluck('pay_date')[1] }}">  
+
+                    </div>
+                    
+                </div> 
                 
-                <div class="after-add-more"></div>
-                <div class="copy d-none">  
-                    <div class="control-group input-group mt-2">  
-                      <input type="text" name="installments[]" class="form-control" placeholder="Enter Installment" value="{{ old('installment_one') }}" disabled>  
-                      <div class="input-group-btn">   
-                        <button class="btn btn-danger remove" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>  
-                      </div>  
-                    </div>  
-                </div>
-                <p class="btn btn-primary btn-sm mt-2 add-more">Add Installment</p>
                 
                 <div class="form-group">
                     <label class="form-control-label">Banner Image:</label>
                     <input class="form-control" type="file" name="banner_image" id="file_input">
-                    <img src="{{ $course->banner_image }}" id="show_img" width="150" class="mt-3" alt="">
+                    <img src="{{ asset('storage/uploads/course/'.$course->banner_image) }}" id="show_img" width="150" class="mt-3" alt="">
                 </div>
       
                 <div class="form-layout-footer">
@@ -101,23 +121,25 @@
     
 @endsection
 
+@section('dashboard_css')
+<link rel="stylesheet" href="{{ asset("backend/css/summernote-bs4.min.css")}}">
+@endsection
 @section('dashboard_js')
+<script src="{{ asset("backend/js/summernote-bs4.min.js")}}"></script>
 <script>
   $('.toast').toast('show');
-   
-    let imgf = document.getElementById("file_input");
-    let outputimg = document.getElementById("show_img");
-    imgf.addEventListener("change", function () {
-        outputimg.src = URL.createObjectURL(imgf.files[0]);
+
+  $('#summernote').summernote({
+      tabsize: 2,
+      height: 200,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['insert', ['link']],
+        ['view', ['fullscreen', 'codeview']]
+      ]
     });
-    $(".add-more").click(function(){   
-          var html = $(".copy").html();  
-          $(".after-add-more").append(html);
-          $(".after-add-more input").prop('disabled', false); 
-      });  
-  
-      $("body").on("click",".remove",function(){   
-          $(this).parents(".control-group").remove();  
-      });
 </script>
 @endsection

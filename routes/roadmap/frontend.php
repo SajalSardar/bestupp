@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\CartController;
 use App\Http\Controllers\backend\ContactController;
 use App\Http\Controllers\backend\StudentController;
 use App\Http\Controllers\backend\TeacherController;
@@ -23,7 +24,13 @@ Route::name('frontend.')->group(function () {
     Route::get('/contacts', [ContactController::class, 'contact'])->name('contact');
     Route::post('/contacts', [ContactController::class, 'contactStore'])->name('contact.store');
 
-    Route::get('/payments', [FrontendController::class, 'payment'])->name('payment');
-    Route::get('/payments/course/{id}', [FrontendController::class, 'paymentCourse'])->name('payment.course');
-    Route::post('/payment/store', [FrontendController::class, 'paymentStore'])->name('payment.store');
+    //free learning route
+    Route::post('/free/learning', [FreeLearningController::class, 'store'])->name('free.learning');
+
+    //cart route
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
+    Route::get('/enroll/{id}', [CartController::class, 'enroll'])->name('enroll');
+    Route::get('/cart/delete/{id}', [CartController::class, 'cartDelete'])->name('cart.delete');
+    Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+
 });

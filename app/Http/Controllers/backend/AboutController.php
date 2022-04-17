@@ -26,6 +26,10 @@ class AboutController extends Controller {
             $_photo_name = Str::slug($request->section_title) . '.' . $banner_photo->getClientOriginalExtension();
 
             $banner_photo->move(public_path('storage/uploads/about/'), $_photo_name);
+            $path = public_path('storage/uploads/about/' . $data->about_banner);
+            if (file_exists($path)) {
+                unlink($path);
+            }
         } else {
             $_photo_name = $data->about_banner;
         }

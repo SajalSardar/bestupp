@@ -1,6 +1,10 @@
 @extends('layouts.frontapp')
 @section('title', "Student Registration")
 @section('content')
+
+
+
+
     <!-- Contact Banaer page Strat -->
   <section id="single_banner_page">
     <div class="single_banner_page_overly">
@@ -70,5 +74,28 @@
 </div>
 </section>
 
-  <!-- Contact Page Part Start -->
+@if ($message = Session::get('success'))
+<div class="toast-container position-absolute top-0 end-0 p-3" style="z-index:9999;">
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="10000">
+  <div class="toast-header " style="background: #5BAD3F">
+    <h3 class="pl-2 text-white">{{ config('app.name') }}</h3>
+    <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+    {{ $message }}
+  </div>
+</div>
+</div>
+@endif
+
+
+@endsection
+
+@section('frontend_js')
+<script>
+  let myAlert = document.querySelector('.toast');
+  let bsAlert = new  bootstrap.Toast(myAlert);
+  bsAlert.show();
+
+</script>
 @endsection

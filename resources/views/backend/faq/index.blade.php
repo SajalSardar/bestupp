@@ -58,12 +58,14 @@
                     <th>Action</th>
                   </tr>
                   @foreach ($datas as $data)
-                    <td >{{ $data->id }}</td>
-                    <td >{{ $data->question }}</td>
-                    <td >{{ $data->answer }}</td>
-                    <td>
-                      <a href="">Delete</a>
-                    </td>
+                    <tr>
+                      <td >{{ $data->id }}</td>
+                      <td >{{ $data->question }}</td>
+                      <td >{{ $data->answer }}</td>
+                      <td>
+                        <a href="">Delete</a>
+                      </td>
+                    </tr>
                   @endforeach
                 </table>
               </div>

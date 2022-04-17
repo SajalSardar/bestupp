@@ -26,15 +26,17 @@
                 <th>Action</th>
               </tr>
               @foreach ($datas as $data)
-                <td >{{ $data->id }}</td>
-                <td >{{ $data->full_name }}</td>
-                <td >{{ $data->mobile  }}</td>
-                <td >{{ $data->email  }}</td>
-                <td >{{ Str::limit($data->message, 20, '...')  }}</td>
-                <td>
-                  <a href="">View</a>
-                  <a href="">Delete</a>
-                </td>
+                <tr>
+                  <td >{{ $data->id }}</td>
+                  <td >{{ $data->full_name }}</td>
+                  <td >{{ $data->mobile  }}</td>
+                  <td >{{ $data->email  }}</td>
+                  <td >{{ Str::limit($data->message, 20, '...')  }}</td>
+                  <td>
+                    <a href="">View</a>
+                    <a href="">Delete</a>
+                  </td>
+                </tr>
               @endforeach
             </table>
           </div>

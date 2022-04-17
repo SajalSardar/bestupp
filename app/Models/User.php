@@ -12,6 +12,18 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles;
 
+    function student() {
+        return $this->hasOne(StudentRegistration::class);
+    }
+
+    function teacher() {
+        return $this->hasOne(TeacherRegistration::class);
+    }
+
+    function orders() {
+        return $this->hasMany(Order::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

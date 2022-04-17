@@ -4,17 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCartsTable extends Migration {
+class CreateFreeLearningsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('carts', function (Blueprint $table) {
+        Schema::create('free_learnings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('course_id')->constrained();
+            $table->string('name');
+            $table->string('email');
+            $table->string('mobile');
+            $table->text('address')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
@@ -25,6 +29,6 @@ class CreateCartsTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('free_learnings');
     }
 }

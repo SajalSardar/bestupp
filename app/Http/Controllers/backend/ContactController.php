@@ -25,7 +25,7 @@ class ContactController extends Controller {
         $data->email     = $request->email;
         $data->message   = $request->message;
         $data->save();
-        return back()->with('success', "Message Send Successfully!");
+        return back()->with('success', "Message Successfully Send!");
     }
 
     public function showAll() {

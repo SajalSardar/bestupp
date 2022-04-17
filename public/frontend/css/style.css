@@ -669,6 +669,23 @@ nav.navbar {
 /* .swiper-container {
     width: 100%;
 } */
+.banner_items{
+    height: 600px;
+    background-size: cover !important;
+    background-position: center center !important;
+}
+@media (max-width: 775px) {
+    .banner_items{
+        height: 400px;
+    }
+    
+}
+@media (max-width: 575px) {
+    .banner_items{
+        height: 300px;
+    }
+    
+}
 
 .swiper-slide {
     width: 100%;

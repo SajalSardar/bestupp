@@ -1,5 +1,5 @@
 @extends('layouts.frontapp')
-@section('title', "All Courses")
+@section('title', $data->name)
 @section('content')
 <!-- Contact Banaer page Strat -->
 <section id="single_banner_page">
@@ -78,19 +78,20 @@
                 <div class="marketplaces course_inner_item">
                   <h3>Payment method</h3>
                   <ul>
-                      {{-- @foreach (json_decode($data->installments) as $installment)
+                      @foreach ($data->installments as $key => $installment)
                       <li>
                         <div class="icon">
                           <i class="fa fa-hand-o-right" aria-hidden="true"></i>
                         </div>
                         <div class="text">
-                          <p>{{ $installment }}</p>
+                          <p> {{ $key == 0 ? "1st" : ($key == 1 ? "2nd" : "3rd")  }} installment = {{ $installment->bdt }} BDT @if($installment->pay_date !=1)({{ $installment->pay_date }} days after the start of the course) @endif</p>
                         </div>
                       </li>
-                      @endforeach --}}
+                      @endforeach
 
                   </ul>
                 </div>
+                <a class="enroll_btn" href="{{ route('frontend.enroll',$data->id) }}">Enroll Now</a>
               </div>
             </div>
           </div>
