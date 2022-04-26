@@ -24,17 +24,18 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
 });
 
 Route::name('dashboard.')->prefix('dashboard')->group(function () {
-    Route::group(['middleware' => ['role:super-admin|admin', 'auth']], function () {
-        Route::resource('/banner', BannerController::class)->except(['show', 'create']);
+
+    Route::group(['middleware' => ['role:super-admin', 'auth']], function () {
+        Route::resource('/banner', BannerController::class)->except(['show', 'create', 'update', 'edit']);
         Route::resource('/course', CourseController::class)->except(['show']);
+        Route::get('/course/status/{course}', [CourseController::class, 'courseStatusUpdate'])->name('course.status.update');
 
         //schedul route
         Route::get('/day-schedul', [ConfigurationController::class, 'DaySchedul'])->name('day.schedul');
         Route::post('/day-schedul', [ConfigurationController::class, 'DaySchedulStore'])->name('day.schedul.store');
-        Route::get('/day-schedul-delete/{id}', [ConfigurationController::class, 'DaySchedulDelete'])->name('day.schedul.delete');
 
         //Teacher education
-        Route::resource('/teachereducation', TeacherEducationController::class)->except(['show', 'create', 'edit']);
+        Route::resource('/teachereducation', TeacherEducationController::class)->except(['show', 'create', 'edit', 'update']);
 
         //about route
         Route::get('/about-us', [AboutController::class, 'aboutInfo'])->name('about.us');
@@ -42,17 +43,20 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
 
         //contact message
         Route::get('/contact/message', [ContactController::class, 'showAll'])->name('show.contact');
+        Route::get('/contact/markasread/{id}', [ContactController::class, 'markasread'])->name('contact.markasread');
 
         //faq
         Route::get('/all/faq', [FaqController::class, 'index'])->name('faq.index');
         Route::post('/add/faq', [FaqController::class, 'store'])->name('faq.store');
+        Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('faq.edit');
+        Route::post('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
 
         //student
         Route::get('/students', [StudentController::class, "showAll"])->name('show.all.students');
         Route::get('/students/{id}', [StudentController::class, "manageStudent"])->name('students.manage');
-        Route::get('/students/complete/{id}', [StudentController::class, "studentComplete"])->name('students.complete');
-        Route::get('/students/drop/{id}', [StudentController::class, "studentDrop"])->name('students.drop');
-        Route::get('/students/running/{id}', [StudentController::class, "studentRunning"])->name('students.running');
+        // Route::get('/students/complete/{id}', [StudentController::class, "studentComplete"])->name('students.complete');
+        // Route::get('/students/drop/{id}', [StudentController::class, "studentDrop"])->name('students.drop');
+        // Route::get('/students/running/{id}', [StudentController::class, "studentRunning"])->name('students.running');
 
         //Teacher
         Route::get('/teacher', [TeacherController::class, "showAll"])->name('show.all.teachers');
@@ -70,15 +74,33 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
 
         //free learning route
         Route::get('/free/learning', [FreeLearningController::class, 'index'])->name('free.learning');
+        Route::get('/learning/read/{id}', [FreeLearningController::class, 'markRead'])->name('free.learning.read');
 
         //order route
         Route::get('/orders', [OrderController::class, 'index'])->name('order.index');
+        Route::get('/order/manage/{id}', [OrderController::class, 'manageOrder'])->name('order.manage');
+        Route::get('/order/running/{id}', [OrderController::class, 'runningOrder'])->name('order.Running');
+        Route::get('/order/drop-out/{id}', [OrderController::class, 'dropOrder'])->name('order.dropout');
+        Route::get('/order/complete/{id}', [OrderController::class, 'completeOrder'])->name('order.complete');
+
+        //delete route
+        Route::get('/day-schedul-delete/{id}', [ConfigurationController::class, 'DaySchedulDelete'])->name('day.schedul.delete');
+        Route::get('/contact/delete/{id}', [ContactController::class, 'markasread'])->name('contact.delete');
+        Route::get('/faq/delete/{id}', [FaqController::class, 'delete'])->name('faq.delete');
+        Route::get('/learning/delete/{id}', [FreeLearningController::class, 'delete'])->name('free.learning.delete');
+        Route::get('/social-media/delete/{id}', [SocialController::class, "delete"])->name('social.delete');
+
     });
 
     Route::group(['middleware' => ['role:student', 'auth']], function () {
-        Route::get('/student/order', [StudentController::class, 'showOrders'])->name('student.order');
+        Route::get('/student/orders', [StudentController::class, 'showOrders'])->name('student.order');
         Route::get('/student/information/edit', [StudentController::class, 'studentInformationEdit'])->name('student.information.edit');
         Route::post('/student/information/edit/{id}', [StudentController::class, 'studentInformationUpdate'])->name('student.information.update');
+
+        //student installment pay
+        Route::get('/installment/pay/{id}', [StudentController::class, 'installmentpay',
+        ])->name('student.installment.pay');
+
     });
 
     Route::group(['middleware' => ['role:teacher', 'auth']], function () {

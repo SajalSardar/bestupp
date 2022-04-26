@@ -29,7 +29,7 @@
             @foreach ($allFaqs as $key=>$faq)
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne_{{ $faq->id }}"
+                <button class="accordion-button {{ $key==0 ? "" : "collapsed" }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne_{{ $faq->id }}"
                   aria-expanded="true" aria-controls="collapseOne">
                   {{ $faq->question }} <i class="fa fa-chevron-down"></i>
                 </button>

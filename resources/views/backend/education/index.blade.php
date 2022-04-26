@@ -45,15 +45,11 @@
                   <tr>
                     <th>id</th>
                     <th>Name</th>
-                    <th>Action</th>
                   </tr>
                   @foreach ($datas as $data)
                     <tr>
                         <td >{{ $data->id }}</td>
                         <td >{{ $data->name }}</td>
-                        <td>
-                        <a href="">Delete</a>
-                        </td>
                     </tr>
                   @endforeach
                 </table>

@@ -17,6 +17,7 @@ class CreateContactsTable extends Migration {
             $table->string('mobile');
             $table->string('email');
             $table->longText('message');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

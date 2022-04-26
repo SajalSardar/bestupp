@@ -27,7 +27,7 @@ class AboutController extends Controller {
 
             $banner_photo->move(public_path('storage/uploads/about/'), $_photo_name);
             $path = public_path('storage/uploads/about/' . $data->about_banner);
-            if (file_exists($path)) {
+            if (file_exists($path) && $data->about_banner) {
                 unlink($path);
             }
         } else {

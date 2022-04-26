@@ -140,7 +140,7 @@
                           <p class="text-danger name_err" ></p>
                         </div>
                         <div class="form-floating admission_input">
-                          <input type="text" name="mobile" class="form-control" id="joinMobile" placeholder="Enter Mobile">
+                          <input type="number" name="mobile" class="form-control" id="joinMobile" placeholder="Enter Mobile">
                           <label for="joinMobile">Enter Mobile</label>
                           <p class="text-danger mobile_err" ></p>
                         </div>

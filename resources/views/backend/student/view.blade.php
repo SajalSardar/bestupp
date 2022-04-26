@@ -9,10 +9,10 @@
 
 <div class="sl-pagebody">
   <div class="sl-page-title">
-    <h5>{{ $findStuden->user->name }} - Status {!! $findStuden->status == 1 ? "<span class='bg-primary p-2'>Running</span>" : ($findStuden->status == 2 ? "<span class='bg-danger p-2'>Drop Out</span>" : "<span class='bg-success p-2'>Completed</span>") !!}
-      <a href="{{ route('dashboard.students.drop',$findStuden->id ) }}" class="btn btn-sm btn-danger float-right">Drop Out</a>
+    <h5>{{ $findStuden->user->name }}
+      {{-- <a href="{{ route('dashboard.students.drop',$findStuden->id ) }}" class="btn btn-sm btn-danger float-right">Drop Out</a>
       <a href="{{ route('dashboard.students.complete',$findStuden->id) }}" class="btn btn-sm btn-primary float-right">Complete</a>
-      <a href="{{ route('dashboard.students.running',$findStuden->id ) }}" class="btn btn-sm btn-info float-right">Running</a>
+      <a href="{{ route('dashboard.students.running',$findStuden->id ) }}" class="btn btn-sm btn-info float-right">Running</a> --}}
     </h5>
   </div>
 
@@ -36,7 +36,10 @@
             <p> No Course </p>
           @endif
           @foreach ($findStuden->user->orders as $order)
-            <span class="btn btn-primary btn-sm">{{ $order->course->name }}</span>
+            <a href="{{ route('dashboard.order.manage',$order->id ) }}" class="btn btn-info btn-sm">{{ $order->course->name }}
+              <span class="btn btn-sm btn-{{ $order->status==3 ? 'success' : 'warning' }} ">{{ $order->status == 3 ? "Complete" : "Running" }}</span>
+            </a>
+            
           @endforeach
          
         </td>

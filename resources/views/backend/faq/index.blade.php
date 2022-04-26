@@ -50,23 +50,28 @@
                 <h2>All FAQ</h2>
               </div>
               <div class="card-body">
-                <table class="table">
-                  <tr>
-                    <th>#</th>
-                    <th>Question</th>
-                    <th>Answer</th>
-                    <th>Action</th>
-                  </tr>
-                  @foreach ($datas as $data)
+                <table class="table table-striped table-bordered dataTable">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Question</th>
+                      <th>Answer</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($datas as $data)
                     <tr>
                       <td >{{ $data->id }}</td>
                       <td >{{ $data->question }}</td>
                       <td >{{ $data->answer }}</td>
                       <td>
-                        <a href="">Delete</a>
+                        <a href="{{ route('dashboard.faq.edit', $data->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                        <a href="{{ route('dashboard.faq.delete', $data->id) }}" class="btn btn-sm btn-danger">Delete</a>
                       </td>
                     </tr>
                   @endforeach
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -77,8 +82,21 @@
     
 @endsection
 
+@section('dashboard_css')
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+
+@endsection
+
+
 @section('dashboard_js')
-<script>
-  $('.toast').toast('show');
-</script>
+    <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  
+
+  <script>
+    $('.dataTable').DataTable({
+      "order": [[ 0, "desc" ]]
+    });
+
+    $('.toast').toast('show');
+  </script>
 @endsection

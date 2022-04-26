@@ -15,6 +15,8 @@ class CreateCartsTable extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('course_id')->constrained();
+            $table->string('selected_day');
+            $table->time('selected_time');
             $table->timestamps();
         });
     }

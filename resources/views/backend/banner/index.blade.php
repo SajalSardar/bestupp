@@ -61,7 +61,12 @@
                       <td >{{ $data->banner_title }}</td>
                       <td ><img src="{{ asset('storage/uploads/banner/'.$data->banner_image)}}" width="100" alt="{{ $data->banner_title }}"></td>
                       <td>
-                        <a href="">Delete</a>
+                        <form action="{{ route('dashboard.banner.destroy',$data->id ) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" style="cursor: pointer" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                        
                       </td>
                     </tr>
                   @endforeach

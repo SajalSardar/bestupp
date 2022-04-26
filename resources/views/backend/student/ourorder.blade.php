@@ -21,9 +21,13 @@
               <span class="ml-2" style="font-weight: 400; font-size: 16px">Day: {{ $order->selected_day }}</span>
               <span class="ml-2" style="font-weight: 400; font-size: 16px">Time: {{ $order->selected_time->isoFormat('H:MM:SS A') }}</span>
               <span class="ml-2" style="font-weight: 400; font-size: 16px">Join Date: {{ $order->created_at->isoFormat('Do MMM  YY') }} </span>
-
-              <span class="float-right badge badge-{{$order->status ==1 ? "primary": ($order->status ==2 ? "danger" : "success" )  }}">{{$order->status ==1 ? "Running": ($order->status ==2 ? "Drop Out" : "Complete" )  }}</span>
-
+              @foreach ($order->OrderInstallments as $OrderInstallment)
+                @if ($OrderInstallment->installment==1 && $OrderInstallment->status == 1)
+                <span class="float-right badge badge-danger">Pending</span>
+                  @elseif ($OrderInstallment->installment==1 && $OrderInstallment->status == 2)
+                  <span class="float-right badge badge-{{$order->status ==1 ? "primary": ($order->status ==2 ? "danger" : "success" )  }}">{{$order->status ==1 ? "Running": ($order->status ==2 ? "Drop Out" : "Complete" )  }}</span>
+                @endif
+              @endforeach
             </h5>
           </div>
           <div class="card-body">
@@ -35,7 +39,7 @@
                 <th>Status</th>
                 <th>Action</th>
               </tr>
-              @foreach ($order->order_installments as $key => $installment)
+              @foreach ($order->OrderInstallments as $key => $installment)
                 <tr>
                   <td>{{ ++$key }}</td>
                   <td>{{ $installment->bdt }}</td>
@@ -50,7 +54,7 @@
                   </td>
                   <td>
                     @if ($installment->status == 1)
-                      <a href='' class='btn btn-sm btn-{{ $installment->paydate < now() ? 'danger' : 'warning' }}'>Pay
+                      <a href='{{ route('dashboard.student.installment.pay',$installment->id) }}' class='btn btn-sm btn-{{ $installment->paydate < now() ? 'danger' : 'warning' }}'>Pay
                         Now</a>
                     @endif
                   </td>

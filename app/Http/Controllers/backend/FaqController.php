@@ -25,4 +25,28 @@ class FaqController extends Controller {
         $data->save();
         return back()->with('success', "FAQ Added!");
     }
+
+    function edit($id) {
+        $data = Faq::find($id);
+        return view('backend.faq.edit', compact('data'));
+    }
+    function update(Request $request, $id) {
+        $data = Faq::find($id);
+
+        $this->validate($request, [
+            "question" => "required",
+            "answer"   => "required",
+        ]);
+
+        $data->question = $request->question;
+        $data->answer   = $request->answer;
+        $data->save();
+        return back()->with('success', "FAQ Update Successfull!");
+    }
+
+    function delete($id) {
+        $data = Faq::find($id);
+        $data->delete();
+        return back()->with('success', "FAQ Delete Successfull!");
+    }
 }

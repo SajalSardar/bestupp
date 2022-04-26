@@ -25,4 +25,11 @@ class SocialController extends Controller {
         $data->save();
         return back()->with('success', "Add Social Media!");
     }
+
+    function delete($id) {
+        $data = SocialNetwork::find($id);
+        $data->delete();
+        return back()->with('success', "Delete Social Media!");
+    }
+
 }

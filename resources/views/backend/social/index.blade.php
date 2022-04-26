@@ -62,7 +62,7 @@
                       <td >{{ $data->name }}</td>
                       <td >{{ $data->link }}</td>
                       <td>
-                        <a href="">Delete</a>
+                        <a href="{{ route('dashboard.social.delete', $data->id) }}" class="btn btn-sm btn-danger">Delete</a>
                       </td>
                     </tr>
                   @endforeach

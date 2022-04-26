@@ -31,4 +31,16 @@ class FreeLearningController extends Controller {
         return response()->json(['success' => 'Your Information Successfully Done!']);
     }
 
+    function markRead($id) {
+        $data         = FreeLearning::find($id);
+        $data->status = 2;
+        $data->save();
+        return back()->with('success', 'Mark as Read Successfully Done!');
+    }
+    function delete($id) {
+        $data = FreeLearning::find($id);
+        $data->delete();
+        return back()->with('success', 'Delete Successfully Done!');
+    }
+
 }

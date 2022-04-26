@@ -13,7 +13,7 @@ class CreateAboutsTable extends Migration {
     public function up() {
         Schema::create('abouts', function (Blueprint $table) {
             $table->id();
-            $table->string('section_title')->default('About Bestupp');
+            $table->string('section_title')->default('About Exnin');
             $table->text('section_description')->nullable();
             $table->longText('about_us')->nullable();
             $table->string('about_banner')->nullable();

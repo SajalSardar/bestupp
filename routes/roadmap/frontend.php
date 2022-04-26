@@ -31,6 +31,5 @@ Route::name('frontend.')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::get('/enroll/{id}', [CartController::class, 'enroll'])->name('enroll');
     Route::get('/cart/delete/{id}', [CartController::class, 'cartDelete'])->name('cart.delete');
-    Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
 });

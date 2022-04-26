@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SslCommerzPaymentController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,18 @@ Auth::routes();
 
 require_once "roadmap/backend.php";
 require_once "roadmap/frontend.php";
+
+// SSLCOMMERZ Start
+
+Route::get('/checkout', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
 
 Route::get('/tokens/create', function (Request $request) {
     $token = $request->user()->createToken(auth()->user()->name);

@@ -54,7 +54,7 @@
               <span class="menu-item-label">Free Learning Student</span></i>
             </div><!-- menu-item -->
           </a>
-          <a href="{{ route('dashboard.order.index') }}" class="sl-menu-link {{ Request::routeIs('dashboard.order.index') ? "active" : ""}}">
+          <a href="{{ route('dashboard.order.index') }}" class="sl-menu-link {{ Request::routeIs('dashboard.order*') ? "active" : ""}}">
             <div class="sl-menu-item">
               <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
               <span class="menu-item-label">Orders</span></i>
@@ -182,7 +182,9 @@
               @endrole
 
               @role('student')
+              @if (!empty(auth()->user()->student->profile_photo))
               <img src="{{ asset('storage/uploads/profiles/'.auth()->user()->student->profile_photo ) }}" class="wd-32 rounded-circle" alt="{{ auth()->user()->name }}">
+              @endif
               @endrole
 
               @role('admin|super-admin')
@@ -278,6 +280,7 @@
         <div class="footer-left">
           <div class="mg-b-2">
             {!! themeoptions()->footer_copy !!}
+           
           </div>
         </div>
         

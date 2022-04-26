@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Banner;
 use App\Models\Course;
+use App\Models\DaySchedule;
 use App\Models\Faq;
 use App\Models\ThemeOptions;
 
@@ -31,7 +32,8 @@ class FrontendController extends Controller {
 
     public function viewCourse($slug) {
         $data = Course::where('slug', $slug)->first();
-        return view('frontend.courseview', compact('data'));
+        $days = DaySchedule::all();
+        return view('frontend.courseview', compact('data', 'days'));
     }
 
     public function about() {

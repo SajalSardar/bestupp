@@ -24,6 +24,7 @@ class ContactController extends Controller {
         $data->mobile    = $request->mobile;
         $data->email     = $request->email;
         $data->message   = $request->message;
+        $data->status    = 1;
         $data->save();
         return back()->with('success', "Message Successfully Send!");
     }
@@ -31,5 +32,11 @@ class ContactController extends Controller {
     public function showAll() {
         $datas = Contact::all();
         return view('backend.contact.index', compact('datas'));
+    }
+    public function markasread($id) {
+        $data         = Contact::find($id);
+        $data->status = 2;
+        $data->save();
+        return back()->with('success', "Message Mark as Read!");
     }
 }

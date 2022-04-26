@@ -29,14 +29,14 @@ class CreateThemeOptionsTable extends Migration {
             $table->string('home_app_title')->default('Download app from the');
             $table->string('home_app_sub_title')->default('Google Play Store');
             $table->text('home_app_description')->nullable();
-            $table->string('faq_title')->default('Frequently Asked Questions (FAQ)');
+            $table->string('faq_title')->default('<h2>Frequently Asked Questions <span>(FAQ)</span></h2>');
             $table->string('faq_subtitle')->default('Every moment of life should be used properly');
-            $table->string('course_title')->default('Our Courses');
+            $table->string('course_title')->default('<h2>Our <span>Courses</span></h2>');
             $table->string('course_subtitle')->default('Every moment of life should be used properly');
-            $table->string('student_title')->default('Student Registration');
+            $table->string('student_title')->default('<h2>Student <span>Registration</span></h2>');
             $table->string('student_subtitle')->default('Every moment of life should be used properly');
 
-            $table->string('teacher_title')->default('Teacher Registration');
+            $table->string('teacher_title')->default('<h2>Teacher <span>Registration</span></h2>');
             $table->string('teacher_subtitle')->default('Every moment of life should be used properly');
             $table->timestamps();
         });

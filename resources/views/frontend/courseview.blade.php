@@ -91,7 +91,37 @@
 
                   </ul>
                 </div>
-                <a class="enroll_btn" href="{{ route('frontend.enroll',$data->id) }}">Enroll Now</a>
+                
+              </div>
+              <div class="card mt-3">
+                <div class="card-header">
+                  <h5>Select Your Preferred Day and Time </h5>
+                </div>
+                <div class="card-body">
+                  <form action="{{ route('frontend.enroll',$data->id) }}" method="GET">
+                    @csrf
+                    <div class="admission_input">
+                      <select class="form-select" name="studentDay" required>
+                        <option selected disabled>-Select One-</option>
+                        @foreach ($days as $day)
+                        <option value="{{ $day->name }}">{{ $day->name }}</option>
+                        @endforeach
+                      </select>
+                      @error('studentDay')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                    <div class=" admission_input">
+                      <input type="time" name="studenttime" class="form-control"  placeholder="Time" required>
+                      @error('studenttime')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                    <div>
+                      <button type="submit" class="enroll_btn btn">Enroll Now</button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -100,6 +130,29 @@
     </div>
   </section>
   <!-- Kid's Learning Details part end -->
+<!-- Online Payment Part End -->
+@if ($message = Session::get('warning'))
+<div class="toast-container position-absolute top-0 end-0 p-3" style="z-index:9999;">
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="10000">
+  <div class="toast-header bg-warning">
+    <h3 class="pl-2 text-white">{{ config('app.name') }}</h3>
+    <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+    {{ $message }}
+  </div>
+</div>
+</div>
+@endif
 
+@endsection
 
+@section('frontend_js')
+<script>
+window.onload = (event)=> {
+ let myAlert = document.querySelector('.toast');
+ let bsAlert = new  bootstrap.Toast(myAlert);
+ bsAlert.show();
+}
+</script>
 @endsection

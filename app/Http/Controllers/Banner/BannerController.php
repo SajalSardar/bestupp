@@ -60,33 +60,18 @@ class BannerController extends Controller {
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Banner  $banner
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Banner $banner) {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Banner  $banner
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Banner $banner) {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Banner  $banner
      * @return \Illuminate\Http\Response
      */
     public function destroy(Banner $banner) {
-        //
+
+        $path = public_path('storage/uploads/banner/' . $banner->banner_image);
+        if (file_exists($path) && $banner->banner_image != null) {
+            unlink($path);
+        }
+        $banner->delete();
+        return back()->with('success', 'Banner Delete!');
     }
 }

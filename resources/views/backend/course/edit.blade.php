@@ -15,6 +15,7 @@
       <div class="card pd-20 pd-sm-40">
         <form action="{{ route('dashboard.course.update',$course->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('put')
             <div class="form-layout">
                 <div class="form-group">
                     <label class="form-control-label">Course Name: <span class="tx-danger">*</span></label>
@@ -76,19 +77,20 @@
                 <div class="form-group ">
                     <label class="form-control-label">1st Installment</label>
                     <div class="input-group">
-                        <input type="number" name="installment[pay]" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[0]  }}"> 
-                        <input type="hidden" name="installment[day]" class="form-control" value="1"> 
+                        <input type="number" name="installment1" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[0]  }}"> 
+                        
                     </div>
-                    @error('installment')
+                    @error('installment1')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div> 
 
                 <div class="form-group ">
+               
                     <label class="form-control-label">2nd Installment</label>
                     <div class="input-group">
-                        <input type="number" name="installment2[pay]" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[1]  }}">
-                        <input type="number" name="installment2[day]" class="form-control" placeholder="Ex: 10 days after join course" value="{{ $course->installments->pluck('pay_date')[1] }}">  
+                        <input type="number" name="installment2" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[1]  }}">
+                        <input type="number" name="day2" class="form-control" placeholder="Ex: 10 days after join course" value="{{ $course->installments->pluck('pay_date')[1] }}">  
 
                     </div>
                     
@@ -97,8 +99,8 @@
                 <div class="form-group ">
                     <label class="form-control-label">3rd Installment</label>
                     <div class="input-group">
-                        <input type="number" name="installment3[pay]" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[2] }}">
-                        <input type="number" name="installment3[day]" class="form-control" placeholder="Ex: 10 days after join course" value="{{ $course->installments->pluck('pay_date')[1] }}">  
+                        <input type="number" name="installment3" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[2] }}">
+                        <input type="number" name="day3" class="form-control" placeholder="Ex: 10 days after join course" value="{{ $course->installments->pluck('pay_date')[2] }}">  
 
                     </div>
                     
@@ -108,6 +110,9 @@
                 <div class="form-group">
                     <label class="form-control-label">Banner Image:</label>
                     <input class="form-control" type="file" name="banner_image" id="file_input">
+                    @error('banner_image')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <img src="{{ asset('storage/uploads/course/'.$course->banner_image) }}" id="show_img" width="150" class="mt-3" alt="">
                 </div>
       

@@ -132,7 +132,69 @@ class CourseController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Course $course) {
-        //
+
+        $banner_photo = $request->file('banner_image');
+        $this->validate($request, [
+            "name"         => "required|unique:courses,name," . $course->id,
+            "description"  => "required",
+            "overview"     => "required",
+            "duration"     => "required",
+            "total_class"  => "required",
+            "class_info"   => "required",
+            "course_fee"   => "required",
+            "usdeuro"      => "required",
+            "installment1" => "required",
+            "banner_image" => "mimes:jpg,jpeg,png,webp|max:5000",
+        ]);
+
+        if ($banner_photo) {
+            $_photo_name = Str::slug($request->name) . '_' . time() . '.' . $banner_photo->getClientOriginalExtension();
+
+            $banner_photo->move(public_path('storage/uploads/course/'), $_photo_name);
+
+            $path = public_path('storage/uploads/course/' . $course->banner_image);
+            if (file_exists($path) && $course->banner_image != null) {
+                unlink($path);
+            }
+        } else {
+            $_photo_name = $course->banner_image;
+        }
+
+        $course->name         = $request->name;
+        $course->slug         = Str::slug($request->name);
+        $course->description  = $request->description;
+        $course->overview     = $request->overview;
+        $course->duration     = $request->duration;
+        $course->total_class  = $request->total_class;
+        $course->class_info   = $request->class_info;
+        $course->course_fee   = $request->course_fee;
+        $course->usdeuro      = $request->usdeuro;
+        $course->banner_image = $_photo_name;
+        $course->save();
+
+        if ($course->id && $request->installment1) {
+            CourseInstallment::where('id', $course->installments[0]['id'])->update([
+                "bdt"        => $request->installment1,
+                "updated_at" => now(),
+            ]);
+        }
+        if ($course->id && $request->installment2) {
+            CourseInstallment::where('id', $course->installments[1]['id'])->update([
+                "bdt"        => $request->installment2,
+                "pay_date"   => $request->day2,
+                "updated_at" => now(),
+            ]);
+        }
+        if ($course->id && $request->installment3) {
+            CourseInstallment::where('id', $course->installments[2]['id'])->update([
+                "bdt"        => $request->installment3,
+                "pay_date"   => $request->day3,
+                "updated_at" => now(),
+            ]);
+        }
+
+        return back()->with('success', "Course Update Successfull!");
+
     }
 
     /**
@@ -141,7 +203,32 @@ class CourseController extends Controller {
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course) {
-        //
+    // public function destroy(Course $course) {
+    //     $path = public_path('storage/uploads/course/' . $course->banner_image);
+    //     if (file_exists($path) && $course->banner_image != null) {
+    //         unlink($path);
+    //     }
+    //     $course->delete();
+    //     foreach ($course->installments as $installment) {
+    //         $installment->delete();
+    //     }
+    //     return back()->with('success', "Course Delete Successfull!");
+    // }
+
+    public function courseStatusUpdate(Course $course) {
+
+        if ($course->status == 1) {
+            $course->status = 2;
+            $course->save();
+            return back()->with('success', "Status Update Successfull!");
+        }
+
+        if ($course->status == 2) {
+            $course->status = 1;
+            $course->save();
+            return back()->with('success', "Status Update Successfull!");
+        }
+
     }
+
 }

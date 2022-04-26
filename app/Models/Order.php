@@ -16,9 +16,6 @@ class Order extends Model {
     function course() {
         return $this->belongsTo(Course::class);
     }
-    function order_installments() {
-        return $this->hasMany(OrderInstallment::class);
-    }
 
     function user() {
         return $this->belongsTo(User::class);

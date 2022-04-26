@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderInstallment;
+use App\Models\StudentRegistration;
 use App\Models\TeacherRegistration;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,8 +25,10 @@ class HomeController extends Controller {
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index() {
-        $teacher = TeacherRegistration::where('user_id', auth()->user()->id)->select('id', 'status')->first();
-        return view('backend.dashboard', compact('teacher'));
+        $teacher  = TeacherRegistration::where('user_id', auth()->user()->id)->select('id', 'status')->first();
+        $sales    = OrderInstallment::select('bdt', 'transaction_id', 'status')->get();
+        $students = StudentRegistration::all();
+        return view('backend.dashboard', compact('teacher', 'sales', 'students'));
     }
 
     /**
