@@ -2,6 +2,7 @@
 
 use App\Http\Resources\CourseResource;
 use App\Models\Course;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,7 @@ Route::middleware('auth:sanctum')->get('/course/{id}', function ($id) {
 
 Route::middleware('auth:sanctum')->get('/course', function () {
     return CourseResource::collection(Course::all());
+});
+Route::middleware('auth:sanctum')->get('/users', function () {
+    return User::all();
 });

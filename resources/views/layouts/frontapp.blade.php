@@ -210,14 +210,14 @@
               <div class="col-6">
                 <ul class="links">
                   @foreach (courseTitieOne() as $titleOne)
-                    <li><a href="{{ route('frontend.view.course',$titleOne->slug) }}"><i class="fa fa-caret-right"></i> {{ $titleOne->name }}</a>
+                    <li><a href="{{ route('frontend.view.course',$titleOne->slug) }}"><i class="fa fa-caret-right"></i> {!! $titleOne->name !!}</a>
                   @endforeach
                 </ul>
               </div>
               <div class="col-6">
                 <ul class="links">
                   @foreach (courseTitieTwo() as $titleTwo)
-                    <li><a href="{{ route('frontend.view.course',$titleTwo->slug) }}"><i class="fa fa-caret-right"></i> {{ $titleTwo->name }}</a>
+                    <li><a href="{{ route('frontend.view.course',$titleTwo->slug) }}"><i class="fa fa-caret-right"></i> {!! $titleTwo->name !!}</a>
                   @endforeach
                 </ul>
               </div>

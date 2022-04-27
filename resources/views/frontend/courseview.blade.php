@@ -1,15 +1,15 @@
 @extends('layouts.frontapp')
-@section('title', $data->name)
+@section('title', strip_tags($data->name))
 @section('content')
 <!-- Contact Banaer page Strat -->
 <section id="single_banner_page">
     <div class="single_banner_page_overly">
       <div class="single_banner_text">
-        <h1>{{ $data->name }}</h1>
+        <h1>{!! $data->name !!}</h1>
         <ul>
           <li><a href="{{ route('frontend.home') }}">Home</a></li>
           <li><a href="{{ route('frontend.all.course') }}"><span>/</span>All Courses</a></li>
-          <li class="diseble"><span>/</span>{{ $data->name }}</li>
+          <li class="diseble"><span>/</span>{!! $data->name !!}</li>
         </ul>
       </div>
     </div>
@@ -20,7 +20,7 @@
   <section id="courses_details">
     <div class="container">
       <div class="section_heading text-center">
-        <h2>{{ $data->name }}</h2>
+        <h2>{!! $data->name !!}</h2>
         <p>{{ $data->description }}</p>
       </div>
       <div class="row align-items-center">

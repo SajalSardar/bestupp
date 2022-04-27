@@ -77,7 +77,7 @@ class CourseController extends Controller {
                 $course->banner_image = $_photo_name;
                 $course->save();
 
-                if ($course->id && !empty($request->installment)) {
+                if ($course->id && $request->installment) {
                     CourseInstallment::insert([
                         "course_id"  => $course->id,
                         "bdt"        => $request->installment['pay'],
@@ -86,7 +86,7 @@ class CourseController extends Controller {
                         "updated_at" => now(),
                     ]);
                 }
-                if ($course->id && !empty($request->installment2)) {
+                if ($course->id && $request->installment2['pay'] != null) {
                     CourseInstallment::insert([
                         "course_id"  => $course->id,
                         "bdt"        => $request->installment2['pay'],
@@ -96,7 +96,7 @@ class CourseController extends Controller {
                     ]);
                 }
 
-                if ($course->id && !empty($request->installment3)) {
+                if ($course->id && $request->installment3['pay'] != null) {
                     CourseInstallment::insert([
                         "course_id"  => $course->id,
                         "bdt"        => $request->installment3['pay'],

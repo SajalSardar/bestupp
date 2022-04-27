@@ -99,8 +99,8 @@
                 <div class="form-group ">
                     <label class="form-control-label">3rd Installment</label>
                     <div class="input-group">
-                        <input type="number" name="installment3" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[2] }}">
-                        <input type="number" name="day3" class="form-control" placeholder="Ex: 10 days after join course" value="{{ $course->installments->pluck('pay_date')[2] }}">  
+                        <input type="number" name="installment3" class="form-control" placeholder="Enter Installment" value="{{ $course->installments->pluck('bdt')[2] ?? "" }}">
+                        <input type="number" name="day3" class="form-control" placeholder="Ex: 10 days after join course" value="{{ $course->installments->pluck('pay_date')[2] ?? ""}}">  
 
                     </div>
                     
