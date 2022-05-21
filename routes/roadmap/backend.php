@@ -90,6 +90,10 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/learning/delete/{id}', [FreeLearningController::class, 'delete'])->name('free.learning.delete');
         Route::get('/social-media/delete/{id}', [SocialController::class, "delete"])->name('social.delete');
 
+        //Privacy Policy
+        Route::get('/privacy-policy', [HomeController::class, "editPolicy"])->name('privacy.policy');
+        Route::post('/privacy-policy/{id}', [HomeController::class, "updatePolicy"])->name('update.privacy.policy');
+
     });
 
     Route::group(['middleware' => ['role:student', 'auth']], function () {

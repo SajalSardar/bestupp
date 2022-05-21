@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\Course;
 use App\Models\DaySchedule;
 use App\Models\Faq;
+use App\Models\PrivacyPolicy;
 use App\Models\ThemeOptions;
 
 class FrontendController extends Controller {
@@ -26,7 +27,7 @@ class FrontendController extends Controller {
     }
 
     public function allCourse() {
-        $courses = Course::where('status', 1)->select('name', 'overview', 'slug', 'banner_image')->OrderBy('id', 'DESC')->get();
+        $courses = Course::where('status', 1)->select('name', 'overview', 'slug', 'banner_image')->get();
         return view('frontend.allcourse', compact('courses'));
     }
 
@@ -39,6 +40,10 @@ class FrontendController extends Controller {
     public function about() {
         $about = About::firstOrFail();
         return view('frontend.about', compact('about'));
+    }
+    public function policy() {
+        $policy = PrivacyPolicy::firstOrFail();
+        return view('frontend.policy', compact('policy'));
     }
 
 }

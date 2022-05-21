@@ -57,7 +57,7 @@ class TeacherController extends Controller {
         $insertUser->email    = $request->email;
         $insertUser->password = Hash::make($request->password);
         $insertUser->save();
-        $insertUser->assignRole(3);
+        $insertUser->assignRole(2);
 
         if ($insertUser->id) {
             $data                    = new TeacherRegistration();

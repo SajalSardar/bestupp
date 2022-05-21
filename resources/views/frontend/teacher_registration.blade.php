@@ -133,29 +133,28 @@
                         @enderror
                       </div>
 
-                      <div class=" admission_input">
-                        <label for="regEducation">Education</label>
-                        <select class="form-select select_2" id="regEducation" name="education[]" multiple>
+                      <div class="form-floating admission_input">
+                        <select class="form-select select_2" id="regEducation" name="education[]" multiple aria-label="Education">
                           <option disabled>Education</option>
                           @foreach ($edus as  $edu)
                             <option value="{{ $edu->name }}">{{ $edu->name }}</option>
                           @endforeach
                         </select>
+                        <label for="regEducation">Education</label>
                         
                         @error('education')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
     
-                      <div class=" admission_input">
-                        <label for="regNameCourse">Name of Course</label>
-                        <select class="form-select select_2" id="regNameCourse"  name="courses[]" multiple>
+                      <div class="form-floating admission_input">
+                        <select class="form-select select_2" id="regNameCourse"  name="courses[]" multiple aria-label="Name of Course">
                           <option disabled> Name of Course </option>
                           @foreach ($courses as $course)
-                          <option value="{{ $course->name }}">{{ $course->name }}</option>
+                          <option value="{{ strip_tags($course->name) }}">{{ strip_tags($course->name) }}</option>
                           @endforeach
-                         
                         </select>
+                        <label for="regNameCourse">Name of Course</label>
                         @error('courses')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror

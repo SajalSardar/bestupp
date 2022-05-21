@@ -120,7 +120,7 @@
         <div class="col-lg-3 col-md-6">
           <div class="footer_item item_left">
             <a href="#">
-              <img src="{{ asset('storage/uploads/logo/'.themeoptions()->logo) }}" alt="{{ config('app.name') }}" style="width:200px">
+              <img src="{{ asset('storage/uploads/logo/'.themeoptions()->logo) }}" alt="{{ config('app.name') }}" style="width: 160px">
             </a>
             <div class="join_free_seminar">
               <button class="main_btn" data-bs-target="#myModal" data-bs-toggle="modal">Join free  learning</button>
@@ -157,7 +157,7 @@
                           <select class="form-select" name="course" id="studentCourse" aria-label="Floating label select example">
                             <option selected disabled>-Select One-</option>
                             @foreach(courses() as $course)
-                            <option value="{{ $course->id }}">{{ $course->name }}</option>
+                            <option value="{{ $course->id }}">{{ strip_tags($course->name) }}</option>
                             @endforeach
                             
                           </select>
@@ -198,7 +198,8 @@
               <li><a href="#"><i class="fa fa-caret-right"></i> Job Placement</a></li>
               <li><a href="#"><i class="fa fa-caret-right"></i> Freelancing Success</a></li>
               <li><a href="#"><i class="fa fa-caret-right"></i> Gallery</a></li>
-              <li><a href="{{ route('frontend.contact') }}"><i class="fa fa-caret-right"></i> Contact us</a></li>
+              <li><a href="{{ route('frontend.contact') }}"><i class="fa fa-caret-right"></i> Send Message</a></li>
+              <li><a href="{{ route('frontend.privacy.policy') }}"><i class="fa fa-caret-right"></i>Privacy Policy</a></li>
             </ul>
           </div>
         </div>
@@ -206,22 +207,11 @@
         <div class="col-lg-4 col-md-6">
           <div class="footer_item">
             <h3>All Courses</h3>
-            <div class="row">
-              <div class="col-6">
-                <ul class="links">
+                <ul class="links row">
                   @foreach (courseTitieOne() as $titleOne)
-                    <li><a href="{{ route('frontend.view.course',$titleOne->slug) }}"><i class="fa fa-caret-right"></i> {!! $titleOne->name !!}</a>
+                    <li class="col-6"><a href="{{ route('frontend.view.course',$titleOne->slug) }}"><i class="fa fa-caret-right"></i> {!! $titleOne->name !!}</a>
                   @endforeach
                 </ul>
-              </div>
-              <div class="col-6">
-                <ul class="links">
-                  @foreach (courseTitieTwo() as $titleTwo)
-                    <li><a href="{{ route('frontend.view.course',$titleTwo->slug) }}"><i class="fa fa-caret-right"></i> {!! $titleTwo->name !!}</a>
-                  @endforeach
-                </ul>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -279,15 +269,16 @@
   <!-- All script Js Here -->
   <script src="{{ asset('frontend/js/jquery-1.12.4.min.js') }}"></script>
   <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('frontend/js/popper.min.js') }}"></script>
   <script src="{{ asset('frontend/js/swiper-bundle.min.js') }}"></script>
   <script src="{{ asset('frontend/js/venobox.min.js') }}"></script>
   <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
   <script src="{{ asset('frontend/js/script.js') }}"></script>
   <script>
+  $(document).ready(function ($) {
+    
     
     //seminar form
-    $(".free_submit").click(function(e){
+    $(".free_submit").on('click',function(e){
       e.preventDefault();
 
       $('.name_err').text('');
@@ -332,6 +323,8 @@
 
 
     });
+  
+  });
   </script>
 
   @yield('frontend_js')

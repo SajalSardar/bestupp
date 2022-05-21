@@ -43,7 +43,7 @@
                 @if ($data->status == 1)
               <tr>    
                   <td>{{ $data->id }}</td>
-                  <td>{{ $data->course->name }}</td>
+                  <td>{{ strip_tags($data->course->name) }}</td>
                   <td>{{ $data->name }}</td>
                   <td>{{ $data->email }}</td>
                   <td>{{ $data->mobile }}</td>

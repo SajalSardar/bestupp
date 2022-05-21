@@ -40,7 +40,7 @@
                 <tr>    
                   <td>{{ $data->id }}</td>
                   <td><img src="{{ asset('storage/uploads/course/'.$data->banner_image)  }}" height="50" alt=""></td>
-                  <td>{{ $data->name }}</td>
+                  <td>{{ strip_tags($data->name) }}</td>
                   <td>{{ $data->duration }}</td>
                   <td>{{ $data->total_class }}</td>
                   <td>{{ $data->course_fee }} BDT</td>

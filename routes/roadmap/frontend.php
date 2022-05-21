@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\CartController;
 use App\Http\Controllers\backend\ContactController;
+use App\Http\Controllers\backend\FreeLearningController;
 use App\Http\Controllers\backend\StudentController;
 use App\Http\Controllers\backend\TeacherController;
 use App\Http\Controllers\frontend\FrontendController;
@@ -31,5 +32,8 @@ Route::name('frontend.')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::get('/enroll/{id}', [CartController::class, 'enroll'])->name('enroll');
     Route::get('/cart/delete/{id}', [CartController::class, 'cartDelete'])->name('cart.delete');
+
+    //Privacy Policy
+    Route::get('/privacy-policy', [FrontendController::class, "policy"])->name('privacy.policy');
 
 });

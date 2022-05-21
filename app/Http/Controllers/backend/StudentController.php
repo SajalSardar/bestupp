@@ -36,7 +36,7 @@ class StudentController extends Controller {
         $insertUser->email    = $request->email;
         $insertUser->password = Hash::make($request->password);
         $insertUser->save();
-        $insertUser->assignRole(4);
+        $insertUser->assignRole(3);
 
         if ($insertUser) {
             $data               = new StudentRegistration();

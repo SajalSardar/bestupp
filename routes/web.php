@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\SslCommerzPaymentController;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,8 +32,8 @@ Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 //SSLCOMMERZ END
 
-Route::get('/tokens/create', function (Request $request) {
-    $token = $request->user()->createToken(auth()->user()->name);
+// Route::get('/tokens/create', function (Request $request) {
+//     $token = $request->user()->createToken(auth()->user()->name);
 
-    return ['token' => $token->plainTextToken];
-});
+//     return ['token' => $token->plainTextToken];
+// });

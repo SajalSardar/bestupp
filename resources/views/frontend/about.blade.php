@@ -1,5 +1,5 @@
 @extends('layouts.frontapp')
-@section('title', "Student Registration")
+@section('title', "About Us")
 @section('content')
  <!-- Contact Banaer page Strat -->
  <section id="single_banner_page">
@@ -8,7 +8,6 @@
         <h1>{!! $about->section_title !!}</h1>
         <ul>
           <li><a href="{{ route('frontend.home') }}">Home</a></li>
-          <li><a href="{{ route('frontend.all.course') }}"><span>/</span>All Courses</a></li>
           <li class="diseble"><span>/</span> About us</li>
         </ul>
       </div>

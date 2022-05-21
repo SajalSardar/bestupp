@@ -6,8 +6,8 @@
     <div class="swiper-container mySwiper">
       <div class="swiper-wrapper">
         @foreach ($banners as $banner)
-        <div class="swiper-slide banner_items" style="background: url({{asset('storage/uploads/banner/'. $banner->banner_image)}})">
-         
+        <div class="swiper-slide banner_1">
+         <img src="{{asset('storage/uploads/banner/'. $banner->banner_image)}}" class="img-fluid" alt="">
         </div>
         @endforeach
       </div>
@@ -115,7 +115,7 @@
 
 
   <!-- Student Ragistration Part Start -->
-  <section id="student_ragistration">
+  <section id="student_ragistration" class="mb-5">
     <div class="container">
       <div class="section_heading text-center">
         {!! $themeoption->student_title !!}
@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="form-floating admission_input">
-                      <input type="text" class="form-control" id="studentNationality" name="nationality">
+                      <input type="text" class="form-control" id="studentNationality" name="nationality" placeholder="Nationality">
                       <label for="studentNationality">Nationality</label>
                       @error('nationality')
                         <p class="text-danger">{{ $message }}</p>
@@ -244,7 +244,7 @@
 
 
   <!-- Download App Part Start -->
-  <section id="download_app">
+  {{-- <section id="download_app">
     <div class="app_overly">
       <div class="container">
         <div class="row align-items-center">
@@ -307,7 +307,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> --}}
   <!-- Download App Part End -->
 
   

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\OrderInstallment;
+use App\Models\PrivacyPolicy;
 use App\Models\StudentRegistration;
 use App\Models\TeacherRegistration;
 use App\Models\User;
@@ -63,6 +64,26 @@ class HomeController extends Controller {
 
         return back()->with('success', "Profile Update Successfull!");
 
+    }
+
+    //Privacy Policy
+
+    function editPolicy() {
+        $Policy = PrivacyPolicy::firstOrFail();
+        return view('backend.policy.edit', compact('Policy'));
+    }
+
+    function updatePolicy(Request $request, $id) {
+        $policy = PrivacyPolicy::find($id);
+        $request->validate([
+            "title"          => "required",
+            "privacy_policy" => "required",
+        ]);
+
+        $policy->title          = $request->title;
+        $policy->privacy_policy = $request->privacy_policy;
+        $policy->save();
+        return back()->with('success', "Privacy Policy Updated!");
     }
 
 }

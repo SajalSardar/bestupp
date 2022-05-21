@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="form-floating admission_input">
-                      <input type="text" class="form-control" id="studentNationality" name="nationality">
+                      <input type="text" class="form-control" id="studentNationality" name="nationality" placeholder="Nationality">
                       <label for="studentNationality">Nationality</label>
                       @error('nationality')
                         <p class="text-danger">{{ $message }}</p>
