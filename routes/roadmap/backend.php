@@ -94,6 +94,9 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/privacy-policy', [HomeController::class, "editPolicy"])->name('privacy.policy');
         Route::post('/privacy-policy/{id}', [HomeController::class, "updatePolicy"])->name('update.privacy.policy');
 
+        //all admin
+        Route::get('/all-admins', [HomeController::class, "allAdmin"])->name("show.all.admin");
+
     });
 
     Route::group(['middleware' => ['role:student', 'auth']], function () {

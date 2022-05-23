@@ -31,10 +31,11 @@ class StudentController extends Controller {
             "gender"      => 'required',
             "address"     => 'required',
         ]);
-        $insertUser           = new User();
-        $insertUser->name     = $request->name;
-        $insertUser->email    = $request->email;
-        $insertUser->password = Hash::make($request->password);
+        $insertUser                    = new User();
+        $insertUser->name              = $request->name;
+        $insertUser->email             = $request->email;
+        $insertUser->password          = Hash::make($request->password);
+        $insertUser->email_verified_at = now();
         $insertUser->save();
         $insertUser->assignRole(3);
 

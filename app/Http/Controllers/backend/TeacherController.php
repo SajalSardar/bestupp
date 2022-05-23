@@ -52,10 +52,11 @@ class TeacherController extends Controller {
         $_certificate_name    = Str::slug($request->name) . '_' . time() . '.' . $certificate->getClientOriginalExtension();
         $certificate_uploades = $certificate->move(public_path('storage/uploads/certificates/'), $_certificate_name);
 
-        $insertUser           = new User();
-        $insertUser->name     = $request->name;
-        $insertUser->email    = $request->email;
-        $insertUser->password = Hash::make($request->password);
+        $insertUser                    = new User();
+        $insertUser->name              = $request->name;
+        $insertUser->email             = $request->email;
+        $insertUser->password          = Hash::make($request->password);
+        $insertUser->email_verified_at = now();
         $insertUser->save();
         $insertUser->assignRole(2);
 

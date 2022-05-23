@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Resources\CourseResource;
-use App\Models\Course;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CommonController;
+use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\StudentController;
+use App\Http\Controllers\Api\TeacherController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,14 +23,27 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+// public route
+Route::get('/course', [CourseController::class, 'index']);
+Route::get('/course/{course}', [CourseController::class, 'show']);
 
-Route::middleware('auth:sanctum')->get('/course/{id}', function ($id) {
-    return new CourseResource(Course::findOrFail($id));
+Route::post('/student/registration', [StudentController::class, 'studentRegistration']);
+Route::post('/teacher/registration', [TeacherController::class, 'teacherRegistration']);
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/banners', [CommonController::class, 'allBanners']);
+Route::get('/about-us', [CommonController::class, 'aboutUs']);
+Route::post('/free-learning', [CommonController::class, 'freeLearning']);
+Route::post('/contact-us', [CommonController::class, 'contactUs']);
+
+//prvate route
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    //order
+    Route::get('/our/orders', [StudentController::class, 'showOrders']);
 });
 
-Route::middleware('auth:sanctum')->get('/course', function () {
-    return CourseResource::collection(Course::all());
-});
 Route::middleware('auth:sanctum')->get('/users', function () {
     return User::all();
 });

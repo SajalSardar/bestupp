@@ -86,4 +86,12 @@ class HomeController extends Controller {
         return back()->with('success', "Privacy Policy Updated!");
     }
 
+    // all admin
+    function allAdmin() {
+        $all_admin = User::with(['roles' => function ($q) {
+            $q->where('name', 'super-admin');
+        }])->get();
+        return view('backend.all_admin.index', compact('all_admin'));
+    }
+
 }
