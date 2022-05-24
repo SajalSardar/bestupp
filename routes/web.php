@@ -37,5 +37,3 @@ Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
 
 //     return ['token' => $token->plainTextToken];
 // });
-
-//  test ripo
