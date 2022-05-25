@@ -14,10 +14,10 @@ class CourseResource extends JsonResource {
     public function toArray($request) {
         return [
             'id'           => $this->id,
-            'name'         => $this->name,
+            'name'         => strip_tags($this->name),
             'slug'         => $this->slug,
-            'description'  => $this->description,
-            'overview'     => $this->overview,
+            'description'  => strip_tags($this->description),
+            'overview'     => strip_tags($this->overview),
             'duration'     => $this->duration,
             'total_class'  => $this->total_class,
             'class_info'   => $this->class_info,

@@ -9,7 +9,10 @@ use App\Models\Course;
 class CourseController extends Controller {
 
     function index() {
-        return CourseResource::collection(Course::all());
+        $data = Course::all();
+        //$new  = strip_tags($data);
+        return CourseResource::collection($data);
+        //return CourseResource::collection($new);
     }
 
     function show(Course $course) {
