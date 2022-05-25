@@ -5,8 +5,6 @@ use App\Http\Controllers\Api\CommonController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\TeacherController;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,27 +18,25 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 // public route
-Route::get('/course', [CourseController::class, 'index']);
-Route::get('/course/{course}', [CourseController::class, 'show']);
-
-Route::post('/student/registration', [StudentController::class, 'studentRegistration']);
-Route::post('/teacher/registration', [TeacherController::class, 'teacherRegistration']);
-
-Route::post('/login', [AuthController::class, 'login']);
 Route::get('/banners', [CommonController::class, 'allBanners']);
 Route::get('/about-us', [CommonController::class, 'aboutUs']);
-Route::post('/free-learning', [CommonController::class, 'freeLearning']);
-Route::post('/contact-us', [CommonController::class, 'contactUs']);
-
 Route::get('/course-day', [CommonController::class, 'courseDay']);
 Route::get('/teacher-education', [CommonController::class, 'teacherEducation']);
 Route::get('/social-icon', [CommonController::class, 'socialNetwork']);
 Route::get('/options', [CommonController::class, 'themeOption']);
 Route::get('/privacy-policy', [CommonController::class, 'privacyPolicy']);
+Route::get('/course', [CourseController::class, 'index']);
+Route::get('/course/{course}', [CourseController::class, 'show']);
+
+Route::post('/student/registration', [StudentController::class, 'studentRegistration']);
+Route::post('/teacher/registration', [TeacherController::class, 'teacherRegistration']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/free-learning', [CommonController::class, 'freeLearning']);
+Route::post('/contact-us', [CommonController::class, 'contactUs']);
 
 //prvate route
 Route::group(['middleware' => ['auth:sanctum']], function () {
