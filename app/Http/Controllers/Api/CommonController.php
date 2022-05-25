@@ -6,7 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Banner;
 use App\Models\Contact;
+use App\Models\DaySchedule;
 use App\Models\FreeLearning;
+use App\Models\PrivacyPolicy;
+use App\Models\SocialNetwork;
+use App\Models\Teachereducation;
+use App\Models\ThemeOptions;
 use Illuminate\Http\Request;
 
 class CommonController extends Controller {
@@ -61,4 +66,29 @@ class CommonController extends Controller {
         ];
         return response($response, 201);
     }
+
+    public function courseDay() {
+        $data = DaySchedule::all();
+        return response($data, 200);
+    }
+
+    public function teacherEducation() {
+        $data = Teachereducation::all();
+        return response($data, 200);
+    }
+    public function socialNetwork() {
+        $data = SocialNetwork::all();
+        return response($data, 200);
+    }
+
+    public function themeOption() {
+        $data = ThemeOptions::first();
+        return response($data, 200);
+    }
+
+    public function privacyPolicy() {
+        $data = PrivacyPolicy::first();
+        return response($data, 200);
+    }
+
 }

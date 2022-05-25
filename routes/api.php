@@ -36,6 +36,12 @@ Route::get('/about-us', [CommonController::class, 'aboutUs']);
 Route::post('/free-learning', [CommonController::class, 'freeLearning']);
 Route::post('/contact-us', [CommonController::class, 'contactUs']);
 
+Route::get('/course-day', [CommonController::class, 'courseDay']);
+Route::get('/teacher-education', [CommonController::class, 'teacherEducation']);
+Route::get('/social-icon', [CommonController::class, 'socialNetwork']);
+Route::get('/options', [CommonController::class, 'themeOption']);
+Route::get('/privacy-policy', [CommonController::class, 'privacyPolicy']);
+
 //prvate route
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -44,6 +50,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/our/orders', [StudentController::class, 'showOrders']);
 });
 
-Route::middleware('auth:sanctum')->get('/users', function () {
-    return User::all();
-});
+// Route::middleware('auth:sanctum')->get('/users', function () {
+//     return User::all();
+// });
