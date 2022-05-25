@@ -25,6 +25,7 @@ class CourseResource extends JsonResource {
             'usdeuro'      => $this->usdeuro,
             'banner_image' => $this->banner_image,
             'status'       => $this->status,
+            "installments" => $this->installments,
         ];
     }
 }
