@@ -9,10 +9,8 @@ use App\Models\Course;
 class CourseController extends Controller {
 
     function index() {
-        $data = Course::all();
-        //$new  = strip_tags($data);
+        $data = Course::where('status', 1)->get();
         return CourseResource::collection($data);
-        //return CourseResource::collection($new);
     }
 
     function show(Course $course) {

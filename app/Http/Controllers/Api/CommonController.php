@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class CommonController extends Controller {
     public function allBanners() {
-        $banners = Banner::all();
+        $banners = Banner::where('status', 1)->get();
         return response($banners, 201);
     }
     public function aboutUs() {
