@@ -20,7 +20,7 @@ class CommonController extends Controller {
         return response($banners, 201);
     }
     public function aboutUs() {
-        $about = About::first();
+        $about = About::where('id', 1)->get();
         return response($about, 201);
     }
 
@@ -82,12 +82,12 @@ class CommonController extends Controller {
     }
 
     public function themeOption() {
-        $data = ThemeOptions::first();
+        $data = ThemeOptions::where('id', 1)->get();
         return response($data, 200);
     }
 
     public function privacyPolicy() {
-        $data = PrivacyPolicy::first();
+        $data = PrivacyPolicy::where('id', 1)->get();
         return response($data, 200);
     }
 
