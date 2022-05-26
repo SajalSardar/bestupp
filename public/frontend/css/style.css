@@ -1872,3 +1872,9 @@ h3.pay_headline::after {
 .cont_location .location_text p span {
     display: block;
 }
+
+
+/* sajal */
+.form-floating>label{
+    left: 15px;
+}
