@@ -26,7 +26,7 @@
       <div class="row align-items-center">
         <div class="col-lg-6">
           <div class="course_detiles_pic">
-            <img src="{{ asset('storage/uploads/course/'.$data->banner_image )}}" alt="{{ $data->name }}" class="img-fluid w-100">
+            <img src="{{ asset('storage/uploads/course/'.$data->banner_image )}}" alt="{{ strip_tags($data->name) }}" class="img-fluid w-100">
           </div>
         </div>
         <div class="col-lg-6">

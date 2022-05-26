@@ -22,7 +22,7 @@
       {!! $about->about_us !!}
       <div class="col-md-5">
         <div class="about_pic">
-          <img src="{{asset('storage/uploads/about/'.$about->about_banner)}}" alt="{!! $about->section_title !!}" class="img-fluid w-100">
+          <img src="{{asset('storage/uploads/about/'.$about->about_banner)}}" alt="{!! strip_tags($about->section_title) !!}" class="img-fluid w-100">
         </div>
       </div>
     </div>
