@@ -98,7 +98,7 @@
               <div class="course_text">
                 <h3>{!! $course->name !!}</h3>
                 {!! Str::limit($course->overview, 180, '...') !!} </p>
-                <a href="{{ route('frontend.view.course',$course->slug) }}">Read More</a>
+                <a href="{{ route('frontend.view.course',$course->slug) }}">Buy Now</a>
               </div>
             </div>
           </div>
