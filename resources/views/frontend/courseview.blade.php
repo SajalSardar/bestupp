@@ -118,7 +118,7 @@
                       @enderror
                     </div>
                     <div>
-                      <button type="submit" class="enroll_btn btn">Enroll Now</button>
+                      <button type="submit" class="enroll_btn btn">Buy Now</button>
                     </div>
                   </form>
                 </div>
