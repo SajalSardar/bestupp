@@ -40,8 +40,8 @@
                 <tr>
                     <td>
                         <div class="cart_product">
-                            <img width="50" src="{{ asset('storage/uploads/course/'.$data->course->banner_image) }}" alt="{{ $data->course->name }}">
-                            <h3 ><a style="color: #5BAD3F" href="{{ route('frontend.view.course',$data->course->slug) }}">{{ $data->course->name }}</a></h3>
+                            <img width="50" src="{{ asset('storage/uploads/course/'.$data->course->banner_image) }}" alt="{{ strip_tags($data->course->name) }}">
+                            <h3 ><a style="color: #5BAD3F" href="{{ route('frontend.view.course',$data->course->slug) }}">{{ strip_tags($data->course->name) }}</a></h3>
                             
                         </div>
                     </td>

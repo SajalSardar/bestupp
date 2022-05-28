@@ -30,10 +30,10 @@
           <div class="courses_item_main">
             <div class="courses_item text-center">
               <div class="course_img">
-                <img src="{{asset('storage/uploads/course/'.$course->banner_image)}}" alt="{{ $course->name }}" class="img-fluid w-100">
+                <img src="{{asset('storage/uploads/course/'.$course->banner_image)}}" alt="{{ strip_tags($course->name) }}" class="img-fluid w-100">
               </div>
               <div class="course_text">
-                <h3>{!! $course->name !!}</h3>
+                <h3>{!! strip_tags($course->name)  !!}</h3>
                 {!! Str::limit($course->overview, 180, '...') !!} </p>
                 <a href="{{ route('frontend.view.course',$course->slug) }}">Read More</a>
               </div>

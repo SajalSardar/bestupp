@@ -90,39 +90,54 @@
                       @endforeach
 
                   </ul>
+                  
                 </div>
-                
+                <button type="button" class="enroll_btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Buy Now</button>
               </div>
-              <div class="card mt-3">
-                <div class="card-header">
-                  <h5>Select Your Preferred Day and Time </h5>
-                </div>
-                <div class="card-body">
-                  <form action="{{ route('frontend.enroll',$data->id) }}" method="GET">
-                    @csrf
-                    <div class="admission_input">
-                      <select class="form-select" name="studentDay" required>
-                        <option selected disabled>-Select One-</option>
-                        @foreach ($days as $day)
-                        <option value="{{ $day->name }}">{{ $day->name }}</option>
-                        @endforeach
-                      </select>
-                      @error('studentDay')
-                        <p class="text-danger">{{ $message }}</p>
-                      @enderror
-                    </div>
-                    <div class=" admission_input">
-                      <input type="time" name="studenttime" class="form-control"  placeholder="Time" required>
-                      @error('studenttime')
-                        <p class="text-danger">{{ $message }}</p>
-                      @enderror
-                    </div>
-                    <div>
-                      <button type="submit" class="enroll_btn btn">Buy Now</button>
-                    </div>
-                  </form>
-                </div>
+              
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" style="z-index: 9999">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select Your Preferred Day and Time</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="card">
+          <div class="card-body">
+            <form action="{{ route('frontend.enroll',$data->id) }}" method="GET">
+              @csrf
+              <div class="admission_input">
+                <select class="form-select" name="studentDay" required>
+                  <option selected disabled>-Select One-</option>
+                  @foreach ($days as $day)
+                  <option value="{{ $day->name }}">{{ $day->name }}</option>
+                  @endforeach
+                </select>
+                @error('studentDay')
+                  <p class="text-danger">{{ $message }}</p>
+                @enderror
               </div>
+              <div class=" admission_input">
+                <input type="time" name="studenttime" class="form-control"  placeholder="Time" required>
+                @error('studenttime')
+                  <p class="text-danger">{{ $message }}</p>
+                @enderror
+              </div>
+              <div>
+                <button type="submit" class="enroll_btn btn">Add Cart</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
             </div>
           </div>
         </div>

@@ -62,7 +62,7 @@ class CourseController extends Controller {
 
         if ($banner_photo) {
             $course_slug = strip_tags($request->name);
-            $_photo_name = Str::slug($request->name) . '_' . time() . '.' . $banner_photo->getClientOriginalExtension();
+            $_photo_name = Str::slug(strip_tags($request->name)) . '_' . time() . '.' . $banner_photo->getClientOriginalExtension();
 
             $photo_uploades = $banner_photo->move(public_path('storage/uploads/course/'), $_photo_name);
             if ($photo_uploades) {
@@ -150,7 +150,7 @@ class CourseController extends Controller {
         ]);
 
         if ($banner_photo) {
-            $_photo_name = Str::slug($request->name) . '_' . time() . '.' . $banner_photo->getClientOriginalExtension();
+            $_photo_name = Str::slug(strip_tags($request->name)) . '_' . time() . '.' . $banner_photo->getClientOriginalExtension();
 
             $banner_photo->move(public_path('storage/uploads/course/'), $_photo_name);
 

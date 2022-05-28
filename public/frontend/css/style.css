@@ -422,7 +422,7 @@ nav.navbar {
     left: 0;
     top: 0;
     width: 100%;
-    z-index: 99999;
+    z-index: 999;
     animation: sticky 0.8s;
     -webkit-animation: sticky 0.8s;
 }
