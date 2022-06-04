@@ -14,6 +14,7 @@ use App\Http\Controllers\backend\ThemeController;
 use App\Http\Controllers\Banner\BannerController;
 use App\Http\Controllers\Course\CourseController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NoticeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
@@ -54,9 +55,6 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         //student
         Route::get('/students', [StudentController::class, "showAll"])->name('show.all.students');
         Route::get('/students/{id}', [StudentController::class, "manageStudent"])->name('students.manage');
-        // Route::get('/students/complete/{id}', [StudentController::class, "studentComplete"])->name('students.complete');
-        // Route::get('/students/drop/{id}', [StudentController::class, "studentDrop"])->name('students.drop');
-        // Route::get('/students/running/{id}', [StudentController::class, "studentRunning"])->name('students.running');
 
         //Teacher
         Route::get('/teacher', [TeacherController::class, "showAll"])->name('show.all.teachers');
@@ -97,6 +95,9 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         //all admin
         Route::get('/all-admins', [HomeController::class, "allAdmin"])->name("show.all.admin");
 
+        //notice board
+        Route::resource('/notice', NoticeController::class)->except(['show']);
+
     });
 
     Route::group(['middleware' => ['role:student', 'auth']], function () {
@@ -108,6 +109,9 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         //student installment pay
         Route::get('/installment/pay/{id}', [StudentController::class, 'installmentpay',
         ])->name('student.installment.pay');
+
+        //notice board
+        Route::get('/student/notice', [NoticeController::class, 'studentNotice'])->name('student.notice');
 
     });
 

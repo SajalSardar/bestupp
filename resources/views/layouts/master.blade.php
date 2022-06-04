@@ -106,6 +106,18 @@
             </div><!-- menu-item -->
           </a><!-- sl-menu-link -->
 
+          <a href="#" class="sl-menu-link {{ Request::routeIs('dashboard.notice*') ? "active" : ""}}">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+              <span class="menu-item-label">Notice</span>
+              <i class="menu-item-arrow fa fa-angle-down"></i>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+          <ul class="sl-menu-sub nav flex-column">
+            <li class="nav-item"><a href="{{ route('dashboard.notice.create') }}" class="nav-link">Add Notice</a></li>
+            <li class="nav-item"><a href="{{ route('dashboard.notice.index') }}" class="nav-link">All Notice</a></li>
+          </ul>
+
           <a href="#" class="sl-menu-link">
             <div class="sl-menu-item">
               <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
@@ -154,6 +166,12 @@
             <span class="menu-item-label">Our Course</span>
           </div><!-- menu-item -->
         </a>
+        <a href="{{ route('dashboard.student.notice') }}" class="sl-menu-link {{ Request::routeIs('dashboard.notice*') ? "active" : ""}}">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Notice</span>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
         <a href="{{ route('dashboard.student.information.edit') }}" class="sl-menu-link">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
