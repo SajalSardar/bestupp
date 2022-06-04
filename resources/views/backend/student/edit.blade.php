@@ -21,7 +21,7 @@
             <div class="form-group col-sm-6">
                 <label class="form-control-label">Father Name:</label>
                 <input class="form-control" type="text" name="fathername" value="{{ $information->fathername }}" placeholder="Father Name">
-                @error('section_description')
+                @error('fathername')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
@@ -99,7 +99,7 @@
             <div class="form-group col-sm-6">
                 <label class="form-control-label">Father Name:</label>
                 <input class="form-control" type="text" name="fathername" placeholder="Father Name">
-                @error('section_description')
+                @error('fathername')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
