@@ -13,7 +13,7 @@
   </div>
 
   <div class="card p-4">
-      @if ($information->id)
+      @if (isset($information->id))
           
       
     <form action="{{ route('dashboard.student.information.update',$information->id) }}" method="POST" enctype="multipart/form-data">
