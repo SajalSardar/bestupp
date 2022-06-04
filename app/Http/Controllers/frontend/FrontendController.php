@@ -34,6 +34,16 @@ class FrontendController extends Controller {
     public function viewCourse($slug) {
         $data = Course::where('slug', $slug)->first();
         $days = DaySchedule::all();
+        // return $data->class_days;
+        // $day_arr = [];
+        // foreach ($days as $day) {
+        //     $exarr      = explode('-', $day->name);
+        //     $day_length = count($exarr);
+        //     $day_arr[]  = $day_length;
+        // }
+        // $a = array_diff($data->class_days, $day_arr);
+        // return $a;
+
         return view('frontend.courseview', compact('data', 'days'));
     }
 

@@ -37,40 +37,53 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label">Course Duration: <span class="tx-danger">*</span></label>
-                    <input class="form-control" type="number" name="duration" value="{{ old('duration') }}" placeholder="Course Duration Ex: 6">
-                    @error('duration')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label">Course Duration: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="number" name="duration" value="{{ old('duration') }}" placeholder="Course Duration Ex: 6">
+                        @error('duration')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label">Total Class Number: <span class="tx-danger">*</span></label>
+                        <input class="form-control" type="number" name="total_class" value="{{ old('total_class') }}" placeholder="Total Class Ex: 33">
+                        @error('total_class')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label">Total Class Number: <span class="tx-danger">*</span></label>
-                    <input class="form-control" type="number" name="total_class" value="{{ old('total_class') }}" placeholder="Total Class Ex: 33">
-                    @error('total_class')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label">Class Info:</label>
+                        <input type="text" placeholder="1 hour a day, 2 days in a week" name="class_info" class="form-control">
+                        @error('class_info')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label">Total Days Per Week:</label>
+                        <input type="text" placeholder="Ex: 2 or 3" name="class_days" class="form-control">
+                        @error('class_days')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label">Class Info:</label>
-                    <input type="text" placeholder="1 hour a day, 2 days in a week" name="class_info" class="form-control">
-                    @error('class_info')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label">Course Fee:</label>
-                    <input type="number"placeholder="Course Fee For BDT" name="course_fee" class="form-control">
-                    @error('course_fee')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label">USD/EURO:</label>
-                    <input type="text" placeholder="USD = $ 80, EURO = € 68" name="usdeuro" class="form-control">
-                    @error('usdeuro')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label">Course Fee:</label>
+                        <input type="number"placeholder="Course Fee For BDT" name="course_fee" class="form-control">
+                        @error('course_fee')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label">USD/EURO:</label>
+                        <input type="text" placeholder="USD = $ 80, EURO = € 68" name="usdeuro" class="form-control">
+                        @error('usdeuro')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
                 <div class="form-group ">
                     <label class="form-control-label">1st Installment</label>

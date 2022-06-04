@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CommonController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\StudentController;
@@ -44,6 +45,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //order
     Route::get('/our/orders', [StudentController::class, 'showOrders']);
+
+    //cart
+    Route::get('/carts', [CartController::class, 'index']);
+    Route::get('/enroll/{id}', [CartController::class, 'enroll']);
+    Route::get('/cart/delete/{id}', [CartController::class, 'cartDelete']);
 });
 
 // Route::middleware('auth:sanctum')->get('/users', function () {

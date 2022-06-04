@@ -113,7 +113,15 @@
                 <select class="form-select" name="studentDay" required>
                   <option selected disabled>-Select One-</option>
                   @foreach ($days as $day)
+                  @php
+                    $exarr      = explode('-', $day->name);
+                    $day_length = count($exarr);
+                  @endphp
+                  @if ($data->class_days == $day_length)
                   <option value="{{ $day->name }}">{{ $day->name }}</option>
+                 
+                  @endif
+                 
                   @endforeach
                 </select>
                 @error('studentDay')

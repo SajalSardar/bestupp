@@ -52,12 +52,21 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label class="form-control-label">Class Info:</label>
-                    <input type="text" placeholder="1 hour a day, 2 days in a week" name="class_info" class="form-control" value="{{ $course->class_info }}">
-                    @error('class_info')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label">Class Info:</label>
+                        <input type="text" placeholder="1 hour a day, 2 days in a week" name="class_info" class="form-control" value="{{ $course->class_info }}">
+                        @error('class_info')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="form-control-label">Total Days Per Week::</label>
+                        <input type="text" placeholder="Ex: 2 or 3" name="class_days" class="form-control" value="{{ $course->class_days }}">
+                        @error('class_days')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label">Course Fee:</label>

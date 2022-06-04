@@ -54,6 +54,7 @@ class CourseController extends Controller {
             "duration"     => "required",
             "total_class"  => "required",
             "class_info"   => "required",
+            "class_days"   => "required",
             "course_fee"   => "required",
             "usdeuro"      => "required",
             "installment"  => "required",
@@ -74,6 +75,7 @@ class CourseController extends Controller {
                 $course->duration     = $request->duration;
                 $course->total_class  = $request->total_class;
                 $course->class_info   = $request->class_info;
+                $course->class_days   = $request->class_days;
                 $course->course_fee   = $request->course_fee;
                 $course->usdeuro      = $request->usdeuro;
                 $course->banner_image = $_photo_name;
@@ -143,6 +145,7 @@ class CourseController extends Controller {
             "duration"     => "required",
             "total_class"  => "required",
             "class_info"   => "required",
+            "class_days"   => "required",
             "course_fee"   => "required",
             "usdeuro"      => "required",
             "installment1" => "required",
@@ -171,6 +174,7 @@ class CourseController extends Controller {
         $course->duration     = $request->duration;
         $course->total_class  = $request->total_class;
         $course->class_info   = $request->class_info;
+        $course->class_days   = $request->class_days;
         $course->course_fee   = $request->course_fee;
         $course->usdeuro      = $request->usdeuro;
         $course->banner_image = $_photo_name;
