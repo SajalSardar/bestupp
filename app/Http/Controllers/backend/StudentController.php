@@ -61,6 +61,38 @@ class StudentController extends Controller {
         }
     }
 
+    function studentInformation(Request $request) {
+        $this->validate($request, [
+            "fathername"    => 'required',
+            "birthday"      => 'required',
+            "mobile"        => 'required',
+            "nationality"   => 'required',
+            "fathername"    => 'required',
+            "gender"        => 'required',
+            "address"       => 'required',
+            'profile_photo' => 'required|mimes:jpeg,jpg,png|max:200',
+        ]);
+
+        $profile_photo = $request->file('profile_photo');
+        $_photo_name   = Str::slug(auth()->user()->name) . '_' . time() . '.' . $profile_photo->getClientOriginalExtension();
+
+        $profile_photo->move(public_path('storage/uploads/profiles/'), $_photo_name);
+
+        $data                = new StudentRegistration();
+        $data->user_id       = auth()->user()->id;
+        $data->birthday      = $request->birthday;
+        $data->mobile        = $request->mobile;
+        $data->nationality   = $request->nationality;
+        $data->guardianname  = $request->guardianname;
+        $data->fathername    = $request->fathername;
+        $data->gender        = $request->gender;
+        $data->address       = $request->address;
+        $data->gnumber       = $request->gnumber;
+        $data->profile_photo = $_photo_name;
+        $data->save();
+        return back()->with('success', "Information Update Successfull!");
+    }
+
     function showAll() {
         $students = StudentRegistration::with('user')->OrderBy('created_at', 'DESC')->get();
         return view('backend.student.index', compact('students'));

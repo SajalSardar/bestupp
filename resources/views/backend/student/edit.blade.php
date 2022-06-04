@@ -93,7 +93,7 @@
           </div>
     </form>
     @else
-    <form action="{{ route('dashboard.student.information.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('dashboard.student.information.insert') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-layout row">
             <div class="form-group col-sm-6">
@@ -105,7 +105,7 @@
             </div>
             <div class="form-group col-sm-6">
                 <label class="form-control-label">Birth Day:</label>
-               <input type="text"  name="birthday" class="form-control">
+               <input type="date"  name="birthday" class="form-control">
                 @error('birthday')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -165,7 +165,7 @@
               </div>
   
             <div class="form-layout-footer col-12">
-              <button class="btn btn-info mg-r-5">Uplode</button>
+              <button class="btn btn-info mg-r-5">Submit</button>
             </div>
           </div>
     </form>
