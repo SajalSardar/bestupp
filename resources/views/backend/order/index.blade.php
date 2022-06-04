@@ -96,7 +96,7 @@
                       <td>{{ $order->user->name }}</td>
                       <td>{{ $order->user->email }}</td>
                       <td> {{ $order->user->student->mobile ?? '' }} </td>
-                      <td>{{ $order->course->name ?? '' }}</td>
+                      <td>{{ strip_tags($order->course->name) ?? '' }}</td>
                       <td>{{ $order->price }}</td>
                       <td>{{ $order->selected_day }}</td>
                       <td>{{ $order->selected_time->format('h:i') }}</td>
@@ -137,7 +137,7 @@
                     <td>{{ $order->user->name }}</td>
                     <td>{{ $order->user->email }}</td>
                     <td> {{ $order->user->student->mobile ?? '' }} </td>
-                    <td>{{ $order->course->name }}</td>
+                    <td>{{ strip_tags($order->course->name) }}</td>
                     <td>{{ $order->price }}</td>
                     <td>{{ $order->selected_day }}</td>
                     <td>{{ $order->selected_time->format('h:i') }}</td>
@@ -176,7 +176,7 @@
                     <td>{{ $order->user->name }}</td>
                     <td>{{ $order->user->email }}</td>
                     <td> {{ $order->user->student->mobile ?? '' }} </td>
-                    <td>{{ $order->course->name }}</td>
+                    <td>{{ strip_tags($order->course->name) }}</td>
                     <td>{{ $order->price }}</td>
                     <td>{{ $order->selected_day }}</td>
                     <td>{{ $order->selected_time->format('h:i') }}</td>
