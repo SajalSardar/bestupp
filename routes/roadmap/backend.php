@@ -102,7 +102,7 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
     Route::group(['middleware' => ['role:student', 'auth']], function () {
         Route::get('/student/orders', [StudentController::class, 'showOrders'])->name('student.order');
         Route::get('/student/information/edit', [StudentController::class, 'studentInformationEdit'])->name('student.information.edit');
-        Route::post('/student/information/edit/{id}', [StudentController::class, 'studentInformationUpdate'])->name('student.information.update');
+        Route::post('/student/information/edit/{id?}', [StudentController::class, 'studentInformationUpdate'])->name('student.information.update');
 
         //student installment pay
         Route::get('/installment/pay/{id}', [StudentController::class, 'installmentpay',

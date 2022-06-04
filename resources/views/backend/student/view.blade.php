@@ -10,9 +10,6 @@
 <div class="sl-pagebody">
   <div class="sl-page-title">
     <h5>{{ $findStuden->user->name }}
-      {{-- <a href="{{ route('dashboard.students.drop',$findStuden->id ) }}" class="btn btn-sm btn-danger float-right">Drop Out</a>
-      <a href="{{ route('dashboard.students.complete',$findStuden->id) }}" class="btn btn-sm btn-primary float-right">Complete</a>
-      <a href="{{ route('dashboard.students.running',$findStuden->id ) }}" class="btn btn-sm btn-info float-right">Running</a> --}}
     </h5>
   </div>
 

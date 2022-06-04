@@ -13,6 +13,9 @@
   </div>
 
   <div class="card p-4">
+      @if ($information->id)
+          
+      
     <form action="{{ route('dashboard.student.information.update',$information->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-layout row">
@@ -90,6 +93,9 @@
             </div>
           </div>
     </form>
+    @else
+    Nai
+    @endif
   </div> 
 </div>
 @endsection
