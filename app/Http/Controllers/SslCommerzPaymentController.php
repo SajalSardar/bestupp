@@ -90,6 +90,9 @@ class SslCommerzPaymentController extends Controller {
         $post_data['value_d'] = "ref004";
 
         #Before  going to initiate the payment order status need to insert or update as Pending.
+        $sslc = new SslCommerzNotification();
+        # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
+        $payment_options = $sslc->makePayment($post_data, 'hosted');
 
         $order = new Order();
         foreach ($cartDatas as $cartData) {
@@ -129,10 +132,6 @@ class SslCommerzPaymentController extends Controller {
             $cartData->delete();
 
         }
-
-        $sslc = new SslCommerzNotification();
-        # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
-        $payment_options = $sslc->makePayment($post_data, 'hosted');
 
         if (!is_array($payment_options)) {
             print_r($payment_options);

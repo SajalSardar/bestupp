@@ -16,7 +16,7 @@
         <div class="card mb-5">
           <div class="card-header">
             <h5>
-              {{ $order->course->name }} 
+              {{ strip_tags($order->course->name) }} 
               <span class="ml-2" style="font-weight: 400; font-size: 16px">Free: {{ $order->price }}</span>
               <span class="ml-2" style="font-weight: 400; font-size: 16px">Day: {{ $order->selected_day }}</span>
               <span class="ml-2" style="font-weight: 400; font-size: 16px">Time: {{ $order->selected_time->isoFormat('H:MM:SS A') }}</span>
