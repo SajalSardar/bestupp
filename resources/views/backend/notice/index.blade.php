@@ -32,7 +32,7 @@
                       <td >{{ $data->id }}</td>
                       <td >{{ $data->notice_type }}</td>
                       <td >{{ $data->title }}</td>
-                      <td >{{Str::limit(strip_tags($data->notice ), 50, '...')  }}</td>
+                      <td >{!!Str::limit($data->notice , 50, '...')  !!}</td>
                       <td>
                         <a href="{{ route('dashboard.notice.edit',$data->id ) }}" class="btn btn-sm btn-info">View</a>
                         <a href="{{ route('dashboard.notice.edit',$data->id ) }}" class="btn btn-sm btn-primary">Edit</a>

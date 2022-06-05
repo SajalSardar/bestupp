@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', "All Notice")
+@section('title', "Notice")
 @section('content')
 
     <nav class="breadcrumb sl-breadcrumb">
@@ -11,20 +11,14 @@
       <div class="sl-page-title">
           <h5>All Notice</h5>
       </div>
-        @foreach (auth()->user()->notices->sortBy('status') as $notice)
-       
           <div class="card mb-3">
               <div class="card-header">
-                <h6 style="color:{{$notice->status==1 ? "#000" : ""}}">{{ $notice->title }}</h6>
+                <h6>{{ $notice->title }}</h6>
               </div>
-              <div class="card-body" style="color:{{$notice->status==1 ? "#000" : ""}}">
-                {!! Str::limit($notice->notice, 200, '...') !!}
-              </div>
-              <div class="card-footer text-right">
-                <a href="{{route('dashboard.student.notice.view',$notice->id )}}" class="btn btn-sm btn-primary">Read More</a>
+              <div class="card-body">
+                {!! $notice->notice !!}
               </div>
           </div>
-        @endforeach
     </div>
     
 @endsection

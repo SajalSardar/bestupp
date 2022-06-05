@@ -41,6 +41,10 @@ class CartController extends Controller {
             }
         }
 
+        if(empty(auth()->user()->student->id)){
+            return redirect(route('dashboard.student.information.edit'))->with('warning', "Set Your Student information!");
+        }
+
         foreach ($cartDatas as $data) {
             if ($data->course_id == $id) {
                 return redirect(route('frontend.cart'));

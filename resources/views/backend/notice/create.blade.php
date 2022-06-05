@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', "About Us")
+@section('title', "Create Notice")
 
 @section('content')
 <nav class="breadcrumb sl-breadcrumb">

@@ -62,6 +62,21 @@
         
       </div>
     </div>
+
+    @if(empty(auth()->user()->student->id) )
+     <div class="row mb-3">
+      <div class="col-12">
+        <div class="card bg-warning">
+          <div class="card-body">
+            <h5 class="text-white float-left">Set Your Student information..</h5>
+            <a href="{{ route('dashboard.student.information.edit') }}"  class="float-right btn btn-primary btn-sm">Update Information</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    @endif
+
     @endrole
 
    @role('super-admin')

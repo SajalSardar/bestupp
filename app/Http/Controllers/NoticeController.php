@@ -13,7 +13,7 @@ class NoticeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $notices = Notice::where('status', 1)->get();
+        $notices = Notice::orderBy('id', "DESC")->get();
         return view('backend.notice.index', compact('notices'));
     }
 
@@ -125,6 +125,12 @@ class NoticeController extends Controller {
 
     function studentNotice() {
         return view('backend.notice.studentnotice');
+    }
+
+    function studentNoticeView(Notice $notice){
+        $notice->status = 2;
+        $notice->save();
+        return view('backend.notice.studenview', compact('notice'));
     }
 
 }

@@ -112,6 +112,7 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
 
         //notice board
         Route::get('/student/notice', [NoticeController::class, 'studentNotice'])->name('student.notice');
+        Route::get('/student/notice/{notice}', [NoticeController::class, 'studentNoticeView'])->name('student.notice.view');
 
     });
 
