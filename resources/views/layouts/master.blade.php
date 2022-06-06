@@ -169,7 +169,10 @@
         <a href="{{ route('dashboard.student.notice') }}" class="sl-menu-link {{ Request::routeIs('dashboard.notice*') ? "active" : ""}}">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
-            <span class="menu-item-label">Notice </span> <span class="badge badge-danger">{{count(auth()->user()->notices->where('status', 1))}} </span>
+            <span class="menu-item-label">Notice </span> 
+            @if(count(auth()->user()->notices->where('status', 1)))
+            <span class="badge badge-danger">{{count(auth()->user()->notices->where('status', 1))}} </span>
+            @endif
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <a href="{{ route('dashboard.student.information.edit') }}" class="sl-menu-link">

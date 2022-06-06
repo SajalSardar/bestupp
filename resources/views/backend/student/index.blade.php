@@ -26,15 +26,21 @@
          </tr>
           </thead>
            <tbody>
-           @foreach ($students as $student)
+           @foreach ($students as $ustudent)
               <tr>    
-                <td>{{ $student->id }}</td>
-                <td>{{ $student->user->name }}</td>
-                <td>{{ $student->user->email }}</td>
-                <td>{{ $student->user->created_at->diffForHumans() }}</td>
-                <td>{{ $student->mobile }}</td>
+                <td>{{ $ustudent->id }}</td>
+                <td>{{ $ustudent->name }}</td>
+                <td>{{ $ustudent->email }}</td>
+                <td>{{ $ustudent->created_at->diffForHumans() }}</td>
+                <td>{{ $ustudent->student->mobile ?? ''}}</td>
                 <td>
-                  <a href="{{ route('dashboard.students.manage', $student->id) }}" class="btn btn-primary btn-sm"> Manage Student</a>
+                  @if (!empty($ustudent->student->id))
+                    <a href="{{ route('dashboard.students.manage', $ustudent->student->id) }}" class="btn btn-primary btn-sm"> Manage Student</a>
+                    @else
+                    <span>Don't provide 
+                      <br> student information.</span>
+                  @endif
+                  
                 </td>
                 
                 

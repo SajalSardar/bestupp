@@ -88,7 +88,7 @@ class TeacherController extends Controller {
     }
 
     function showAll() {
-        $teachers = TeacherRegistration::with('user')->orderBy('created_at', 'DESC')->get();
+        $teachers = User::role('teacher')->with('teacher')->orderBy('created_at', 'DESC')->get();
         return view('backend.teacher.index', compact('teachers'));
     }
 

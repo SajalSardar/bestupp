@@ -39,16 +39,18 @@
               </thead>
               
               <tbody>
-                @foreach( $teachers as $teacher)
-                @if ($teacher->status == 2)
+                @foreach( $teachers as $singleteacher)
+                @if (!empty($singleteacher->teacher->status) && $singleteacher->teacher->status == 2)
                 <tr>    
-                  <td>{{ $teacher->id }}</td>
-                  <td>{{ $teacher->user->name }}</td>
-                  <td>{{ $teacher->user->email }}</td>
-                  <td>{{ $teacher->mobile }}</td>
-                  <td>{{ $teacher->user->created_at->diffForHumans() }}</td>
+                  <td>{{ $singleteacher->id }}</td>
+                  <td>{{ $singleteacher->name }}</td>
+                  <td>{{ $singleteacher->email }}</td>
+                  <td>{{ $singleteacher->teacher->mobile ?? '' }}</td>
+                  <td>{{ $singleteacher->created_at->diffForHumans() }}</td>
                   <td>
-                    <a href="{{ route('dashboard.teachers.view',$teacher->id ) }}" class="btn btn-sm btn-primary">Manage Teacher</a>
+                    @if (!empty($singleteacher->teacher->id))
+                    <a href="{{ route('dashboard.teachers.view',$singleteacher->teacher->id ) }}" class="btn btn-sm btn-primary">Manage Teacher</a>
+                    @endif
                   </td>
               </tr>
                 @endif
@@ -69,16 +71,21 @@
               </tr>
               </thead>
               <tbody>
-                @foreach( $teachers as $teacher)
-                @if ($teacher->status == 1)
+                @foreach( $teachers as $singleteacher)
+                @if (empty($singleteacher->teacher->status) || $singleteacher->teacher->status == 1 )
                 <tr>    
-                  <td>{{ $teacher->id }}</td>
-                  <td>{{ $teacher->user->name }}</td>
-                  <td>{{ $teacher->user->email }}</td>
-                  <td>{{ $teacher->mobile }}</td>
-                  <td>{{ $teacher->user->created_at->diffForHumans() }}</td>
+                  <td>{{ $singleteacher->id }}</td>
+                  <td>{{ $singleteacher->name }}</td>
+                  <td>{{ $singleteacher->email }}</td>
+                  <td>{{ $singleteacher->teacher->mobile ?? ''}}</td>
+                  <td>{{ $singleteacher->created_at->diffForHumans() }}</td>
                   <td>
-                    <a href="{{ route('dashboard.teachers.view',$teacher->id ) }}" class="btn btn-sm btn-primary">Manage Teacher</a>
+                    @if (!empty($singleteacher->teacher->id))
+                    <a href="{{ route('dashboard.teachers.view',$singleteacher->teacher->id ) }}" class="btn btn-sm btn-primary">Manage Teacher</a>
+                    @else
+                    <span>Don't provide 
+                      <br>teacher information.</span>
+                    @endif
                   </td>
               </tr>
                 @endif
@@ -99,16 +106,18 @@
               </tr>
               </thead>
               <tbody>
-                @foreach ( $teachers as $teacher)
-                @if ($teacher->status == 3)
+                @foreach ( $teachers as $singleteacher)
+                @if (!empty($singleteacher->teacher->status) && $singleteacher->teacher->status == 3)
                 <tr>    
-                  <td>{{ $teacher->id }}</td>
-                  <td>{{ $teacher->user->name }}</td>
-                  <td>{{ $teacher->user->email }}</td>
-                  <td>{{ $teacher->mobile }}</td>
-                  <td>{{ $teacher->user->created_at->diffForHumans() }}</td>
+                  <td>{{ $singleteacher->id }}</td>
+                  <td>{{ $singleteacher->name }}</td>
+                  <td>{{ $singleteacher->email }}</td>
+                  <td>{{ $singleteacher->teacher->mobile ?? '' }}</td>
+                  <td>{{ $singleteacher->created_at->diffForHumans() }}</td>
                   <td>
-                    <a href="{{ route('dashboard.teachers.view',$teacher->id ) }}" class="btn btn-sm btn-primary">Manage Teacher</a>
+                    @if (!empty($singleteacher->teacher->id))
+                    <a href="{{ route('dashboard.teachers.view',$singleteacher->teacher->id ) }}" class="btn btn-sm btn-primary">Manage Teacher</a>
+                    @endif
                   </td>
               </tr>
                 @endif

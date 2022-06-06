@@ -32,7 +32,7 @@
         <td width="5%">:</td>
         <td>
           @foreach (json_decode($teacher->courses) as $course)
-            <span class="btn btn-primary btn-sm">{{ $course }}</span>
+            <span class="btn btn-primary btn-sm">{{ strip_tags($course) }}</span>
           @endforeach
         </td>
       </tr>

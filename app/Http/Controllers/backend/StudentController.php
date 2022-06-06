@@ -94,7 +94,7 @@ class StudentController extends Controller {
     }
 
     function showAll() {
-        $students = StudentRegistration::with('user')->OrderBy('created_at', 'DESC')->get();
+        $students = User::role('student')->with('student')->OrderBy('created_at', 'DESC')->get();
         return view('backend.student.index', compact('students'));
     }
 
