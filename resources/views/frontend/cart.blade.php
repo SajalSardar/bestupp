@@ -19,7 +19,7 @@
   <section class="my-5">
     <div class="container">
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 table-responsive">
           @if (session('warning'))
             <div class="alert alert-warning">{{ session('warning') }}</div>
           @endif
