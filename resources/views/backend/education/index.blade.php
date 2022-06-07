@@ -45,11 +45,19 @@
                   <tr>
                     <th>id</th>
                     <th>Name</th>
+                    <th>Action</th>
                   </tr>
                   @foreach ($datas as $data)
                     <tr>
                         <td >{{ $data->id }}</td>
                         <td >{{ $data->name }}</td>
+                        <td >
+                          <form action="{{ route('dashboard.teachereducation.destroy',$data->id ) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger"> Delete</button>
+                          </form>
+                        </td>
                     </tr>
                   @endforeach
                 </table>

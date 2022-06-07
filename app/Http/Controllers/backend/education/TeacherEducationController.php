@@ -31,6 +31,11 @@ class TeacherEducationController extends Controller {
         $insert       = new Teachereducation();
         $insert->name = $request->name;
         $insert->save();
-        return back()->with('success', 'Education Add Successully Done!');
+        return back()->with('success', 'Education Add Successfull!');
+    }
+
+    public function destroy(Teachereducation $Teachereducation) {
+        $Teachereducation->delete();
+        return back()->with('success', 'Education Delete Successufull!');
     }
 }
