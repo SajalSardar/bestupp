@@ -9,7 +9,7 @@
         <ul>
           <li><a href="{{ route('frontend.home') }}">Home</a></li>
           <li><a href="{{ route('frontend.all.course') }}"><span>/</span>All Courses</a></li>
-          <li class="diseble"><span>{!! $data->name !!}</span></li>
+          <li class="diseble"><span>/</span>{{ strip_tags($data->name) }}</li>
         </ul>
       </div>
     </div>
