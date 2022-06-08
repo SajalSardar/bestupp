@@ -27,7 +27,7 @@
           @empty
           <div class="card mb-3">
             <div class="card-body"">
-              <p>No Notice Here!</p>
+              <p>No Notice Found!</p>
             </div>
         </div>
         @endforelse
