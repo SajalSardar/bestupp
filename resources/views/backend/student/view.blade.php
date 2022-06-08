@@ -33,7 +33,7 @@
             <p> No Course </p>
           @endif
           @foreach ($findStuden->user->orders as $order)
-            <a href="{{ route('dashboard.order.manage',$order->id ) }}" class="btn btn-info btn-sm">{{ $order->course->name }}
+            <a href="{{ route('dashboard.order.manage',$order->id ) }}" class="btn btn-info btn-sm">{{ strip_tags($order->course->name) }}
               <span class="btn btn-sm btn-{{ $order->status==3 ? 'success' : 'warning' }} ">{{ $order->status == 3 ? "Complete" : "Running" }}</span>
             </a>
             
