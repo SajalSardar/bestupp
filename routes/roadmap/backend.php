@@ -98,6 +98,8 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         //notice board
         Route::resource('/notice', NoticeController::class)->except(['show']);
 
+        //due notification
+        Route::get('/due/notification', [HomeController::class, "dueNotification"])->name("due.notification");
     });
 
     Route::group(['middleware' => ['role:student', 'auth']], function () {

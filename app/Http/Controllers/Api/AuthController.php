@@ -29,8 +29,13 @@ class AuthController extends Controller {
             'user'  => $user,
             'token' => $token,
         ];
-
-        return response($response, 201);
+        if ($response) {
+            return response($response, 201);
+        } else {
+            return [
+                'error' => 'Invalid User!',
+            ];
+        }
 
     }
 

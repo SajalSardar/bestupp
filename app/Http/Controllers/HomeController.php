@@ -94,4 +94,8 @@ class HomeController extends Controller {
         return view('backend.all_admin.index', compact('all_admin'));
     }
 
+    function dueNotification() {
+        return view('backend.due_notification.index');
+    }
+
 }
