@@ -11,7 +11,7 @@
       <div class="sl-page-title">
           <h5>All Notice</h5>
       </div>
-        @foreach (auth()->user()->notices->sortBy('status') as $notice)
+        @forelse (auth()->user()->notices->sortBy('status') as $notice)
        
           <div class="card mb-3">
               <div class="card-header">
@@ -24,7 +24,13 @@
                 <a href="{{route('dashboard.student.notice.view',$notice->id )}}" class="btn btn-sm btn-primary">Read More</a>
               </div>
           </div>
-        @endforeach
+          @empty
+          <div class="card mb-3">
+            <div class="card-body"">
+              <p>No Notice Here!</p>
+            </div>
+        </div>
+        @endforelse
     </div>
     
 @endsection
