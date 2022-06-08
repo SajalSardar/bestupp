@@ -29,9 +29,11 @@ Route::name('frontend.')->group(function () {
     Route::post('/free/learning', [FreeLearningController::class, 'store'])->name('free.learning');
 
     //cart route
-    Route::get('/cart', [CartController::class, 'index'])->name('cart');
-    Route::get('/enroll/{id}', [CartController::class, 'enroll'])->name('enroll');
-    Route::get('/cart/delete/{id}', [CartController::class, 'cartDelete'])->name('cart.delete');
+    Route::group(['middleware' => ['role:student', 'auth']], function () {
+        Route::get('/cart', [CartController::class, 'index'])->name('cart');
+        Route::get('/enroll/{id}', [CartController::class, 'enroll'])->name('enroll');
+        Route::get('/cart/delete/{id}', [CartController::class, 'cartDelete'])->name('cart.delete');
+    });
 
     //Privacy Policy
     Route::get('/privacy-policy', [FrontendController::class, "policy"])->name('privacy.policy');
