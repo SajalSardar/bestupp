@@ -27,7 +27,7 @@
             </ul>
 
             <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="home">
+              <div class="tab-pane fade show active table-responsive" id="home">
                 <table class="table table-striped table-bordered dataTable">
                   <thead>
                     <tr>
@@ -58,7 +58,7 @@
                   </tbody>
                 </table>
               </div>
-              <div class="tab-pane fade " id="contact">
+              <div class="tab-pane fade table-responsive" id="contact">
                 <table class="table table-striped table-bordered dataTable">
                   <thead>
                     <tr>

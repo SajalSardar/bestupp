@@ -49,7 +49,7 @@
               <div class="card-header">
                 <h2>All FAQ</h2>
               </div>
-              <div class="card-body">
+              <div class="card-body table-responsive">
                 <table class="table table-striped table-bordered dataTable">
                   <thead>
                     <tr>

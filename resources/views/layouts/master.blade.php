@@ -213,6 +213,7 @@
               @role('admin|super-admin')
               <img src="{{ asset('backend/img/img3.jpg') }}" class="wd-32 rounded-circle" alt="{{ auth()->user()->name }}">
               @endrole
+              <i class="menu-item-arrow fa fa-angle-down"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-header wd-200">
               <ul class="list-unstyled user-profile-nav">
@@ -257,16 +258,8 @@
 
     <script src="{{ asset("backend/js/jquery-1.12.4.min.js")}}"></script>
     <script src="{{ asset("backend/js/bootstrap.bundle.min.js")}}"></script>
-    <script src="{{ asset("backend/js/jquery-ui.js")}}"></script>
     <script src="{{ asset("backend/js/perfect-scrollbar.jquery.js")}}"></script>
     <script src="{{ asset("backend/js/jquery.sparkline.min.js")}}"></script>
-    <script src="{{ asset("backend/js/d3.js")}}"></script>
-    <script src="{{ asset("backend/js/rickshaw.min.js")}}"></script>
-    <script src="{{ asset("backend/js/Chart.js")}}"></script>
-    <script src="{{ asset("backend/js/jquery.flot.js")}}"></script>
-    <script src="{{ asset("backend/js/jquery.flot.pie.js")}}"></script>
-    <script src="{{ asset("backend/js/jquery.flot.resize.js")}}"></script>
-    <script src="{{ asset("backend/js/jquery.flot.spline.js")}}"></script>
 
     <script src="{{ asset("backend/js/starlight.js")}}"></script>
     <script src="{{ asset("backend/js/ResizeSensor.js")}}"></script>

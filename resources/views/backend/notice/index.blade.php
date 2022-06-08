@@ -14,7 +14,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <div class="card">
+            <div class="card table-responsive">
               <div class="card-header">
                 <h2>All Notice</h2>
               </div>

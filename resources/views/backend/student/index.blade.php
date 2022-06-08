@@ -12,7 +12,7 @@
         <h5>All Students</h5>
       </div>
 
-      <div class="card p-3">
+      <div class="card p-3 table-responsive">
 
         <table class="table table-striped table-bordered dataTable">
           <thead>

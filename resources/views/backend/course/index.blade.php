@@ -23,7 +23,7 @@
           
         </ul>
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home">
+          <div class="tab-pane fade show active table-responsive" id="home">
             <table class="table table-bordered">
                 <tr>    
                     <th>Id</th>
@@ -70,7 +70,7 @@
                 @endforelse
             </table>
           </div>
-          <div class="tab-pane fade" id="contact">
+          <div class="tab-pane fade table-responsive" id="contact">
             <table class="table table-bordered">
                 <tr>    
                     <th>Id</th>

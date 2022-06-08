@@ -24,7 +24,7 @@
         </ul>
 
         <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="home">
+          <div class="tab-pane fade show active table-responsive" id="home">
             <table class="table table-bordered dataTable table-striped mt-3">
               <thead>
                 <tr>    

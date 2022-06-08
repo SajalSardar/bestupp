@@ -104,7 +104,17 @@
             <a class="nav-link {{ Request::routeIs('frontend.contact') ? "active" : ""}}" href="{{ route('frontend.contact') }}">Contact</a>
           </li>
         </ul>
-        <a class="enroll_btn" href="{{ route('frontend.student.registration.view') }}">Enroll Now</a>
+        @guest()
+        <a class="enroll_btn" href="{{ route('login') }}">Login</a>
+        @endguest
+       @auth
+       <a class="enroll_btn me-3" href="{{ route('frontend.cart') }}">View Cart</a>
+       <form action="{{ route('logout') }}" method="POST" class="d-inline">
+         @csrf
+         <button class="enroll_btn" type="submit" style="border:none">Log Out</button>
+       </form>
+       
+       @endauth
       </div>
     </div>
   </nav>

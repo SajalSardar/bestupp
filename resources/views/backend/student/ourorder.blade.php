@@ -30,7 +30,7 @@
               @endforeach
             </h5>
           </div>
-          <div class="card-body">
+          <div class="card-body table-responsive">
             <table class="table table-bordered">
               <tr>
                 <th>Id</th>

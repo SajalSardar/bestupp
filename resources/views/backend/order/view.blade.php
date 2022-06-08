@@ -18,14 +18,14 @@
   <div class="card mb-5">
     <div class="card-header">
       <h4>
-        {{ $orderManage->course->name }}
+        {{ strip_tags($orderManage->course->name) }}
         <span class="ml-2" style="font-weight: 400; font-size: 16px">Free: {{ $orderManage->price }}</span>
         <span class="ml-2" style="font-weight: 400; font-size: 16px">Day: {{ $orderManage->selected_day }}</span>
         <span class="ml-2" style="font-weight: 400; font-size: 16px">Time: {{ $orderManage->selected_time->isoFormat('H:MM:SS A') }}</span>
         <span class="ml-2" style="font-weight: 400; font-size: 16px">Join Date: {{ $orderManage->created_at->isoFormat('Do MMM  YY') }} </span>
       </h4>
     </div>
-    <div class="card-body">
+    <div class="card-body table-responsive">
       <table class="table table-bordered">
         <tbody><tr>
           <th>Id</th>
