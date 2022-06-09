@@ -21,13 +21,18 @@ class AuthController extends Controller {
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response([
-                'error' => 'Invalid User!',
+                'user' => [
+                    'error'   => true,
+                    'message' => "Invalid User",
+                ],
+
             ]);
         };
         $token    = $user->createToken('apptoken')->plainTextToken;
         $response = [
             'user'  => $user,
             'token' => $token,
+            'error' => false,
         ];
 
         return response($response, 201);
