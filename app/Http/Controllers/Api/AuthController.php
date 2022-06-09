@@ -21,10 +21,9 @@ class AuthController extends Controller {
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response([
-                'user' => [
-                    'error'   => true,
-                    'message' => "Invalid User",
-                ],
+
+                'error'   => true,
+                'message' => "Invalid User",
 
             ]);
         };
