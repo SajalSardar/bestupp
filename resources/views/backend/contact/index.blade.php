@@ -80,7 +80,7 @@
                       <td >{{ $data->email  }}</td>
                       <td >{{ $data->message }}</td>
                       <td>
-                        <a href="" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{{ route('dashboard.contact.delete',$data->id ) }}" class="btn btn-sm btn-danger">Delete</a>
                       </td>
                     </tr>
                     @endif

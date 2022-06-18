@@ -35,7 +35,7 @@
             <form action="{{ route('frontend.contact.store') }}" method="POST">
               @csrf
             <div class="form-floating admission_input">
-              <input type="text" class="form-control" id="contFristName" placeholder="Frist Name" name="name">
+              <input type="text" class="form-control" id="contFristName" placeholder="Frist Name" name="name" value="{{ old('name') }}">
               <label for="contFristName">Full Name</label>
               @error('name')
                 <p class="text-danger">{{ $message }}</p>
@@ -44,7 +44,7 @@
 
 
             <div class="form-floating admission_input">
-              <input type="text" class="form-control" id="contMobNumber" placeholder="Mobile Number" name="mobile">
+              <input type="text" class="form-control" id="contMobNumber" placeholder="Mobile Number" name="mobile" value="{{ old('mobile') }}">
               <label for="contMobNumber">Mobile Number</label>
               @error('mobile')
               <p class="text-danger">{{ $message }}</p>
@@ -52,19 +52,37 @@
             </div>
 
             <div class="form-floating admission_input">
-              <input type="text" class="form-control" id="contEmail" placeholder="E-Mail" name="email">
+              <input type="text" class="form-control" id="contEmail" placeholder="E-Mail" name="email" value="{{ old('email') }}">
               <label for="contEmail">E-Mail</label>
               @error('email')
               <p class="text-danger">{{ $message }}</p>
               @enderror
             </div>
             <div class="form-floating admission_input">
-              <textarea class="form-control" placeholder="Leave a comment here" id="contMassage" name="message"></textarea>
+              <textarea class="form-control" placeholder="Leave a comment here" id="contMassage" name="message" style="height: 150px">{{ old('message') }}</textarea>
               <label for="contMassage">Message</label>
               @error('message')
               <p class="text-danger">{{ $message }}</p>
               @enderror
             </div>
+
+            <div class="form-floating admission_input">
+              <input id="captcha" type="text" class="form-control" placeholder="Enter Captcha" name="captcha">
+              <label for="captcha">Enter Captcha</label>
+              @error('captcha')
+              <p class="text-danger">{{ $message }}</p>
+              @enderror
+          </div>
+
+            <div class="form-floating admission_input">
+              <div class="captcha">
+                  <span>{!! captcha_img() !!}</span>
+                  <button type="button" class="btn btn-danger" class="reload" id="reload">
+                      &#x21bb;
+                  </button>
+              </div>
+          </div>
+          
 
             <button class="main_btn payment_btn" type="submit">Submit</button>
           </form>
@@ -93,9 +111,22 @@
 
 @section('frontend_js')
 <script>
+   $(document).ready(function(){
+    $('#reload').on('click',function () {
+          $.ajax({
+              type: 'GET',
+              url: '{{ route('dashboard.reload.captcha') }}',
+              success: function (data) {
+                  $(".captcha span").html(data.captcha);
+              }
+          });
+      });
+  });
+
   let myAlert = document.querySelector('.toast');
   let bsAlert = new  bootstrap.Toast(myAlert);
   bsAlert.show();
+
 
 </script>
 @endsection

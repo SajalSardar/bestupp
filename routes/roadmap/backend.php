@@ -45,6 +45,8 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         //contact message
         Route::get('/contact/message', [ContactController::class, 'showAll'])->name('show.contact');
         Route::get('/contact/markasread/{id}', [ContactController::class, 'markasread'])->name('contact.markasread');
+        Route::get('/contact/delete/{id}', [ContactController::class, 'deleteContact'])->name('contact.delete');
+        Route::get('/reload-captcha', [ContactController::class, 'reloadCaptcha'])->name('reload.captcha');
 
         //faq
         Route::get('/all/faq', [FaqController::class, 'index'])->name('faq.index');
@@ -83,7 +85,6 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
 
         //delete route
         Route::get('/day-schedul-delete/{id}', [ConfigurationController::class, 'DaySchedulDelete'])->name('day.schedul.delete');
-        Route::get('/contact/delete/{id}', [ContactController::class, 'markasread'])->name('contact.delete');
         Route::get('/faq/delete/{id}', [FaqController::class, 'delete'])->name('faq.delete');
         Route::get('/learning/delete/{id}', [FreeLearningController::class, 'delete'])->name('free.learning.delete');
         Route::get('/social-media/delete/{id}', [SocialController::class, "delete"])->name('social.delete');
