@@ -51,7 +51,3 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/enroll/{id}', [CartController::class, 'enroll']);
     Route::get('/cart/delete/{id}', [CartController::class, 'cartDelete']);
 });
-
-// Route::middleware('auth:sanctum')->get('/users', function () {
-//     return User::all();
-// });
