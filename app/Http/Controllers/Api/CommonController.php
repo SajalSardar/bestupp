@@ -8,11 +8,13 @@ use App\Models\Banner;
 use App\Models\Contact;
 use App\Models\DaySchedule;
 use App\Models\FreeLearning;
+use App\Models\Notice;
 use App\Models\PrivacyPolicy;
 use App\Models\SocialNetwork;
 use App\Models\Teachereducation;
 use App\Models\ThemeOptions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommonController extends Controller {
     public function allBanners() {
@@ -88,6 +90,11 @@ class CommonController extends Controller {
 
     public function privacyPolicy() {
         $data = PrivacyPolicy::where('id', 1)->get();
+        return response($data, 200);
+    }
+
+    public function notice() {
+        $data = Auth::user()->notices;
         return response($data, 200);
     }
 

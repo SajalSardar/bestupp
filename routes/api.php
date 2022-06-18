@@ -50,4 +50,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/carts', [CartController::class, 'index']);
     Route::get('/enroll/{id}', [CartController::class, 'enroll']);
     Route::get('/cart/delete/{id}', [CartController::class, 'cartDelete']);
+
+    //Notice
+    Route::get('/notice', [CommonController::class, 'notice']);
 });
