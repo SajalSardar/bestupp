@@ -17,7 +17,7 @@ class AuthController extends Controller {
         ]);
 
         //email check
-        $user = User::where('email', $request->email)->with('roles', 'notices')->first();
+        $user = User::where('email', $request->email)->with('roles')->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response([
