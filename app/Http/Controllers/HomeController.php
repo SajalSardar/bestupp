@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\OrderInstallment;
 use App\Models\PrivacyPolicy;
 use App\Models\StudentRegistration;
@@ -95,7 +96,19 @@ class HomeController extends Controller {
     }
 
     function dueNotification() {
+
         return view('backend.due_notification.index');
+
+    }
+    function dueNotificationSubmit(Request $request) {
+
+        $orders = Order::with(['OrderInstallments' => function ($q) use ($request) {
+
+            $q->where('transaction_id', null)->where('paydate', '<=', $request->day);
+        }, 'user'])->get();
+
+        return view('backend.due_notification.index', compact('orders'));
+
     }
 
 }

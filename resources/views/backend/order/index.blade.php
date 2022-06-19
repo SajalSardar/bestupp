@@ -205,9 +205,9 @@
   <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
 <script>
-  $('.dataTable2').DataTable({
-    "order": [[ 0, "desc" ]]
-  });
+    $('.dataTable2').DataTable({
+      "order": [[ 0, "desc" ]]
+    });
 </script>
 @endsection
     

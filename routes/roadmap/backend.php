@@ -101,6 +101,7 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
 
         //due notification
         Route::get('/due/notification', [HomeController::class, "dueNotification"])->name("due.notification");
+        Route::get('/due/notification/query', [HomeController::class, "dueNotificationSubmit"])->name("due.notification.query");
     });
 
     Route::group(['middleware' => ['role:student', 'auth']], function () {

@@ -13,67 +13,75 @@
   </div>
 
   <div class="card pd-20 pd-sm-40">
-    <form action="{{ route('dashboard.notice.store') }}" method="POST" >
-        @csrf
+    <form action="{{ route('dashboard.due.notification.query') }}" method="GET" >
         <div class="form-layout">
           <div class="form-group">
-            <strong>Select Student Type:</strong><br><br>
-            <label>
-              <input type="radio" name="notice_type" value="all"> All Student
-            </label>
-            <label class="ml-4">
-              <input type="radio" name="notice_type" value="admitted"> Admitted by course
-            </label>
-            <label class="ml-4">
-              <input type="radio" name="notice_type" value="none_admitted"> None Admitted
-            </label>
-            @error('notice_type')
+            <label>Select Day</label>
+              <input type="date" name="day" value="{{ $_GET['day'] ?? old('day') }}" class="form-control" placeholder="">
+            @error('day')
                 <p class="alert text-danger">{{ $message }}</p>
             @enderror
         </div>
-
-            <div class="form-group">
-                <label class="form-control-label">Title: <span class="tx-danger">*</span></label>
-                <input class="form-control" type="text" name="title" value="{{ old('title') }}" placeholder="Title">
-                @error('title')
-                    <p class="alert text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-            <div class="form-group">
-                <label class="form-control-label">Notice:</label>
-               <textarea id="summernote" name="notice" id="" class="form-control">{{ old('notice') }}</textarea>
-                @error('notice')
-                    <p class="alert text-danger">{{ $message }}</p>
-                @enderror
-            </div>
-  
+           
             <div class="form-layout-footer">
               <button class="btn btn-info mg-r-5">Submit</button>
             </div>
           </div>
     </form>
   </div> 
+
+  <div class="card px-5 pb-5 table-responsive">
+   
+    @if(isset($orders))
+
+      <table class="table table-striped table-bordered dataTable2">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Course Name</th>
+            <th>Installment No</th>
+            <th>Pay Date</th>
+            <th>Pay Tk</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach ($orders as $order )
+          @foreach ( $order->OrderInstallments as  $installment )
+      
+            <tr>
+              <td>{{ $order->user->name }}</td>
+              <td>{{ strip_tags($order->course->name) }}</td>
+              <td>{{ $installment->installment }}</td>
+              <td class="{{ $installment->paydate < now() ? 'text-danger': '' }}">{{ $installment->paydate->format('d M Y') }}</td>
+              <td>{{ $installment->bdt }}</td>
+              <td>
+                <a href="" class="btn btn-primary btn-sm">Send Notification</a>
+              </td>
+            </tr>
+          @endforeach
+            
+          @endforeach
+        </tbody>
+      </table>
+    
+      
+    @endif
+  </div> 
 </div>
 @endsection
 
 @section('dashboard_css')
-<link rel="stylesheet" href="{{ asset("backend/css/summernote-bs4.min.css")}}">
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 @endsection
 
 @section('dashboard_js')
-<script src="{{ asset("backend/js/summernote-bs4.min.js")}}"></script>
+  <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
 <script>
-  $('#summernote').summernote({
-      tabsize: 2,
-      height: 200,
-      toolbar: [
-        ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
-        ['insert', ['link']],
-        ['view', ['fullscreen', 'codeview']]
-      ]
-    });
+  $('.dataTable2').DataTable({
+    "order": [[ 0, "desc" ]]
+  });
 </script>
 @endsection
+
