@@ -8,6 +8,7 @@ use App\Models\PrivacyPolicy;
 use App\Models\StudentRegistration;
 use App\Models\TeacherRegistration;
 use App\Models\User;
+use App\Notifications\DueNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -105,10 +106,16 @@ class HomeController extends Controller {
         $orders = Order::with(['OrderInstallments' => function ($q) use ($request) {
 
             $q->where('transaction_id', null)->where('paydate', '<=', $request->day);
-        }, 'user'])->get();
+        }, 'user', 'course'])->get();
 
         return view('backend.due_notification.index', compact('orders'));
 
+    }
+
+    function dueNotificationSend($id) {
+        $OrderInstallment = OrderInstallment::find($id);
+        $OrderInstallment->order->user->notify(new DueNotification($OrderInstallment));
+        return back()->with('success', "Notification Successfully Send!");
     }
 
 }

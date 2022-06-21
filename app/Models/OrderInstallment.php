@@ -17,4 +17,8 @@ class OrderInstallment extends Model {
     protected $casts = [
         'paydate' => 'datetime',
     ];
+
+    function order() {
+        return $this->belongsTo(Order::class);
+    }
 }

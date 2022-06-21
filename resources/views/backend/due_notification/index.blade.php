@@ -56,7 +56,7 @@
               <td class="{{ $installment->paydate < now() ? 'text-danger': '' }}">{{ $installment->paydate->format('d M Y') }}</td>
               <td>{{ $installment->bdt }}</td>
               <td>
-                <a href="" class="btn btn-primary btn-sm">Send Notification</a>
+                <a href="{{ route('dashboard.due.notification.send', $installment->id) }}" class="btn btn-primary btn-sm">Send Notification</a>
               </td>
             </tr>
           @endforeach
@@ -80,7 +80,7 @@
 
 <script>
   $('.dataTable2').DataTable({
-    "order": [[ 0, "desc" ]]
+    "order": [[ 3, "asc" ]]
   });
 </script>
 @endsection
