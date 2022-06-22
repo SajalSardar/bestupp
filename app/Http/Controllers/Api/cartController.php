@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 
-class cartController extends Controller {
+class CartController extends Controller {
 
     function index() {
 
