@@ -42,6 +42,7 @@
             <th>Installment No</th>
             <th>Pay Date</th>
             <th>Pay Tk</th>
+            <th>Send Time</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -55,8 +56,13 @@
               <td>{{ $installment->installment }}</td>
               <td class="{{ $installment->paydate < now() ? 'text-danger': '' }}">{{ $installment->paydate->format('d M Y') }}</td>
               <td>{{ $installment->bdt }}</td>
+              <td>{{ $installment->send_notification ? $installment->send_notification->diffForHumans() : "--" }}</td>
               <td>
-                <a href="{{ route('dashboard.due.notification.send', $installment->id) }}" class="btn btn-primary btn-sm">Send Notification</a>
+               
+                <a href="{{ route('dashboard.due.notification.send', $installment->id) }}" class="btn btn-{{ $installment->send_notification != null ? "warning" : "primary" }} btn-sm"> 
+                  
+                  {{ $installment->send_notification != null ? "Resend Notification" : "Send Notification" }}
+                </a>
               </td>
             </tr>
           @endforeach

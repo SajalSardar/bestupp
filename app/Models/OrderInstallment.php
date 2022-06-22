@@ -15,7 +15,8 @@ class OrderInstallment extends Model {
      * @var array<string, string>
      */
     protected $casts = [
-        'paydate' => 'datetime',
+        'paydate'           => 'datetime',
+        'send_notification' => 'datetime',
     ];
 
     function order() {

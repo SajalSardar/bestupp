@@ -115,6 +115,8 @@ class HomeController extends Controller {
     function dueNotificationSend($id) {
         $OrderInstallment = OrderInstallment::find($id);
         $OrderInstallment->order->user->notify(new DueNotification($OrderInstallment));
+        $OrderInstallment->send_notification = now();
+        $OrderInstallment->save();
         return back()->with('success', "Notification Successfully Send!");
     }
 
