@@ -46,7 +46,7 @@ class FrontendController extends Controller {
         return view('frontend.about', compact('about', 'about_page_first', 'about_page'));
     }
     public function policy() {
-        $policy = PrivacyPolicy::firstOrFail();
+        $policy = PrivacyPolicy::all();
         return view('frontend.policy', compact('policy'));
     }
 

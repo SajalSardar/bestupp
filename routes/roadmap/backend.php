@@ -95,8 +95,11 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/social-media/delete/{id}', [SocialController::class, "delete"])->name('social.delete');
 
         //Privacy Policy
-        Route::get('/privacy-policy', [HomeController::class, "editPolicy"])->name('privacy.policy');
+        Route::get('/privacy-policy', [HomeController::class, "createPolicy"])->name('privacy.policy.index');
+        Route::post('/privacy-policy', [HomeController::class, "insertPolicy"])->name('privacy.policy.insert');
+        Route::get('/privacy-policy/edit/{id}', [HomeController::class, "editPolicy"])->name('privacy.policy.edit');
         Route::post('/privacy-policy/{id}', [HomeController::class, "updatePolicy"])->name('update.privacy.policy');
+        Route::get('/privacy-policy/delete/{id}', [HomeController::class, "deletePolicy"])->name('privacy.policy.delete');
 
         //all admin
         Route::get('/all-admins', [HomeController::class, "allAdmin"])->name("show.all.admin");

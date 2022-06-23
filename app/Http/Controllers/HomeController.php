@@ -70,8 +70,24 @@ class HomeController extends Controller {
 
     //Privacy Policy
 
-    function editPolicy() {
-        $Policy = PrivacyPolicy::firstOrFail();
+    function createPolicy() {
+        $policy = PrivacyPolicy::all();
+        return view('backend.policy.index', compact('policy'));
+    }
+    function insertPolicy(Request $request) {
+        $policy = new PrivacyPolicy();
+        $request->validate([
+            "title"          => "required",
+            "privacy_policy" => "required",
+        ]);
+
+        $policy->title          = $request->title;
+        $policy->privacy_policy = $request->privacy_policy;
+        $policy->save();
+        return back()->with('success', "Privacy Policy Added!");
+    }
+    function editPolicy($id) {
+        $Policy = PrivacyPolicy::findOrFail($id);
         return view('backend.policy.edit', compact('Policy'));
     }
 
@@ -85,7 +101,13 @@ class HomeController extends Controller {
         $policy->title          = $request->title;
         $policy->privacy_policy = $request->privacy_policy;
         $policy->save();
-        return back()->with('success', "Privacy Policy Updated!");
+        return redirect(route('dashboard.privacy.policy.index'))->with('success', "Privacy Policy Updated!");
+    }
+
+    function deletePolicy($id) {
+        $Policy = PrivacyPolicy::findOrFail($id);
+        $Policy->delete();
+        return back()->with('success', "Privacy Policy Deleted!");
     }
 
     // all admin

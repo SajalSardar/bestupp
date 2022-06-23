@@ -152,7 +152,7 @@
             <li class="nav-item"><a target="_blank" href="{{ route('register') }}" class="nav-link">Create Another Admin</a></li>
             <li class="nav-item"><a  href="{{ route('dashboard.show.all.admin') }}" class="nav-link">All Admin</a></li>
             @endrole
-            <li class="nav-item"><a href="{{ route('dashboard.privacy.policy') }}" class="nav-link">Privacy Policy</a></li>
+            <li class="nav-item"><a href="{{ route('dashboard.privacy.policy.index') }}" class="nav-link">Privacy Policy</a></li>
           </ul>
           
         @endrole

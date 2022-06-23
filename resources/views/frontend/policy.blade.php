@@ -7,7 +7,7 @@
  <section id="single_banner_page">
   <div class="single_banner_page_overly">
     <div class="single_banner_text">
-      <h1>{!! $policy->title !!}</h1>
+      <h1>Privacy Policy</h1>
       <ul>
         <li><a href="{{ route('frontend.home') }}">Home</a></li>
         <li class="diseble"><span>/</span> Privacy Policy</li>
@@ -21,7 +21,12 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-10">
-      {!! $policy->privacy_policy !!}
+      @foreach ($policy as $policy)
+        <div class="about_text">
+          <h4>{{ $policy->title }}</h4>
+          {!! $policy->privacy_policy !!}
+        </div>
+        @endforeach
     </div>
   </div>
 </div>
