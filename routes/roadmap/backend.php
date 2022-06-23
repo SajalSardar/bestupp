@@ -42,6 +42,11 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/about-us', [AboutController::class, 'aboutInfo'])->name('about.us');
         Route::post('/about-us/{id}', [AboutController::class, 'aboutUpdate'])->name('about.update');
 
+        Route::post('/about-content', [AboutController::class, 'aboutContentInsert'])->name('about.content.insert');
+        Route::get('/about-content/{id}', [AboutController::class, 'aboutContentEdit'])->name('about.content.edit');
+        Route::post('/about-content/{id}', [AboutController::class, 'aboutContentUpdate'])->name('about.content.update');
+        Route::get('/about-content/delete/{id}', [AboutController::class, 'aboutContentDelete'])->name('about.content.delete');
+
         //contact message
         Route::get('/contact/message', [ContactController::class, 'showAll'])->name('show.contact');
         Route::get('/contact/markasread/{id}', [ContactController::class, 'markasread'])->name('contact.markasread');

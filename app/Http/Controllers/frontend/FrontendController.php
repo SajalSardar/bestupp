@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\AboutPageContent;
 use App\Models\Banner;
 use App\Models\Course;
 use App\Models\DaySchedule;
@@ -39,8 +40,10 @@ class FrontendController extends Controller {
     }
 
     public function about() {
-        $about = About::firstOrFail();
-        return view('frontend.about', compact('about'));
+        $about            = About::firstOrFail();
+        $about_page_first = AboutPageContent::first();
+        $about_page       = AboutPageContent::offset(1)->limit(50)->get();
+        return view('frontend.about', compact('about', 'about_page_first', 'about_page'));
     }
     public function policy() {
         $policy = PrivacyPolicy::firstOrFail();

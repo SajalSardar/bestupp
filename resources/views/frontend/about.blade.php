@@ -19,7 +19,20 @@
 <section id="about_page">
   <div class="container">
     <div class="row align-items-center">
-      {!! $about->about_us !!}
+      <div class="col-12">
+        <div class="about_text_top">
+          <h4>{{ $about_page_first->title }}</h4>
+          {!! $about_page_first->description !!}
+        </div>
+      </div>
+      <div class="col-md-7">
+        @foreach ($about_page as $about_page)
+        <div class="about_text">
+          <h4>{{ $about_page->title }}</h4>
+          {!! $about_page->description !!}
+        </div>
+        @endforeach
+      </div>
       <div class="col-md-5">
         <div class="about_pic">
           <img src="{{asset('storage/uploads/about/'.$about->about_banner)}}" alt="{!! strip_tags($about->section_title) !!}" class="img-fluid w-100">

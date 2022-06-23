@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 // public route
 Route::get('/banners', [CommonController::class, 'allBanners']);
 Route::get('/about-us', [CommonController::class, 'aboutUs']);
+Route::get('/about-content', [CommonController::class, 'aboutContent']);
 Route::get('/course-day', [CommonController::class, 'courseDay']);
 Route::get('/teacher-education', [CommonController::class, 'teacherEducation']);
 Route::get('/social-icon', [CommonController::class, 'socialNetwork']);

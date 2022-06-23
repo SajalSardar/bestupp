@@ -4,14 +4,16 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\AboutPageContent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class AboutController extends Controller {
 
     public function aboutInfo() {
-        $aboutData = About::select('id', 'section_title', 'section_description', 'about_us', 'about_banner')->first();
-        return view('backend.about.index', compact('aboutData'));
+        $aboutData        = About::select('id', 'section_title', 'section_description', 'about_us', 'about_banner')->first();
+        $aboutPageContent = AboutPageContent::all();
+        return view('backend.about.index', compact('aboutData', 'aboutPageContent'));
     }
 
     public function aboutUpdate(Request $request, $id) {
@@ -41,5 +43,35 @@ class AboutController extends Controller {
         $data->save();
         return back()->with('success', "Successfully Uploaded About Content!");
 
+    }
+
+    public function aboutContentInsert(Request $request) {
+        $this->validate($request, [
+            'title'       => 'required',
+            'description' => 'required',
+        ]);
+        $data = new AboutPageContent();
+        $data->create($request->all());
+        return back()->with('success', "Successfully Insert About Content!");
+    }
+    public function aboutContentEdit($id) {
+        $data = AboutPageContent::findOrFail($id);
+        return view('backend.about.edit', compact('data'));
+    }
+    public function aboutContentUpdate(Request $request, $id) {
+        $data = AboutPageContent::findOrFail($id);
+        $this->validate($request, [
+            'title'       => 'required',
+            'description' => 'required',
+        ]);
+
+        $data->title       = $request->title;
+        $data->description = $request->description;
+        return redirect(route('dashboard.about.us'))->with('success', "Successfully Update About Content!");
+    }
+    public function aboutContentDelete($id) {
+        $data = AboutPageContent::findOrFail($id);
+        $data->delete();
+        return redirect(route('dashboard.about.us'))->with('success', "Successfully Delete About Content!");
     }
 }

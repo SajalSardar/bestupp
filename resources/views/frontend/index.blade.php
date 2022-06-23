@@ -67,7 +67,7 @@
         </div>
         <div class="col-lg-7">
           <div class="about_text">
-            {!! Str::limit($aboutHome->about_us, 1000, '...') !!}
+            {!! $aboutHome->about_us !!}
           </div>
           <div class="about_btn">
             <a href="{{ route('frontend.about') }}">Read More</a>

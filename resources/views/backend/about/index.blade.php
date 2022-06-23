@@ -4,7 +4,7 @@
 @section('content')
 <nav class="breadcrumb sl-breadcrumb">
   <a class="breadcrumb-item" href="{{ route('dashboard') }}">Dashboard</a>
-  <span class="breadcrumb-item active">Update About Us</span>
+  <span class="breadcrumb-item active">About Us</span>
 </nav>
 
 <div class="sl-pagebody">
@@ -31,8 +31,8 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label class="form-control-label">About Us:</label>
-               <textarea id="summernote" name="about_us" id="" class="form-control">{{ $aboutData->about_us }}</textarea>
+                <label class="form-control-label">Home Page About Us:</label>
+               <textarea class="summernote" name="about_us" id="" class="form-control">{{ $aboutData->about_us }}</textarea>
                 @error('about_us')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -53,6 +53,68 @@
     </form>
   </div> 
 </div>
+
+
+<div class="sl-pagebody">
+  <div class="sl-page-title">
+    <h5>Add About Page Content</h5>
+  </div>
+
+  <div class="card pd-20 pd-sm-40">
+    <form action="{{ route('dashboard.about.content.insert') }}" method="POST">
+        @csrf
+        <div class="form-layout">
+            <div class="form-group">
+                <label class="form-control-label">Title: <span class="tx-danger">*</span></label>
+                <input class="form-control" type="text" name="title" placeholder="Title">
+                @error('title')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+              </div>
+            <div class="form-group">
+                <label class="form-control-label">Description:</label>
+               <textarea class="summernote" name="description" class="form-control"></textarea>
+                @error('description')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+            </div>
+  
+            <div class="form-layout-footer">
+              <button class="btn btn-info mg-r-5">Add Info</button>
+            </div>
+          </div>
+    </form>
+  </div> 
+</div>
+
+
+<div class="sl-pagebody">
+  <div class="sl-page-title">
+    <h5>About Page Content</h5>
+  </div>
+
+  <div class="card pd-20 pd-sm-40 table-responsive">
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th>Id</th>
+        <th>Ttile</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+      @foreach ($aboutPageContent as $aboutPageContent)
+        <tr>
+          <td>{{ $aboutPageContent->id }}</td>
+          <td>{{ $aboutPageContent->title }}</td>
+          <td>{!! Str::limit($aboutPageContent->description, 100, '...') !!}</td>
+          <td>
+            <a href="{{ route('dashboard.about.content.edit', $aboutPageContent->id) }}" class="btn btn-sm btn-primary">Edit</a>
+            <a href="{{ route('dashboard.about.content.delete', $aboutPageContent->id) }}" class="btn btn-sm btn-warning">Delete</a>
+          </td>
+        </tr>
+      @endforeach
+    </table>
+  </div> 
+</div>
 @endsection
 
 @section('dashboard_css')
@@ -62,7 +124,7 @@
 @section('dashboard_js')
 <script src="{{ asset("backend/js/summernote-bs4.min.js")}}"></script>
 <script>
-  $('#summernote').summernote({
+  $('.summernote').summernote({
       tabsize: 2,
       height: 200,
       toolbar: [

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
+use App\Models\AboutPageContent;
 use App\Models\Banner;
 use App\Models\Contact;
 use App\Models\DaySchedule;
@@ -24,6 +25,10 @@ class CommonController extends Controller {
     public function aboutUs() {
         $about = About::where('id', 1)->get();
         return response($about, 201);
+    }
+    public function aboutContent() {
+        $aboutData = AboutPageContent::all();
+        return response($aboutData, 201);
     }
 
     public function freeLearning(Request $request) {
