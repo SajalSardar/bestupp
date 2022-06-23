@@ -71,7 +71,7 @@ class HomeController extends Controller {
     //Privacy Policy
 
     function createPolicy() {
-        $policy = PrivacyPolicy::all();
+        $policy = PrivacyPolicy::orderBy('id', 'asc')->get();
         return view('backend.policy.index', compact('policy'));
     }
     function insertPolicy(Request $request) {

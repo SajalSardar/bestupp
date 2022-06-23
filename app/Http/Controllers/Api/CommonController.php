@@ -94,7 +94,7 @@ class CommonController extends Controller {
     }
 
     public function privacyPolicy() {
-        $data = PrivacyPolicy::all();
+        $data = PrivacyPolicy::orderBy('id', 'asc')->get();
         return response($data, 200);
     }
 
