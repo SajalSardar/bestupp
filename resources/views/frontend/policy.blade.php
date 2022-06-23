@@ -23,7 +23,7 @@
     <div class="col-lg-10">
       @foreach ($policy as $policy)
         <div class="about_text">
-          <h4>{{ Str::lower($policy->title) }}</h4>
+          <h4>{{ Str::title($policy->title) }}</h4>
           {!! $policy->privacy_policy !!}
         </div>
         @endforeach
