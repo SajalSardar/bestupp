@@ -24,6 +24,7 @@ Route::name('frontend.')->group(function () {
 
     Route::get('/contacts', [ContactController::class, 'contact'])->name('contact');
     Route::post('/contacts', [ContactController::class, 'contactStore'])->name('contact.store');
+    Route::get('/reload-captcha', [ContactController::class, 'reloadCaptcha'])->name('reload.captcha');
 
     //free learning route
     Route::post('/free/learning', [FreeLearningController::class, 'store'])->name('free.learning');

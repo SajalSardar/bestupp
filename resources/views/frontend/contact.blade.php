@@ -115,7 +115,7 @@
     $('#reload').on('click',function () {
           $.ajax({
               type: 'GET',
-              url: '{{ route('dashboard.reload.captcha') }}',
+              url: '{{ route('frontend.reload.captcha') }}',
               success: function (data) {
                   $(".captcha span").html(data.captcha);
               }

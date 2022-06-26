@@ -51,7 +51,6 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/contact/message', [ContactController::class, 'showAll'])->name('show.contact');
         Route::get('/contact/markasread/{id}', [ContactController::class, 'markasread'])->name('contact.markasread');
         Route::get('/contact/delete/{id}', [ContactController::class, 'deleteContact'])->name('contact.delete');
-        Route::get('/reload-captcha', [ContactController::class, 'reloadCaptcha'])->name('reload.captcha');
 
         //faq
         Route::get('/all/faq', [FaqController::class, 'index'])->name('faq.index');
