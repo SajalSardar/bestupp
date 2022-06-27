@@ -6,17 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\CheckPhoto;
 use App\Models\TeacherRegistration;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class TeacherController extends Controller {
     public function teacherRegistration(Request $request) {
 
         $photo    = base64_decode($request->photo);
         $fileName = uniqid() . '.' . 'jpg';
-        Storage::disk('public')->put('uploads/nids/' . $fileName, $photo);
+        //Storage::disk('public')->put('uploads/nids/' . $fileName, $photo);
+        move_uploaded_file(public_path('storage/uploads/profiles/') . $fileName, $photo);
 
         $data        = new CheckPhoto();
-        $data->photo = $photo;
+        $data->photo = $fileName;
         $data->save();
         return response($data, 201);
 
