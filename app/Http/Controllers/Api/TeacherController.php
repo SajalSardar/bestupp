@@ -12,8 +12,8 @@ class TeacherController extends Controller {
 
         $photo    = base64_decode($request->photo);
         $fileName = uniqid() . '.' . 'jpg';
-        //Storage::disk('public')->put('uploads/nids/' . $fileName, $photo);
-        move_uploaded_file(public_path('storage/uploads/profiles/') . $fileName, $photo);
+        //Storage::disk('public')->put('uploads/profiles/' . $fileName, $photo);
+        move_uploaded_file($photo, public_path('storage/uploads/profiles/') . $fileName, );
 
         $data        = new CheckPhoto();
         $data->photo = $fileName;
