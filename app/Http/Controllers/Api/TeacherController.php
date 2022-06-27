@@ -10,8 +10,8 @@ class TeacherController extends Controller {
     public function teacherRegistration(Request $request) {
 
         $nid         = $request->file('nid');
-        $photo       = $request->file('photo');
-        $certificate = $request->file('certificate');
+        $photo       = $request->photo;
+        $certificate = $request->certificate;
 
         //print_r($photo);
 
