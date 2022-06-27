@@ -9,13 +9,11 @@ use Illuminate\Http\Request;
 class TeacherController extends Controller {
     public function teacherRegistration(Request $request) {
 
-        $nid         = $request->file('nid');
-        $photo       = $request->photo;
-        $certificate = $request->certificate;
+        $photo = $request->photo;
 
         //print_r($photo);
 
-        return response($photo, 201);
+        return response($photo);
 
         // $base64Image  = explode(";base64,", $encode);
         // $explodeImage = explode("image/", $base64Image[0]);
