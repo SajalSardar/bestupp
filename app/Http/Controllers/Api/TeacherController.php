@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class TeacherController extends Controller {
     public function teacherRegistration(Request $request) {
 
-        $photo       = $request->photo;
+        $photo       = $request->father_name;
         $data        = new CheckPhoto();
         $data->photo = $photo;
         $data->save();
