@@ -9,11 +9,28 @@ use Illuminate\Http\Request;
 class TeacherController extends Controller {
     public function teacherRegistration(Request $request) {
 
-        $photo = $request->photo;
+        $photo                   = $request->photo;
+        $data                    = new TeacherRegistration();
+        $data->user_id           = 100;
+        $data->courses           = "sdf";
+        $data->teachereducations = "sdf";
+        $data->birthday          = "sdf";
+        $data->mobile            = "sdf";
+        $data->address           = "sdf";
+        $data->national          = "sdf";
+        $data->father_name       = "sdf";
+        $data->gender            = "sdf";
+        $data->parmanet_address  = "sdf";
+        $data->university        = "sdf";
+        $data->nid               = "sdf";
+        $data->certificate       = "sdf";
+        $data->photo             = $photo;
+        $data->save();
+        return response($data, 201);
 
-        //print_r($photo);
+        // //print_r($photo);
 
-        return response($photo);
+        // return response("ok");
 
         // $base64Image  = explode(";base64,", $encode);
         // $explodeImage = explode("image/", $base64Image[0]);
