@@ -3,28 +3,16 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\CheckPhoto;
 use App\Models\TeacherRegistration;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller {
     public function teacherRegistration(Request $request) {
 
-        $photo                   = $request->photo;
-        $data                    = new TeacherRegistration();
-        $data->user_id           = 100;
-        $data->courses           = "sdf";
-        $data->teachereducations = "sdf";
-        $data->birthday          = "sdf";
-        $data->mobile            = "sdf";
-        $data->address           = "sdf";
-        $data->national          = "sdf";
-        $data->father_name       = "sdf";
-        $data->gender            = "sdf";
-        $data->parmanet_address  = "sdf";
-        $data->university        = "sdf";
-        $data->nid               = "sdf";
-        $data->certificate       = "sdf";
-        $data->photo             = $photo;
+        $photo       = $request->photo;
+        $data        = new CheckPhoto();
+        $data->photo = $photo;
         $data->save();
         return response($data, 201);
 
