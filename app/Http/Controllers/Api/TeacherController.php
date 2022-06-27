@@ -14,8 +14,9 @@ class TeacherController extends Controller {
         $photo    = base64_decode($request->photo);
         $fileName = uniqid() . '.' . 'jpg';
         Storage::disk('public')->put('uploads/nids/' . $fileName, $photo);
+
         $data        = new CheckPhoto();
-        $data->photo = $fileName;
+        $data->photo = $photo;
         $data->save();
         return response($data, 201);
 
