@@ -103,4 +103,21 @@ class CommonController extends Controller {
         return response($data, 200);
     }
 
+    public function uploadImage() {
+        if ($_POST) {
+            $data        = $_POST['imgBase64'];
+            $data        = str_replace('data:image/png;base64,', '', $data);
+            $data        = str_replace(' ', '+', $data);
+            $data        = base64_decode($data);
+            $file        = '' . rand() . '.png';
+            $success     = file_put_contents($file, $data);
+            $data        = base64_decode($data);
+            $source_img  = imagecreatefromstring($data);
+            $rotated_img = imagerotate($source_img, 90, 0);
+            $file        = '' . rand() . '.png';
+            $imageSave   = imagejpeg($rotated_img, $file, 10);
+            imagedestroy($source_img);
+        }
+    }
+
 }
