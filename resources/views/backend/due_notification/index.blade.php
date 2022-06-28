@@ -34,7 +34,7 @@
    
     @if(isset($orders))
 
-      <table class="table table-striped table-bordered dataTable2">
+      <table class="table table-striped table-bordered">
         <thead>
           <tr>
             <th>Name</th>
@@ -77,17 +77,5 @@
 </div>
 @endsection
 
-@section('dashboard_css')
-<link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-@endsection
 
-@section('dashboard_js')
-  <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-
-<script>
-  $('.dataTable2').DataTable({
-    "order": [[ 3, "asc" ]]
-  });
-</script>
-@endsection
 
