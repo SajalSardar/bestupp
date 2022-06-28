@@ -32,6 +32,9 @@ class TeacherController extends Controller {
             "certificate"      => "required",
         ]);
 
+        $courses    = explode(',', $request->courses);
+        $educations = explode(',', $request->education);
+
         $nid       = base64_decode($request->nid);
         $_nid_name = Str::slug($request->name) . '_' . time() . '.' . 'jpg';
         file_put_contents(public_path('storage/uploads/nids/') . $_nid_name, $nid);
@@ -55,8 +58,8 @@ class TeacherController extends Controller {
         if ($insertUser->id) {
             $data                    = new TeacherRegistration();
             $data->user_id           = $insertUser->id;
-            $data->courses           = json_encode($request->courses);
-            $data->teachereducations = json_encode($request->education);
+            $data->courses           = json_encode($courses);
+            $data->teachereducations = json_encode($educations);
             $data->birthday          = $request->birthday;
             $data->mobile            = $request->mobile;
             $data->address           = $request->address;
@@ -101,6 +104,9 @@ class TeacherController extends Controller {
             "university"       => "required",
         ]);
 
+        $courses    = explode(',', $request->courses);
+        $educations = explode(',', $request->education);
+
         if (!empty($request->nid)) {
             $nid       = base64_decode($request->nid);
             $_nid_name = Str::slug($request->name) . '_' . time() . '.' . 'jpg';
@@ -138,8 +144,8 @@ class TeacherController extends Controller {
             $_certificate_name = $data->certificate;
         }
 
-        $data->courses           = json_encode($request->courses);
-        $data->teachereducations = json_encode($request->education);
+        $data->courses           = json_encode($courses);
+        $data->teachereducations = json_encode($educations);
         $data->birthday          = $request->birthday;
         $data->mobile            = $request->mobile;
         $data->national          = $request->nationality;
