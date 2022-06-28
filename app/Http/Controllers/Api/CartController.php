@@ -36,8 +36,14 @@ class CartController extends Controller {
         ]);
     }
 
-    function enroll(Request $request, $id) {
-        $cartDatas = Cart::where('user_id', auth()->user()->id)->get();
+    function enroll(Request $request) {
+        $this->validate($request, [
+            'studentDay'  => 'required',
+            'studenttime' => 'required',
+            'user_id'     => 'required',
+            'course_id'   => 'required',
+        ]);
+        $cartDatas = Cart::where('user_id', $request->user_id)->get();
 
         foreach (auth()->user()->roles as $role) {
             if ($role->name == 'super-admin' || $role->name == 'admin' || $role->name == 'teacher') {
@@ -48,21 +54,16 @@ class CartController extends Controller {
         }
 
         foreach ($cartDatas as $data) {
-            if ($data->course_id == $id) {
+            if ($data->course_id == $request->course_id) {
                 return response([
                     "message" => "Already Added Cart!",
                 ]);
             }
         }
 
-        $this->validate($request, [
-            'studentDay'  => 'required',
-            'studenttime' => 'required',
-        ]);
-
         $data                = new Cart();
-        $data->user_id       = auth()->user()->id;
-        $data->course_id     = $id;
+        $data->user_id       = $request->user_id;
+        $data->course_id     = $request->course_id;
         $data->selected_day  = $request->studentDay;
         $data->selected_time = $request->studenttime;
         $data->save();

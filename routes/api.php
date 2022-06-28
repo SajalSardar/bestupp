@@ -49,7 +49,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //cart
     Route::get('/carts', [CartController::class, 'index']);
-    Route::get('/enroll/{id}', [CartController::class, 'enroll']);
+    Route::post('/enroll', [CartController::class, 'enroll']);
     Route::get('/cart/delete/{id}', [CartController::class, 'cartDelete']);
 
     //Notice
