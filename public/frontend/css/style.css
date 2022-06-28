@@ -1878,3 +1878,23 @@ h3.pay_headline::after {
 .form-floating>label{
     left: 15px;
 }
+
+.select_2_label{
+    color: #212529;
+    background: #fff;
+    width: 100%;
+    border: 1px solid rgb(169, 169, 169);
+    border-bottom: 0;
+    font-size: 16px;
+    padding-top: 5px;
+    padding-left: 10px;
+}
+
+#registration .select2-container--default .select2-selection--multiple,
+#registration .select2-container--default.select2-container--focus .select2-selection--multiple {
+    border: 1px solid rgb(169, 169, 169);
+    outline: 0;
+    border-top: 0;
+    border-radius: 0;
+    border-radius: 0 0 3px 3px;
+}

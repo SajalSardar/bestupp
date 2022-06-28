@@ -107,7 +107,7 @@
 
                       <div class="form-floating admission_input col-md-6">
                         <select class="form-select" id="regGender" aria-label="Floating label select example" name="gender">
-                          <option selected disabled>-Select One-</option>
+                          <option selected disabled> Select Gender </option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
                         </select>
@@ -118,9 +118,8 @@
                       </div>
 
                       <div class=" admission_input col-md-6">
-                        <label for="regEducation">Select Education</label>
+                        <label for="regEducation" class="select_2_label">Select Education</label>
                         <select class="form-select select_2" id="regEducation" name="education[]" multiple>
-                          <option disabled>Education</option>
                           @foreach ($edus as  $edu)
                             <option value="{{ $edu->name }}">{{ $edu->name }}</option>
                           @endforeach
@@ -139,9 +138,8 @@
                       </div>
     
                       <div class=" admission_input col-md-6">
-                        <label for="regNameCourse">Select Course</label>
+                        <label for="regNameCourse" class="select_2_label">Select Course</label>
                         <select class="form-select select_2" id="regNameCourse"  name="courses[]" multiple aria-label="Name of Course">
-                          <option disabled> Name of Course </option>
                           @foreach ($courses as $course)
                           <option value="{{ strip_tags($course->name) }}">{{ strip_tags($course->name) }}</option>
                           @endforeach
