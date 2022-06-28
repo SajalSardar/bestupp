@@ -155,25 +155,6 @@ class StudentController extends Controller {
         return view('backend.student.view', compact('findStuden'));
     }
 
-    // function studentComplete($id) {
-    //     $teacher         = StudentRegistration::find($id);
-    //     $teacher->status = 3;
-    //     $teacher->save();
-    //     return back()->with('success', 'Course Completed!');
-    // }
-    // function studentDrop($id) {
-    //     $teacher         = StudentRegistration::find($id);
-    //     $teacher->status = 2;
-    //     $teacher->save();
-    //     return back()->with('success', 'Student Drop out!!');
-    // }
-    // function studentRunning($id) {
-    //     $teacher         = StudentRegistration::find($id);
-    //     $teacher->status = 1;
-    //     $teacher->save();
-    //     return back()->with('success', 'Student Running!!');
-    // }
-
     function installmentpay($id) {
         $installment = OrderInstallment::find($id);
         // return $installment->installment;

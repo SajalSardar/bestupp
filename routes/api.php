@@ -54,4 +54,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //Notice
     Route::get('/notice', [CommonController::class, 'notice']);
+
+    //student
+    Route::get('/student/profile', [StudentController::class, 'studentProfile']);
+    Route::post('/student/profile/update', [StudentController::class, 'studentUpdate']);
+
+    //student
+    Route::get('/teacher/profile', [TeacherController::class, 'teacherProfile']);
+    Route::get('/teacher/profile/update', [TeacherController::class, 'teacherUpdate']);
 });
