@@ -40,8 +40,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/free-learning', [CommonController::class, 'freeLearning']);
 Route::post('/contact-us', [CommonController::class, 'contactUs']);
 
-Route::post('/image-upload', [CommonController::class, 'uploadImage']);
-
 //prvate route
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
