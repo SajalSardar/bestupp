@@ -58,8 +58,8 @@ class TeacherController extends Controller {
         if ($insertUser->id) {
             $data                    = new TeacherRegistration();
             $data->user_id           = $insertUser->id;
-            $data->courses           = json_encode(["a", "b"]);
-            $data->teachereducations = json_encode(["a", "b"]);
+            $data->courses           = ["Diploma"];
+            $data->teachereducations = ["Diploma"];
             $data->birthday          = $request->birthday;
             $data->mobile            = $request->mobile;
             $data->address           = $request->address;
@@ -68,9 +68,9 @@ class TeacherController extends Controller {
             $data->gender            = $request->gender;
             $data->parmanet_address  = $request->parmanet_address;
             $data->university        = $request->university;
-            $data->nid               = $_nid_name;
-            $data->photo             = $_photo_name;
-            $data->certificate       = $_certificate_name;
+            $data->nid               = "abc.jpg";
+            $data->photo             = "abc.jpg";
+            $data->certificate       = "abc.jpg";
             $data->save();
         }
 
