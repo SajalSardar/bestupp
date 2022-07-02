@@ -43,15 +43,15 @@ class CartController extends Controller {
             'course_id'   => 'required',
             'user_id'     => 'required',
         ]);
-        $cartDatas = Cart::where('user_id', auth()->user()->id)->get();
+        $cartDatas = Cart::where('user_id', $request->user_id)->get();
 
-        foreach (auth()->user()->roles as $role) {
-            if ($role->name == 'super-admin' || $role->name == 'admin' || $role->name == 'teacher') {
-                return response([
-                    'warning' => "You do not enroll this course. Because you are not a student!",
-                ]);
-            }
-        }
+        // foreach (auth()->user()->roles as $role) {
+        //     if ($role->name == 'super-admin' || $role->name == 'admin' || $role->name == 'teacher') {
+        //         return response([
+        //             'warning' => "You do not enroll this course. Because you are not a student!",
+        //         ]);
+        //     }
+        // }
 
         foreach ($cartDatas as $data) {
             if ($data->course_id == $request->course_id) {
