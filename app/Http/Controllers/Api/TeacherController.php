@@ -34,8 +34,6 @@ class TeacherController extends Controller {
 
         $courses    = explode(',', $request->courses);
         $educations = explode(',', $request->education);
-        array_filter($courses);
-        array_filter($educations);
 
         $nid       = base64_decode($request->nid);
         $_nid_name = Str::slug($request->name) . '_' . time() . '.' . 'jpg';
@@ -60,8 +58,8 @@ class TeacherController extends Controller {
         if ($insertUser->id) {
             $data                    = new TeacherRegistration();
             $data->user_id           = $insertUser->id;
-            $data->courses           = json_encode($courses);
-            $data->teachereducations = json_encode($educations);
+            $data->courses           = json_encode(array_filter($courses));
+            $data->teachereducations = json_encode(array_filter($educations));
             $data->birthday          = $request->birthday;
             $data->mobile            = $request->mobile;
             $data->address           = $request->address;
