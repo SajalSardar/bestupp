@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/student/profile', [StudentController::class, 'studentProfile']);
     Route::post('/student/profile/update', [StudentController::class, 'studentUpdate']);
 
-    //student
+    //teacher
     Route::get('/teacher/profile', [TeacherController::class, 'teacherProfile']);
     Route::post('/teacher/profile/update', [TeacherController::class, 'teacherUpdate']);
 });
