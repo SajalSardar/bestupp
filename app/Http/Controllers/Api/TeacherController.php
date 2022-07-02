@@ -34,8 +34,8 @@ class TeacherController extends Controller {
 
         $courses    = explode(',', $request->courses);
         $educations = explode(',', $request->education);
-        array_map('trim', $courses);
-        array_map('trim', $educations);
+        array_filter($courses);
+        array_filter($educations);
 
         $nid       = base64_decode($request->nid);
         $_nid_name = Str::slug($request->name) . '_' . time() . '.' . 'jpg';
