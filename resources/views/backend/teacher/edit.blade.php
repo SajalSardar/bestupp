@@ -20,7 +20,7 @@
                 <label class="form-control-label">Courses:</label>
                 <select name="courses[]" class="form-control select_2" multiple>
                     @foreach ($courses as $course)
-                    <option value="{{ $course->name }}" 
+                    <option value="{{ strip_tags($course->name) }}" 
                     
                         @foreach (json_decode($information->courses) as $courses)
                             {{ $courses == strip_tags($course->name) ? "selected" : ""}}
