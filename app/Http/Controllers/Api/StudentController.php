@@ -62,7 +62,7 @@ class StudentController extends Controller {
     }
 
     public function studentProfile() {
-        $studentProfile = Auth::user();
+        $studentProfile = Auth::with('student');
         return response($studentProfile, 201);
     }
 
