@@ -84,7 +84,7 @@ class TeacherController extends Controller {
     }
 
     public function teacherProfile() {
-        $teacherProfile = Auth::with('teacher')->user();
+        $teacherProfile = User::where('id', auth()->user()->id)->with('teacher')->get();
         return response($teacherProfile, 201);
     }
 
