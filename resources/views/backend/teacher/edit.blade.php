@@ -22,8 +22,8 @@
                     @foreach ($courses as $course)
                     <option value="{{ strip_tags($course->name) }}" 
                     
-                        @foreach (json_decode($information->courses) as $courses)
-                            {{ $courses == strip_tags($course->name) ? "selected" : ""}}
+                        @foreach (json_decode($information->courses) as $Tcourse)
+                            {{ $Tcourse == strip_tags($course->name) ? "selected" : ""}}
                         @endforeach
                         
                     >{{ strip_tags($course->name) }}</option>
