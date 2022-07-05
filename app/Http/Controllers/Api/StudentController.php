@@ -62,7 +62,7 @@ class StudentController extends Controller {
     }
 
     public function studentProfile() {
-        $studentProfile = Auth::with('student');
+        $studentProfile = User::where('id', auth()->user()->id)->with('student');
         return response($studentProfile, 201);
     }
 
