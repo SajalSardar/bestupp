@@ -23,10 +23,10 @@
                     <option value="{{ $course->name }}" 
                     
                         @foreach (json_decode($information->courses) as $courses)
-                            {{ $courses == $course->name ? "selected" : ""}}
+                            {{ $courses == strip_tags($course->name) ? "selected" : ""}}
                         @endforeach
                         
-                    >{{ $course->name }}</option>
+                    >{{ strip_tags($course->name) }}</option>
                     @endforeach 
                 </select>
                 @error('courses')
