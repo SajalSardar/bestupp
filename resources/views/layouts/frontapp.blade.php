@@ -214,6 +214,7 @@
               <li><a href="{{ route('frontend.contact') }}"><i class="fa fa-caret-right"></i> Send Message</a></li>
               <li><a href="{{ route('frontend.privacy.policy') }}"><i class="fa fa-caret-right"></i>Privacy Policy</a></li>
               <li><a href="{{ route('frontend.terms.condition') }}"><i class="fa fa-caret-right"></i>Terms And Condition</a></li>
+              <li><a href="{{ route('frontend.return.refund') }}"><i class="fa fa-caret-right"></i>Return &amp; Refund</a></li>
             </ul>
           </div>
         </div>

@@ -54,5 +54,9 @@ class FrontendController extends Controller {
         $policy = TermsCondition::orderBy('id', 'asc')->get();
         return view('frontend.terms', compact('policy'));
     }
+    public function returnRefund() {
+        //$policy = TermsCondition::orderBy('id', 'asc')->get();
+        return view('frontend.return');
+    }
 
 }

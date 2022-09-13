@@ -41,5 +41,6 @@ Route::name('frontend.')->group(function () {
 
     //Terms And Condition
     Route::get('/terms-condition', [FrontendController::class, "termsCondition"])->name('terms.condition');
+    Route::get('/return-refund', [FrontendController::class, "returnRefund"])->name('return.refund');
 
 });
