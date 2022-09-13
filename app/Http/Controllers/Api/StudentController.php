@@ -70,7 +70,7 @@ class StudentController extends Controller {
                 unlink($path);
             }
         } else {
-            $_photo_name = $user->student->profile_photo;
+            $_photo_name = $user->student->profile_photo ?? null;
         }
 
         $studentInformation = StudentRegistration::updateOrCreate([
