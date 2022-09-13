@@ -24,28 +24,27 @@ class StudentController extends Controller {
             "gender"      => 'required',
             "address"     => 'required',
         ]);
-        $insertUser                    = new User();
-        $insertUser->name              = $request->name;
-        $insertUser->email             = $request->email;
-        $insertUser->password          = Hash::make($request->password);
-        $insertUser->email_verified_at = now();
-        $insertUser->save();
+
+        $insertUser = User::create([
+            "name"              => $request->name,
+            "email"             => $request->email,
+            "password"          => Hash::make($request->password),
+            "email_verified_at" => now(),
+        ]);
         $insertUser->assignRole(3);
 
-        if ($insertUser) {
-            $data               = new StudentRegistration();
-            $data->user_id      = $insertUser->id;
-            $data->birthday     = $request->birthday;
-            $data->mobile       = $request->mobile;
-            $data->nationality  = $request->nationality;
-            $data->guardianname = $request->guardianname;
-            $data->fathername   = $request->fathername;
-            $data->gender       = $request->gender;
-            $data->address      = $request->address;
-            $data->gnumber      = $request->gnumber;
-            $data->save();
+        $StudentData               = new StudentRegistration();
+        $StudentData->user_id      = $insertUser->id;
+        $StudentData->birthday     = $request->birthday;
+        $StudentData->mobile       = $request->mobile;
+        $StudentData->nationality  = $request->nationality;
+        $StudentData->guardianname = $request->guardianname;
+        $StudentData->fathername   = $request->fathername;
+        $StudentData->gender       = $request->gender;
+        $StudentData->address      = $request->address;
+        $StudentData->gnumber      = $request->gnumber;
+        $StudentData->save();
 
-        }
         $token    = $insertUser->createToken('apptoken')->plainTextToken;
         $response = [
             'user'  => $insertUser,

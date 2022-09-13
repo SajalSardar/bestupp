@@ -47,32 +47,30 @@ class TeacherController extends Controller {
         $_certificate_name = Str::slug($request->name) . '_' . time() . '.' . 'jpg';
         file_put_contents(public_path('storage/uploads/certificates/') . $_certificate_name, $certificate);
 
-        $insertUser                    = new User();
-        $insertUser->name              = $request->name;
-        $insertUser->email             = $request->email;
-        $insertUser->password          = Hash::make($request->password);
-        $insertUser->email_verified_at = now();
-        $insertUser->save();
+        $insertUser = User::create([
+            "name"              => $request->name,
+            "email"             => $request->email,
+            "password"          => Hash::make($request->password),
+            "email_verified_at" => now(),
+        ]);
         $insertUser->assignRole(2);
 
-        if ($insertUser->id) {
-            $data                    = new TeacherRegistration();
-            $data->user_id           = $insertUser->id;
-            $data->courses           = json_encode(array_filter($courses));
-            $data->teachereducations = json_encode(array_filter($educations));
-            $data->birthday          = $request->birthday;
-            $data->mobile            = $request->mobile;
-            $data->address           = $request->address;
-            $data->national          = $request->national;
-            $data->father_name       = $request->father_name;
-            $data->gender            = $request->gender;
-            $data->parmanet_address  = $request->parmanet_address;
-            $data->university        = $request->university;
-            $data->nid               = $_nid_name;
-            $data->photo             = $_photo_name;
-            $data->certificate       = $_certificate_name;
-            $data->save();
-        }
+        $data                    = new TeacherRegistration();
+        $data->user_id           = $insertUser->id;
+        $data->courses           = json_encode(array_filter($courses));
+        $data->teachereducations = json_encode(array_filter($educations));
+        $data->birthday          = $request->birthday;
+        $data->mobile            = $request->mobile;
+        $data->address           = $request->address;
+        $data->national          = $request->national;
+        $data->father_name       = $request->father_name;
+        $data->gender            = $request->gender;
+        $data->parmanet_address  = $request->parmanet_address;
+        $data->university        = $request->university;
+        $data->nid               = $_nid_name;
+        $data->photo             = $_photo_name;
+        $data->certificate       = $_certificate_name;
+        $data->save();
 
         $token    = $insertUser->createToken('apptoken')->plainTextToken;
         $response = [
