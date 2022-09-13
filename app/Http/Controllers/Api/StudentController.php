@@ -47,10 +47,10 @@ class StudentController extends Controller {
         return response($studentProfile, 201);
     }
 
-    function studentUpdate(Request $request, $id) {
+    function studentUpdate(Request $request) {
 
         $profile_photo = $request->profile_photo;
-        $data          = StudentRegistration::find($id);
+        $user          = Auth::user()->id;
 
         $this->validate($request, [
             "birthday"    => 'required',
@@ -64,29 +64,32 @@ class StudentController extends Controller {
         if (!empty($profile_photo)) {
 
             $photo       = base64_decode($request->profile_photo);
-            $_photo_name = Str::slug($data->user->name) . '_' . time() . '.' . 'jpg';
+            $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
             file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
 
-            $path = public_path('storage/uploads/profiles/' . $data->profile_photo);
-            if (file_exists($path) && $data->profile_photo != null) {
+            $path = public_path('storage/uploads/profiles/' . $user->student->profile_photo);
+            if (file_exists($path) && $user->student->profile_photo != null) {
                 unlink($path);
             }
         } else {
-            $_photo_name = $data->profile_photo;
+            $_photo_name = $user->student->profile_photo;
         }
 
-        $data->birthday      = $request->birthday;
-        $data->mobile        = $request->mobile;
-        $data->nationality   = $request->nationality;
-        $data->guardianname  = $request->guardianname;
-        $data->fathername    = $request->fathername;
-        $data->gender        = $request->gender;
-        $data->address       = $request->address;
-        $data->gnumber       = $request->gnumber;
-        $data->profile_photo = $_photo_name;
-        $data->save();
+        $studentInformation = StudentRegistration::updateOrCreate([
+            'user_id' => Auth::user()->id,
+        ], [
+            "birthday"      => $request->birthday,
+            "mobile  "      => $request->mobile,
+            "nationality"   => $request->nationality,
+            "guardianname"  => $request->guardianname,
+            "fathername"    => $request->fathername,
+            "gender"        => $request->gender,
+            "address "      => $request->address,
+            "gnumber "      => $request->gnumber,
+            "profile_photo" => $_photo_name,
+        ]);
 
-        return response($data, 201);
+        return response($studentInformation, 201);
     }
 
 }
