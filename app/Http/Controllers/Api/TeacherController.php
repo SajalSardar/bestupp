@@ -42,8 +42,8 @@ class TeacherController extends Controller {
         return response($teacherProfile, 201);
     }
 
-    public function teacherUpdate(Request $request, $id) {
-        $data = TeacherRegistration::find($id);
+    public function teacherUpdate(Request $request) {
+        $user = Auth::user()->id;
 
         $this->validate($request, [
             "birthday"         => "required",
@@ -63,57 +63,59 @@ class TeacherController extends Controller {
 
         if (!empty($request->nid)) {
             $nid       = base64_decode($request->nid);
-            $_nid_name = Str::slug($request->name) . '_' . time() . '.' . 'jpg';
+            $_nid_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
             file_put_contents(public_path('storage/uploads/nids/') . $_nid_name, $nid);
 
-            $path = public_path('storage/uploads/nids/' . $data->nid);
+            $path = public_path('storage/uploads/nids/' . $user->teacher->nid);
             if (file_exists($path)) {
                 unlink($path);
             }
         } else {
-            $_nid_name = $data->nid;
+            $_nid_name = $user->teacher->nid;
         }
 
         if (!empty($request->photo)) {
             $photo       = base64_decode($request->photo);
-            $_photo_name = Str::slug($request->name) . '_' . time() . '.' . 'jpg';
+            $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
             file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
-            $path = public_path('storage/uploads/profiles/' . $data->photo);
+            $path = public_path('storage/uploads/profiles/' . $user->teacher->photo);
             if (file_exists($path)) {
                 unlink($path);
             }
         } else {
-            $_photo_name = $data->photo;
+            $_photo_name = $user->teacher->photo;
         }
 
         if (!empty($request->certificate)) {
             $certificate       = base64_decode($request->certificate);
-            $_certificate_name = Str::slug($request->name) . '_' . time() . '.' . 'jpg';
+            $_certificate_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
             file_put_contents(public_path('storage/uploads/certificates/') . $_certificate_name, $certificate);
-            $path = public_path('storage/uploads/certificates/' . $data->certificate);
+            $path = public_path('storage/uploads/certificates/' . $user->teacher->certificate);
             if (file_exists($path)) {
                 unlink($path);
             }
         } else {
-            $_certificate_name = $data->certificate;
+            $_certificate_name = $user->teacher->certificate;
         }
+        $teacherInformation = TeacherRegistration::updateOrCreate([
+            'user_id' => $user,
+        ], [
+            "courses"           => json_encode($courses),
+            "teachereducations" => json_encode($educations),
+            "birthday "         => $request->birthday,
+            "mobile"            => $request->mobile,
+            "national"          => $request->nationality,
+            "father_name"       => $request->fathername,
+            "gender "           => $request->gender,
+            "address"           => $request->address,
+            "parmanet_address"  => $request->parmanet_address,
+            "university"        => $request->university,
+            "photo "            => $_photo_name,
+            "nid"               => $_nid_name,
+            "certificate"       => $_certificate_name,
+        ]);
 
-        $data->courses           = json_encode($courses);
-        $data->teachereducations = json_encode($educations);
-        $data->birthday          = $request->birthday;
-        $data->mobile            = $request->mobile;
-        $data->national          = $request->nationality;
-        $data->father_name       = $request->fathername;
-        $data->gender            = $request->gender;
-        $data->address           = $request->address;
-        $data->parmanet_address  = $request->parmanet_address;
-        $data->university        = $request->university;
-        $data->photo             = $_photo_name;
-        $data->nid               = $_nid_name;
-        $data->certificate       = $_certificate_name;
-
-        $data->save();
-        return response($data, 201);
+        return response($teacherInformation, 201);
     }
 
 }
