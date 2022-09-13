@@ -48,8 +48,7 @@ class StudentController extends Controller {
     }
 
     public function studentUpdate(Request $request) {
-        $user = Auth::user()->id;
-
+        $user = Auth::user();
         $this->validate($request, [
             "birthday"    => 'required',
             "mobile"      => 'required',
@@ -74,7 +73,7 @@ class StudentController extends Controller {
         }
 
         $studentInformation = StudentRegistration::updateOrCreate([
-            'user_id' => $user,
+            'user_id' => $user->id,
         ], [
             "birthday"      => $request->birthday,
             "mobile  "      => $request->mobile,
@@ -87,7 +86,7 @@ class StudentController extends Controller {
             "profile_photo" => $_photo_name,
         ]);
 
-        return response($user, 201);
+        return response($user->student, 201);
     }
 
 }
