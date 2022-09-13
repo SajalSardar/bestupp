@@ -14,15 +14,9 @@ use Illuminate\Support\Str;
 class StudentController extends Controller {
     public function studentRegistration(Request $request) {
         $this->validate($request, [
-            'name'        => ['required', 'string', 'max:255'],
-            'email'       => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password'    => ['required', 'string', 'min:8'],
-            "birthday"    => 'required',
-            "mobile"      => 'required',
-            "nationality" => 'required',
-            "fathername"  => 'required',
-            "gender"      => 'required',
-            "address"     => 'required',
+            'name'     => ['required', 'string', 'max:255'],
+            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
 
         $insertUser = User::create([
@@ -32,18 +26,6 @@ class StudentController extends Controller {
             "email_verified_at" => now(),
         ]);
         $insertUser->assignRole(3);
-
-        $StudentData               = new StudentRegistration();
-        $StudentData->user_id      = $insertUser->id;
-        $StudentData->birthday     = $request->birthday;
-        $StudentData->mobile       = $request->mobile;
-        $StudentData->nationality  = $request->nationality;
-        $StudentData->guardianname = $request->guardianname;
-        $StudentData->fathername   = $request->fathername;
-        $StudentData->gender       = $request->gender;
-        $StudentData->address      = $request->address;
-        $StudentData->gnumber      = $request->gnumber;
-        $StudentData->save();
 
         $token    = $insertUser->createToken('apptoken')->plainTextToken;
         $response = [
