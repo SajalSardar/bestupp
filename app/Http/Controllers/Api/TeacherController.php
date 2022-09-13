@@ -43,7 +43,7 @@ class TeacherController extends Controller {
     }
 
     public function teacherUpdate(Request $request) {
-        $user = Auth::user()->id;
+        $user = Auth::user();
 
         $this->validate($request, [
             "birthday"         => "required",
@@ -101,7 +101,7 @@ class TeacherController extends Controller {
             $_certificate_name = $user->teacher->certificate;
         }
         $teacherInformation = TeacherRegistration::updateOrCreate([
-            'user_id' => $user,
+            'user_id' => $user->id,
         ], [
             "courses"           => json_encode($courses),
             "teachereducations" => json_encode($educations),
