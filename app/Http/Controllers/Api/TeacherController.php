@@ -70,7 +70,7 @@ class TeacherController extends Controller {
             file_put_contents(public_path('storage/uploads/nids/') . $_nid_name, $nid);
 
             $path = public_path('storage/uploads/nids/' . $user->teacher->nid);
-            if (file_exists($path)) {
+            if (file_exists($path) && $user->teacher->profile_photo != null) {
                 unlink($path);
             }
         } else {
@@ -82,7 +82,7 @@ class TeacherController extends Controller {
             $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
             file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
             $path = public_path('storage/uploads/profiles/' . $user->teacher->photo);
-            if (file_exists($path)) {
+            if (file_exists($path) && $user->teacher->profile_photo != null) {
                 unlink($path);
             }
         } else {
@@ -94,7 +94,7 @@ class TeacherController extends Controller {
             $_certificate_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
             file_put_contents(public_path('storage/uploads/certificates/') . $_certificate_name, $certificate);
             $path = public_path('storage/uploads/certificates/' . $user->teacher->certificate);
-            if (file_exists($path)) {
+            if (file_exists($path) && $user->teacher->profile_photo != null) {
                 unlink($path);
             }
         } else {

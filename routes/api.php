@@ -63,4 +63,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //teacher
     Route::get('/teacher/profile', [TeacherController::class, 'teacherProfile']);
     Route::post('/teacher/profile/update', [TeacherController::class, 'teacherUpdate']);
+
+    //user account update
+    Route::post('user/edit/{id}', [AuthController::class, "updateProfile"]);
 });

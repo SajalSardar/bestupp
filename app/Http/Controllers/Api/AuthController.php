@@ -47,4 +47,23 @@ class AuthController extends Controller {
         ];
 
     }
+
+    //reset user
+    public function updateProfile(Request $request, $id) {
+        $userdata = User::find($id);
+        $this->validate($request, [
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|email|max:255|unique:users,email,' . $userdata->id,
+            'password' => 'confirmed',
+        ]);
+
+        $userdata->name  = $request->name;
+        $userdata->email = $request->email;
+        if ($request->password) {
+            $userdata->password = Hash::make($request->password);
+        }
+        $userdata->save();
+
+        return response($userdata, 200);
+    }
 }
