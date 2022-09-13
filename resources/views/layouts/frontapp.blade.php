@@ -263,6 +263,13 @@
                 </ul>
               </div>
             </div>
+            <h6 style="color: #5BAD3F; font-weight: 400;">Office Address:</h6>
+            <div class="contact_inner_text">
+              
+              <ul>
+                <li>House no.264/4,Middle Pirerbag,Mirpur,Dhaka-1216</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
