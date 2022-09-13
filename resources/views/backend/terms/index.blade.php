@@ -1,18 +1,18 @@
 @extends('layouts.master')
-@section('title', 'Privacy Policy')
+@section('title', 'Terms And Condition')
 @section('content')
 <nav class="breadcrumb sl-breadcrumb">
   <a class="breadcrumb-item" href="{{ route('dashboard') }}">Dashboard</a>
-  <span class="breadcrumb-item active">Privacy Policy</span>
+  <span class="breadcrumb-item active">Terms And Condition</span>
 </nav>
 
 <div class="sl-pagebody">
   <div class="sl-page-title">
-    <h5>Add Privacy Policy</h5>
+    <h5>Add Terms And Condition</h5>
   </div>
 
   <div class="card pd-20 pd-sm-40">
-    <form action="{{ route('dashboard.privacy.policy.insert') }}" method="POST" >
+    <form action="{{ route('dashboard.termscondition.store') }}" method="POST" >
         @csrf
         <div class="form-layout">
             <div class="form-group">
@@ -23,7 +23,7 @@
                 @enderror
               </div>
             <div class="form-group">
-                <label class="form-control-label">Privacy Policy:</label>
+                <label class="form-control-label">Terms And Condition:</label>
                <textarea id="summernote" name="privacy_policy" id="" class="form-control"></textarea>
                 @error('privacy_policy')
                     <div class="alert alert-danger">{{ $message }}</div>
@@ -40,7 +40,7 @@
 
 <div class="sl-pagebody">
   <div class="sl-page-title">
-    <h5>Policy Page Content</h5>
+    <h5>Terms Page Content</h5>
   </div>
 
   <div class="card pd-20 pd-sm-40 table-responsive">
@@ -51,14 +51,19 @@
         <th>Description</th>
         <th>Action</th>
       </tr>
-      @foreach ($policy as $policy)
+      @foreach ($terms as $policy)
         <tr>
           <td>{{ $policy->id }}</td>
           <td>{{ $policy->title }}</td>
           <td>{!! Str::limit($policy->privacy_policy, 100, '...') !!}</td>
           <td>
-            <a href="{{ route('dashboard.privacy.policy.edit', $policy->id) }}" class="btn btn-sm btn-primary">Edit</a>
-            <a href="{{ route('dashboard.privacy.policy.delete', $policy->id) }}" class="btn btn-sm btn-warning">Delete</a>
+            <a href="{{ route('dashboard.termscondition.edit', $policy->id) }}" class="btn btn-sm btn-primary">Edit</a>
+            
+            <form action="{{ route('dashboard.termscondition.destroy', $policy->id) }}" method="POST" class="d-inline">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="btn btn-sm btn-warning">Delete</button>
+            </form>
           </td>
         </tr>
       @endforeach

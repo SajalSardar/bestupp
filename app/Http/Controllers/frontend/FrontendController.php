@@ -10,6 +10,7 @@ use App\Models\Course;
 use App\Models\DaySchedule;
 use App\Models\Faq;
 use App\Models\PrivacyPolicy;
+use App\Models\TermsCondition;
 use App\Models\ThemeOptions;
 
 class FrontendController extends Controller {
@@ -48,6 +49,10 @@ class FrontendController extends Controller {
     public function policy() {
         $policy = PrivacyPolicy::orderBy('id', 'asc')->get();
         return view('frontend.policy', compact('policy'));
+    }
+    public function termsCondition() {
+        $policy = TermsCondition::orderBy('id', 'asc')->get();
+        return view('frontend.terms', compact('policy'));
     }
 
 }

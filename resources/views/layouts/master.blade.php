@@ -153,6 +153,7 @@
             <li class="nav-item"><a  href="{{ route('dashboard.show.all.admin') }}" class="nav-link">All Admin</a></li>
             @endrole
             <li class="nav-item"><a href="{{ route('dashboard.privacy.policy.index') }}" class="nav-link">Privacy Policy</a></li>
+            <li class="nav-item"><a href="{{ route('dashboard.termscondition.index') }}" class="nav-link">Terms And Condition</a></li>
           </ul>
           
         @endrole

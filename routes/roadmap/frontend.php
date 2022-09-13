@@ -39,4 +39,7 @@ Route::name('frontend.')->group(function () {
     //Privacy Policy
     Route::get('/privacy-policy', [FrontendController::class, "policy"])->name('privacy.policy');
 
+    //Terms And Condition
+    Route::get('/terms-condition', [FrontendController::class, "termsCondition"])->name('terms.condition');
+
 });
