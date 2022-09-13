@@ -47,10 +47,8 @@ class StudentController extends Controller {
         return response($studentProfile, 201);
     }
 
-    function studentUpdate(Request $request) {
-
-        $profile_photo = $request->profile_photo;
-        $user          = Auth::user()->id;
+    public function studentUpdate(Request $request) {
+        $user = Auth::user()->id;
 
         $this->validate($request, [
             "birthday"    => 'required',
@@ -61,7 +59,7 @@ class StudentController extends Controller {
             "address"     => 'required',
         ]);
 
-        if (!empty($profile_photo)) {
+        if (!empty($request->profile_photo)) {
 
             $photo       = base64_decode($request->profile_photo);
             $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
