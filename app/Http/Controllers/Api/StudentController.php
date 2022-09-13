@@ -9,7 +9,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class StudentController extends Controller {
     public function studentRegistration(Request $request) {
@@ -50,44 +49,44 @@ class StudentController extends Controller {
     public function studentUpdate(Request $request) {
         $user = Auth::user()->id;
 
-        $this->validate($request, [
-            "birthday"    => 'required',
-            "mobile"      => 'required',
-            "nationality" => 'required',
-            "fathername"  => 'required',
-            "gender"      => 'required',
-            "address"     => 'required',
-        ]);
+        // $this->validate($request, [
+        //     "birthday"    => 'required',
+        //     "mobile"      => 'required',
+        //     "nationality" => 'required',
+        //     "fathername"  => 'required',
+        //     "gender"      => 'required',
+        //     "address"     => 'required',
+        // ]);
 
-        if (!empty($request->profile_photo)) {
+        // if (!empty($request->profile_photo)) {
 
-            $photo       = base64_decode($request->profile_photo);
-            $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
-            file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
+        //     $photo       = base64_decode($request->profile_photo);
+        //     $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
+        //     file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
 
-            $path = public_path('storage/uploads/profiles/' . $user->student->profile_photo);
-            if (file_exists($path) && $user->student->profile_photo != null) {
-                unlink($path);
-            }
-        } else {
-            $_photo_name = $user->student->profile_photo ?? null;
-        }
+        //     $path = public_path('storage/uploads/profiles/' . $user->student->profile_photo);
+        //     if (file_exists($path) && $user->student->profile_photo != null) {
+        //         unlink($path);
+        //     }
+        // } else {
+        //     $_photo_name = $user->student->profile_photo ?? null;
+        // }
 
-        $studentInformation = StudentRegistration::updateOrCreate([
-            'user_id' => $user,
-        ], [
-            "birthday"      => $request->birthday,
-            "mobile  "      => $request->mobile,
-            "nationality"   => $request->nationality,
-            "guardianname"  => $request->guardianname,
-            "fathername"    => $request->fathername,
-            "gender"        => $request->gender,
-            "address "      => $request->address,
-            "gnumber "      => $request->gnumber,
-            "profile_photo" => $_photo_name,
-        ]);
+        // $studentInformation = StudentRegistration::updateOrCreate([
+        //     'user_id' => $user,
+        // ], [
+        //     "birthday"      => $request->birthday,
+        //     "mobile  "      => $request->mobile,
+        //     "nationality"   => $request->nationality,
+        //     "guardianname"  => $request->guardianname,
+        //     "fathername"    => $request->fathername,
+        //     "gender"        => $request->gender,
+        //     "address "      => $request->address,
+        //     "gnumber "      => $request->gnumber,
+        //     "profile_photo" => $_photo_name,
+        // ]);
 
-        return response($studentInformation, 201);
+        return response($user, 201);
     }
 
 }
