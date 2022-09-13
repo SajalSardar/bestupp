@@ -56,6 +56,9 @@ class TeacherController extends Controller {
             "gender"           => "required",
             "parmanet_address" => "required",
             "university"       => "required",
+            "photo "           => "required",
+            "nid"              => "required",
+            "certificate"      => "required",
         ]);
 
         $courses    = explode(',', $request->courses);
