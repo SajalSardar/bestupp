@@ -64,10 +64,13 @@ class StudentController extends Controller {
             $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
             file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
 
-            $path = public_path('storage/uploads/profiles/' . $user->student->profile_photo);
-            if (file_exists($path) && $user->student->profile_photo != null) {
-                unlink($path);
+            if ($user->student->profile_photo != null) {
+                $path = public_path('storage/uploads/profiles/' . $user->student->profile_photo);
+                if (file_exists($path)) {
+                    unlink($path);
+                }
             }
+
         } else {
             $_photo_name = $user->student->profile_photo ?? null;
         }
@@ -86,7 +89,7 @@ class StudentController extends Controller {
             "profile_photo" => $_photo_name,
         ]);
 
-        return response($user->student, 201);
+        return response($studentInformation, 201);
     }
 
 }
