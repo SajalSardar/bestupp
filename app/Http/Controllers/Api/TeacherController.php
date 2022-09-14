@@ -56,7 +56,7 @@ class TeacherController extends Controller {
             "gender"           => "required",
             "parmanet_address" => "required",
             "university"       => "required",
-            "photo "           => "required",
+            "photo"            => "required",
             "nid"              => "required",
             "certificate"      => "required",
         ]);
@@ -115,15 +115,15 @@ class TeacherController extends Controller {
         ], [
             "courses"           => json_encode($courses),
             "teachereducations" => json_encode($educations),
-            "birthday "         => $request->birthday,
+            "birthday"          => $request->birthday,
             "mobile"            => $request->mobile,
             "national"          => $request->nationality,
             "father_name"       => $request->fathername,
-            "gender "           => $request->gender,
+            "gender"            => $request->gender,
             "address"           => $request->address,
             "parmanet_address"  => $request->parmanet_address,
             "university"        => $request->university,
-            "photo "            => $_photo_name,
+            "photo"             => $_photo_name,
             "nid"               => $_nid_name,
             "certificate"       => $_certificate_name,
         ]);
