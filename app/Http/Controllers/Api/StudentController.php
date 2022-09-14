@@ -79,13 +79,13 @@ class StudentController extends Controller {
             'user_id' => $user->id,
         ], [
             "birthday"      => $request->birthday,
-            "mobile  "      => $request->mobile,
+            "mobile"        => $request->mobile,
             "nationality"   => $request->nationality,
             "guardianname"  => $request->guardianname,
             "fathername"    => $request->fathername,
             "gender"        => $request->gender,
-            "address "      => $request->address,
-            "gnumber "      => $request->gnumber,
+            "address"       => $request->address,
+            "gnumber"       => $request->gnumber,
             "profile_photo" => $_photo_name,
         ]);
 
