@@ -11,6 +11,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-md-4 order-md-2 mb-4">
+                
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-muted">Your cart</span>
                     <span class="badge badge-secondary badge-pill">3</span>
@@ -85,6 +86,12 @@
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
+                    </div>
+                    <div class="mb-3">
+                        <label><input type="checkbox" name="check"> I have read and  agree to the website terms and conditions, privacy and policy, return and refund policy </label>
+                        @error('check')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                     
                     <button class="btn enroll_btn btn-block mb-5" type="submit">Continue to checkout</button>

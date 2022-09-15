@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\ReturnPolicy;
 use App\Models\TermsCondition;
 use Illuminate\Http\Request;
 
@@ -93,5 +94,18 @@ class TermsConditionController extends Controller {
     public function destroy(TermsCondition $termscondition) {
         $termscondition->delete();
         return back()->with('success', "Terms Condition Deleted!");
+    }
+
+    public function returnPolicy() {
+        $returnPolicy = ReturnPolicy::first();
+        return view('backend.return.edit', compact('returnPolicy'));
+    }
+
+    public function returnPolicyUpdate(Request $request, $id) {
+        $data                 = ReturnPolicy::find($id);
+        $data->title          = $request->title;
+        $data->privacy_policy = $request->privacy_policy;
+        $data->save();
+        return back()->with('success', "Update Return Policy Updated!");
     }
 }

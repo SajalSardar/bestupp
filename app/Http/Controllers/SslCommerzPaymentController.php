@@ -36,6 +36,11 @@ class SslCommerzPaymentController extends Controller {
         # Here you have to receive all the order data to initate the payment.
         # Let's say, your oder transaction informations are saving in a table called "orders"
         # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
+
+        $request->validate([
+            'check' => "required",
+        ]);
+
         $cartDatas = Cart::where('user_id', auth()->user()->id)->with(['course' => function ($q) {
             $q->with('installments');
         }])->get();

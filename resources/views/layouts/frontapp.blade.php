@@ -128,7 +128,7 @@
 
     <!-- Footer Part Start -->
   <section id="footer">
-    <div class="container">
+    <div class="container mb-3">
       <div class="row">
         <div class="col-lg-3 col-md-6">
           <div class="footer_item item_left">
@@ -198,6 +198,8 @@
                 <a href="{{  themeoptions()->footer_google_store_link }}"><img class="img-fluid" src="{{ asset('frontend/images/Play-store.png') }}" alt="Play Store image"></a>
               </div>
             </div>
+
+            <p class="mt-3"><strong>Trade License:</strong> TRAD/DNCC/001463/2022</p>
 
           </div>
         </div>
@@ -278,10 +280,13 @@
         </div>
       </div>
     </div>
+    <a target="_blank" href="https://www.sslcommerz.com/" title="SSLCommerz" alt="SSLCommerz"><img style="width:100%;height:auto;" src="https://securepay.sslcommerz.com/public/image/SSLCommerz-Pay-With-logo-All-Size-01.png" /></a>
     <div class="copy">
       {!! themeoptions()->footer_copy !!}
     </div>
   </section>
+ 
+
 
   <div class="modal" id="success_modal" style="z-index: 9999;">
     <div class="modal-dialog">

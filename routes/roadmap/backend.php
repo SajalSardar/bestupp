@@ -1,22 +1,22 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\NoticeController;
-use App\Http\Controllers\backend\FaqController;
 use App\Http\Controllers\backend\AboutController;
+use App\Http\Controllers\backend\ConfigurationController;
+use App\Http\Controllers\backend\ContactController;
+use App\Http\Controllers\backend\education\TeacherEducationController;
+use App\Http\Controllers\backend\FaqController;
+use App\Http\Controllers\backend\FreeLearningController;
 use App\Http\Controllers\backend\OrderController;
+use App\Http\Controllers\backend\SocialController;
+use App\Http\Controllers\backend\StudentController;
+use App\Http\Controllers\backend\TeacherController;
+use App\Http\Controllers\backend\TermsConditionController;
 use App\Http\Controllers\backend\ThemeController;
 use App\Http\Controllers\Banner\BannerController;
 use App\Http\Controllers\Course\CourseController;
-use App\Http\Controllers\backend\SocialController;
-use App\Http\Controllers\backend\ContactController;
-use App\Http\Controllers\backend\StudentController;
-use App\Http\Controllers\backend\TeacherController;
-use App\Http\Controllers\backend\FreeLearningController;
-use App\Http\Controllers\backend\ConfigurationController;
-use App\Http\Controllers\backend\TermsConditionController;
-use App\Http\Controllers\backend\education\TeacherEducationController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NoticeController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
@@ -97,6 +97,8 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         //terms-and-condition
 
         Route::resource('termscondition', TermsConditionController::class);
+        Route::get('return-policy', [TermsConditionController::class, "returnPolicy"])->name('return.policy');
+        Route::post('return-policy/{id}', [TermsConditionController::class, "returnPolicyUpdate"])->name('return.policy.update');
 
         //Privacy Policy
         Route::get('/privacy-policy', [HomeController::class, "createPolicy"])->name('privacy.policy.index');

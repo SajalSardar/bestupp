@@ -154,6 +154,7 @@
             @endrole
             <li class="nav-item"><a href="{{ route('dashboard.privacy.policy.index') }}" class="nav-link">Privacy Policy</a></li>
             <li class="nav-item"><a href="{{ route('dashboard.termscondition.index') }}" class="nav-link">Terms And Condition</a></li>
+            <li class="nav-item"><a href="{{ route('dashboard.return.policy') }}" class="nav-link">Return Policy</a></li>
           </ul>
           
         @endrole
