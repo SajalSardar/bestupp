@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\frontend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use App\Models\About;
-use App\Models\AboutPageContent;
 use App\Models\Banner;
 use App\Models\Course;
 use App\Models\DaySchedule;
-use App\Models\Faq;
+use App\Models\ReturnPolicy;
+use App\Models\ThemeOptions;
 use App\Models\PrivacyPolicy;
 use App\Models\TermsCondition;
-use App\Models\ThemeOptions;
+use App\Models\AboutPageContent;
+use App\Http\Controllers\Controller;
 
 class FrontendController extends Controller {
     /**
@@ -55,8 +56,8 @@ class FrontendController extends Controller {
         return view('frontend.terms', compact('policy'));
     }
     public function returnRefund() {
-        //$policy = TermsCondition::orderBy('id', 'asc')->get();
-        return view('frontend.return');
+        $returnPolicy = ReturnPolicy::first();
+        return view('frontend.return', compact('returnPolicy'));
     }
 
 }
