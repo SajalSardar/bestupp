@@ -78,7 +78,7 @@ class StudentController extends Controller {
         $studentInformation = StudentRegistration::updateOrCreate([
             'user_id' => $user->id,
         ], [
-            "birthday"      => $request->birthday,
+            "birthday"      => "20-12-1992",
             "mobile"        => $request->mobile,
             "nationality"   => $request->nationality,
             "guardianname"  => $request->guardianname,
