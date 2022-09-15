@@ -48,7 +48,8 @@ class StudentController extends Controller {
     }
 
     public function studentUpdate(Request $request) {
-        $user = Auth::user();
+        $photo = base64_decode($request->profile_photo);
+        $user  = Auth::user();
         $this->validate($request, [
             "birthday"    => 'required',
             "mobile"      => 'required',
@@ -58,7 +59,7 @@ class StudentController extends Controller {
             "address"     => 'required',
         ]);
 
-        if ($request->profile_photo) {
+        if ($photo) {
 
             if ($user->student->profile_photo != null) {
                 $path = public_path('storage/uploads/profiles/' . $user->student->profile_photo);
@@ -66,7 +67,7 @@ class StudentController extends Controller {
                     unlink($path);
                 }
             }
-            $photo       = base64_decode($request->profile_photo);
+
             $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
             file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
 

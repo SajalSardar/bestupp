@@ -65,10 +65,6 @@ class TeacherController extends Controller {
         $educations = explode(',', $request->education);
 
         if (!empty($request->nid)) {
-            $nid       = base64_decode($request->nid);
-            $_nid_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
-            file_put_contents(public_path('storage/uploads/nids/') . $_nid_name, $nid);
-
             if ($user->teacher->profile_photo != null) {
                 $path = public_path('storage/uploads/nids/' . $user->teacher->nid);
                 if (file_exists($path)) {
@@ -76,36 +72,39 @@ class TeacherController extends Controller {
                 }
             }
 
+            $nid       = base64_decode($request->nid);
+            $_nid_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
+            file_put_contents(public_path('storage/uploads/nids/') . $_nid_name, $nid);
+
         } else {
             $_nid_name = $user->teacher->nid ?? null;
         }
 
         if (!empty($request->photo)) {
-            $photo       = base64_decode($request->photo);
-            $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
-            file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
             if ($user->teacher->profile_photo != null) {
                 $path = public_path('storage/uploads/profiles/' . $user->teacher->photo);
                 if (file_exists($path)) {
                     unlink($path);
                 }
             }
+            $photo       = base64_decode($request->photo);
+            $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
+            file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
 
         } else {
             $_photo_name = $user->teacher->photo ?? null;
         }
 
         if (!empty($request->certificate)) {
-            $certificate       = base64_decode($request->certificate);
-            $_certificate_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
-            file_put_contents(public_path('storage/uploads/certificates/') . $_certificate_name, $certificate);
-
             if ($user->teacher->profile_photo != null) {
                 $path = public_path('storage/uploads/certificates/' . $user->teacher->certificate);
                 if (file_exists($path)) {
                     unlink($path);
                 }
             }
+            $certificate       = base64_decode($request->certificate);
+            $_certificate_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
+            file_put_contents(public_path('storage/uploads/certificates/') . $_certificate_name, $certificate);
 
         } else {
             $_certificate_name = $user->teacher->certificate ?? null;
