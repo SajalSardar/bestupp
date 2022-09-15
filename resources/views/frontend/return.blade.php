@@ -22,7 +22,7 @@
   <div class="row justify-content-center">
     <div class="col-lg-10">
         <div class="about_text">
-          <h4>{{ $returnPolicy->title }}</h4>
+          {{-- <h4>{{ $returnPolicy->title }}</h4> --}}
           
           {!! $returnPolicy->privacy_policy  !!}
           
