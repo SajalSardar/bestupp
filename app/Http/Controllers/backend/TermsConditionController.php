@@ -102,6 +102,10 @@ class TermsConditionController extends Controller {
     }
 
     public function returnPolicyUpdate(Request $request, $id) {
+        $request->validate([
+            "title"          => "required",
+            "privacy_policy" => "required",
+        ]);
         $data                 = ReturnPolicy::find($id);
         $data->title          = $request->title;
         $data->privacy_policy = $request->privacy_policy;
