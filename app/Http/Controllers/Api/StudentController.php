@@ -53,7 +53,7 @@ class StudentController extends Controller {
         if ($photo) {
             return response($photo);
         } else {
-            return "Image Not Found";
+            return response("Image Not Found");
         }
 
         $user = Auth::user();
