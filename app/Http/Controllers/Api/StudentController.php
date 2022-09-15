@@ -72,7 +72,7 @@ class StudentController extends Controller {
             file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
 
         } else {
-            $_photo_name = $user->student->profile_photo ?? null;
+            $_photo_name = $user->student->profile_photo;
         }
 
         $studentInformation = StudentRegistration::updateOrCreate([
