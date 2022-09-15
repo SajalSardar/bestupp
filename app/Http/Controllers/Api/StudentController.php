@@ -58,11 +58,7 @@ class StudentController extends Controller {
             "address"     => 'required',
         ]);
 
-        if (!empty($request->profile_photo)) {
-
-            $photo       = base64_decode($request->profile_photo);
-            $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
-            file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
+        if ($request->profile_photo) {
 
             if ($user->student->profile_photo != null) {
                 $path = public_path('storage/uploads/profiles/' . $user->student->profile_photo);
@@ -70,6 +66,9 @@ class StudentController extends Controller {
                     unlink($path);
                 }
             }
+            $photo       = base64_decode($request->profile_photo);
+            $_photo_name = Str::slug($user->name) . '_' . time() . '.' . 'jpg';
+            file_put_contents(public_path('storage/uploads/profiles/') . $_photo_name, $photo);
 
         } else {
             $_photo_name = $user->student->profile_photo ?? null;
