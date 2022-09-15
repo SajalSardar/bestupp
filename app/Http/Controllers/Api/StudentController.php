@@ -49,7 +49,14 @@ class StudentController extends Controller {
 
     public function studentUpdate(Request $request) {
         $photo = base64_decode($request->profile_photo);
-        $user  = Auth::user();
+
+        if ($photo) {
+            return response($photo);
+        } else {
+            return "Image Not Found";
+        }
+
+        $user = Auth::user();
         $this->validate($request, [
             "birthday"    => 'required',
             "mobile"      => 'required',
