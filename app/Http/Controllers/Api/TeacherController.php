@@ -69,7 +69,7 @@ class TeacherController extends Controller {
         $educations = explode(',', $request->education);
 
         if ($nid) {
-            if ($user->teacher->profile_photo != null) {
+            if (!empty($user->teacher->profile_photo) && $user->teacher->profile_photo != null) {
                 $path = public_path('storage/uploads/nids/' . $user->teacher->nid);
                 if (file_exists($path)) {
                     unlink($path);
@@ -84,7 +84,7 @@ class TeacherController extends Controller {
         }
 
         if ($photo) {
-            if ($user->teacher->profile_photo != null) {
+            if (!empty($user->teacher->profile_photo) && $user->teacher->profile_photo != null) {
                 $path = public_path('storage/uploads/profiles/' . $user->teacher->photo);
                 if (file_exists($path)) {
                     unlink($path);
@@ -98,7 +98,7 @@ class TeacherController extends Controller {
         }
 
         if ($certificate) {
-            if ($user->teacher->profile_photo != null) {
+            if (!empty($user->teacher->profile_photo) && $user->teacher->profile_photo != null) {
                 $path = public_path('storage/uploads/certificates/' . $user->teacher->certificate);
                 if (file_exists($path)) {
                     unlink($path);
