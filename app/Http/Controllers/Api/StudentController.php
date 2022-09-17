@@ -62,7 +62,7 @@ class StudentController extends Controller {
 
         if ($photo) {
 
-            if ($user->student->profile_photo) {
+            if (!empty($user->student) && $user->student->profile_photo != null) {
                 $path = public_path('storage/uploads/profiles/' . $user->student->profile_photo);
                 if (file_exists($path)) {
                     unlink($path);
