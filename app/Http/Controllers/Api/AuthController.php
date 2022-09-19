@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller {
@@ -51,20 +50,19 @@ class AuthController extends Controller {
 
     //reset user
     public function updateProfile(Request $request) {
-        $user = Auth::user()->id;
+        $userdata = User::find(auth()->user()->id);
         $this->validate($request, [
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|max:255|unique:users,email,' . $user,
-            'password' => 'confirmed',
+            'name'  => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $userdata->id,
         ]);
 
-        $user->name  = $request->name;
-        $user->email = $request->email;
+        $userdata->name  = $request->name;
+        $userdata->email = $request->email;
         if ($request->password) {
-            $user->password = Hash::make($request->password);
+            $userdata->password = Hash::make($request->password);
         }
-        $user->save();
+        $userdata->save();
 
-        return response($user, 201);
+        return response($userdata, 201);
     }
 }
