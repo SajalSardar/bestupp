@@ -65,6 +65,6 @@ class AuthController extends Controller {
         }
         $user->save();
 
-        return response($user, 200);
+        return response($user, 201);
     }
 }
