@@ -15,13 +15,13 @@ class CreateStudentRegistrationsTable extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('birthday');
-            $table->integer('mobile');
+            $table->string('mobile');
             $table->string('nationality');
             $table->string('guardianname')->nullable();
             $table->string('fathername');
             $table->string('gender');
             $table->text('address');
-            $table->integer('gnumber')->nullable();
+            $table->string('gnumber')->nullable();
             $table->string('profile_photo')->nullable();
             $table->string('status')->default(1);
             $table->softDeletes();
