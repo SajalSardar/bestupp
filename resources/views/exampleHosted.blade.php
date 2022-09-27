@@ -88,7 +88,7 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label><input type="checkbox" name="check"> I have read and  agree to the website terms and conditions, <a href="{{ route('frontend.privacy.policy') }}">privacy and policy</a>, <a href="{{ route('frontend.return.refund') }}">return and refund policy</a> </label>
+                        <label><input type="checkbox" name="check"> I have read and  agree to the website terms and conditions, <a href="{{ route('frontend.privacy.policy') }}" target="_blank">privacy and policy</a>, <a href="{{ route('frontend.return.refund') }}" target="_blank">return and refund policy</a> </label>
                         @error('check')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
