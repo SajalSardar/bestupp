@@ -31,6 +31,8 @@ Route::get('/teacher-education', [CommonController::class, 'teacherEducation']);
 Route::get('/social-icon', [CommonController::class, 'socialNetwork']);
 Route::get('/options', [CommonController::class, 'themeOption']);
 Route::get('/privacy-policy', [CommonController::class, 'privacyPolicy']);
+Route::get('/terms-condition', [CommonController::class, "termsCondition"]);
+Route::get('/return-refund', [CommonController::class, "returnRefund"]);
 Route::get('/course', [CourseController::class, 'index']);
 Route::get('/course/{course}', [CourseController::class, 'show']);
 

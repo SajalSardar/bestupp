@@ -11,8 +11,10 @@ use App\Models\DaySchedule;
 use App\Models\FreeLearning;
 use App\Models\Notice;
 use App\Models\PrivacyPolicy;
+use App\Models\ReturnPolicy;
 use App\Models\SocialNetwork;
 use App\Models\Teachereducation;
+use App\Models\TermsCondition;
 use App\Models\ThemeOptions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -101,6 +103,15 @@ class CommonController extends Controller {
     public function notice() {
         $data = Auth::user()->notices;
         return response($data, 200);
+    }
+
+    public function termsCondition() {
+        $policy = TermsCondition::orderBy('id', 'asc')->get();
+        return response($policy, 200);
+    }
+    public function returnRefund() {
+        $returnPolicy = ReturnPolicy::first();
+        return response($returnPolicy, 200);
     }
 
 }
