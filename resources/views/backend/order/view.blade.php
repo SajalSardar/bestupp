@@ -73,7 +73,7 @@
           <td width="20%"><strong>Courses</strong></td>
           <td width="5%">:</td>
           <td>
-            {{ $orderManage->course->name }}
+            {!! $orderManage->course->name !!}
           </td>
         </tr>
         <tr>
