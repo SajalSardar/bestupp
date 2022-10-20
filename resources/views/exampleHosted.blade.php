@@ -4,10 +4,7 @@
 <section>
     <div class="container">
         <div class="py-5 text-center">
-            <h2>EasyCheckout (Popup) - SSLCommerz</h2>
-    
-            <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. We have provided this
-                sample form for understanding HostedCheckout  Payment integration with SSLCommerz.</p>
+            <h2>Continue To Checkout</h2>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-4 order-md-2 mb-4">

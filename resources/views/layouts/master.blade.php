@@ -274,7 +274,9 @@
     <script src="{{ asset("backend/js/ResizeSensor.js")}}"></script>
     <script src="{{ asset("backend/js/dashboard.js")}}"></script>
     @yield('dashboard_js')
-    
+    <script>
+      $('.toast').toast('show');
+    </script>
     
   </body>
 </html>
