@@ -6,6 +6,7 @@ use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderInstallment;
+use App\Notifications\InvoicePaid;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -33,9 +34,7 @@ class SslCommerzPaymentController extends Controller {
     }
 
     public function index(Request $request) {
-        # Here you have to receive all the order data to initate the payment.
-        # Let's say, your oder transaction informations are saving in a table called "orders"
-        # In "orders" table, order unique identity is "transaction_id". "status" field contain status of the transaction, "amount" is the order amount to be paid and "currency" is for storing Site Currency which will be checked with paid currency.
+       
 
         $request->validate([
             'check' => "required",
@@ -136,7 +135,6 @@ class SslCommerzPaymentController extends Controller {
         }
 
         $sslc = new SslCommerzNotification();
-        # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )
         $payment_options = $sslc->makePayment($post_data, 'hosted');
 
         if (!is_array($payment_options)) {
@@ -149,10 +147,15 @@ class SslCommerzPaymentController extends Controller {
     public function success(Request $request) {
 
         $tran_id = $request->input('tran_id');
+        $installmentQuery = OrderInstallment::where('transaction_id', $tran_id);
 
-        OrderInstallment::where('transaction_id', $tran_id)->update([
+        $installmentQuery->update([
             'status' => 2,
         ]);
+        $OrderInstallments = $installmentQuery->get();
+        foreach($OrderInstallments as $OrderInstallment){
+            $OrderInstallment->order->user->notify(new InvoicePaid($OrderInstallment));
+        }
 
         return redirect(route('dashboard.student.order'))->with('success', 'Transaction is successfully Completed!');
     }
@@ -192,12 +195,11 @@ class SslCommerzPaymentController extends Controller {
     }
 
     public function ipn(Request $request) {
-        #Received all the payement information from the gateway
+
         if ($request->input('tran_id')) {
 
             $tran_id = $request->input('tran_id');
 
-            #Check order status in order tabel against the transaction id or order id.
             $order_details = OrderInstallment::where('transaction_id', $tran_id)
                 ->select('transaction_id', 'status', 'bdt')->first();
 

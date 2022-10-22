@@ -43,30 +43,4 @@ class ConfigurationController extends Controller
 
     }
 
-    // function TimeSchedul(){
-    //     $datas = TimeSchedule::all();
-    //     return view('backend.configaration.time', compact('datas'));
-    // }
-    // function TimeSchedulStore(Request $request) {
-
-    //     return $request;
-
-    //     $this->validate($request,[
-    //         'time_schedul' => "required"
-    //     ]);
-
-    //     $data = new TimeSchedule();
-
-    //     $data->time_schedule = $request->time_schedule;
-    //     $data->save();
-    //     return back()->with("success", "Time Schedule Added!");
-
-    // }
-
-    // function TimeSchedulDelete($id){
-    //     $id = TimeSchedule::find($id);
-    //     $id->delete();
-    //     return back()->with("success", "Time Schedule Deleted!");
-
-    // }
 }
