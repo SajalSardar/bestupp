@@ -136,6 +136,7 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
 
     });
 
+
     Route::group(['middleware' => ['role:teacher', 'auth']], function () {
         Route::get('/teacher/information/edit', [TeacherController::class, 'teacherInformationEdit'])->name('teacher.information.edit');
         Route::post('/teacher/information/edit/{id}', [TeacherController::class, 'teacherInformationUpdate'])->name('teacher.information.update');

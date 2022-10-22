@@ -166,6 +166,7 @@
             <span class="menu-item-label">Teacher Profile</span>
           </div><!-- menu-item -->
         </a>
+     
         @endrole
 
         @role('student')

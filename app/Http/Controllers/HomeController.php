@@ -124,6 +124,9 @@ class HomeController extends Controller {
 
     }
     function dueNotificationSubmit(Request $request) {
+        $request->validate([
+            "day" => 'required'
+        ]);
 
         $orders = Order::with(['OrderInstallments' => function ($q) use ($request) {
 
