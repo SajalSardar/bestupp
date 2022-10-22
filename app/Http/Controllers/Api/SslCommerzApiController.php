@@ -18,6 +18,7 @@ class SslCommerzApiController extends Controller
             $q->with('installments');
         }])->get();
 
+
         $pay_bdt = [];
         foreach ($cartDatas as $cartData) {
             foreach ($cartData->course->installments as $installment) {
@@ -106,7 +107,9 @@ class SslCommerzApiController extends Controller
 
             $cartData->delete();
         }
-
+        return response([
+            "success" => "Order Completed! Now Pay",
+        ]);
         
     }
 
