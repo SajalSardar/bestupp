@@ -134,12 +134,18 @@ class SslCommerzApiController extends Controller
 
         if (1 == $order_detials->status) {
             $order_detials->update(['status' => 1]);
-            return redirect(route('dashboard.student.order'))->with('error', 'Transaction is Falied');
+            return response([
+                "error" => "Transaction is Falied!",
+            ]);
             
         } else if ($order_detials->status == 2) {
-            return redirect(route('dashboard.student.order'))->with('info', 'Transaction is already Successful');
+            return response([
+                "error" => "Transaction is already Successful!",
+            ]);
         } else {
-            return redirect(route('dashboard.student.order'))->with('error', 'Invalid Transaction');
+            return response([
+                "error" => "Invalid Transaction!",
+            ]);
         }
 
     }
