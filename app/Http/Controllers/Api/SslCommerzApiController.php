@@ -174,51 +174,5 @@ class SslCommerzApiController extends Controller
 
     }
 
-    public function ipn(Request $request) {
-        #Received all the payement information from the gateway
-        if ($request->input('tran_id')) {
-
-            $tran_id = $request->input('tran_id');
-
-            #Check order status in order tabel against the transaction id or order id.
-            $order_details = OrderInstallment::where('transaction_id', $tran_id)
-                ->select('transaction_id', 'status', 'bdt')->first();
-
-            if (1 == $order_details->status) {
-                $sslc       = new SslCommerzNotification();
-                $validation = $sslc->orderValidate($request->all(), $tran_id, $order_details->bdt);
-                if ($validation == TRUE) {
-                    
-                    $update_product = OrderInstallment::where('transaction_id', $tran_id)
-                        ->update(['status' => 2]);
-                    return response([
-                        "success" => "Transaction is successfully Completed!",
-                    ]);
-                    
-                } else {
-                   
-                    $update_product = OrderInstallment::where('transaction_id', $tran_id)
-                        ->update(['status' => 1]);
-
-                    return response([
-                        "error" => "Transaction is Fail!",
-                    ]);
-                }
-
-            } else if ($order_details->status == 2) {
-
-                return response([
-                    "info" => "Transaction is already successfully Completed!",
-                ]);
-            } else {
-                return response([
-                    "error" => "Invalid Transaction!",
-                ]);
-            }
-        } else {
-            return response([
-                "error" => "Invalid Data!",
-            ]);
-        }
-    }
+   
 }
