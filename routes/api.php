@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CommonController;
 use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\SslCommerzApiController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\TeacherController;
 use Illuminate\Support\Facades\Route;
@@ -47,9 +48,6 @@ Route::post('/contact-us', [CommonController::class, 'contactUs']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    //order
-    Route::get('/our/orders', [StudentController::class, 'showOrders']);
-
     //cart
     Route::get('/carts', [CartController::class, 'index']);
     Route::post('/enroll', [CartController::class, 'enroll']);
@@ -68,4 +66,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //user account update
     Route::post('user/edit', [AuthController::class, "updateProfile"]);
+
+    //order
+    Route::get('/our/orders', [StudentController::class, 'showOrders']);
+
+    Route::post('/pay', [SslCommerzApiController::class, 'index']);
+    Route::post('/success', [SslCommerzApiController::class, 'success']);
+    Route::post('/fail', [SslCommerzApiController::class, 'fail']);
+    Route::post('/cancel', [SslCommerzApiController::class, 'cancel']);
+
+    Route::post('/ipn', [SslCommerzApiController::class, 'ipn']);
 });
