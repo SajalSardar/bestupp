@@ -141,7 +141,7 @@ class SslCommerzApiController extends Controller
             
         } else if ($order_detials->status == 2) {
             return response([
-                "error" => "Transaction is already Successful!",
+                "info" => "Transaction is already Successful!",
             ]);
         } else {
             return response([
@@ -169,7 +169,7 @@ class SslCommerzApiController extends Controller
             ]);
         } else {
             return response([
-                "info" => "Invalid Transaction!",
+                "error" => "Invalid Transaction!",
             ]);
         }
 
