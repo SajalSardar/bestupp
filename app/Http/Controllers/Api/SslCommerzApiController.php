@@ -109,6 +109,7 @@ class SslCommerzApiController extends Controller
         }
         return response([
             "success" => "Order Completed! Now Pay",
+            "pay_info" => $post_data,
         ]);
         
     }
