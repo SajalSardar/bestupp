@@ -73,4 +73,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/success', [SslCommerzApiController::class, 'success']);
     Route::post('/fail', [SslCommerzApiController::class, 'fail']);
     Route::post('/cancel', [SslCommerzApiController::class, 'cancel']);
+
+    //student installment pay
+    Route::get('/installment/pay/{id}', [StudentController::class, 'installmentpay',
+    ]);
 });
