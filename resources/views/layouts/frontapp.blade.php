@@ -117,7 +117,9 @@
             </a>
             <ul class="dropdown_menu">
               @role('student')
-              <li><a class="nav-link drop-item" href="{{ route('dashboard.student.information.edit') }}">Profile</a>
+              <li><a class="nav-link drop-item" href="{{ route('dashboard.profile.edit') }}">User Information</a>
+              </li>
+              <li><a class="nav-link drop-item" href="{{ route('dashboard.student.information.edit') }}">Student Information</a>
               </li>
               <li><a class="nav-link drop-item" href="{{ route('dashboard.student.order') }}">Our Order</a>
               </li>
