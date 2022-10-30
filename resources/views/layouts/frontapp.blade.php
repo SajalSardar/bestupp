@@ -104,20 +104,41 @@
             <a class="nav-link {{ Request::routeIs('frontend.contact') ? "active" : ""}}" href="{{ route('frontend.contact') }}">Contact</a>
           </li>
         </ul>
+
+        @auth
+        <ul class="navbar-nav ms-auto menu" id="navbar-example3">
+          @role('student')
+          <li class="nav-item"><a class="nav-link" href="{{ route('frontend.cart') }}">View Cart</a></li>
+          @endrole
+          
+          <li class="nav-item drop_down">
+            <a class="nav-link">
+              {{ auth()->user()->name }} <i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown_menu">
+              @role('student')
+              <li><a class="nav-link drop-item" href="{{ route('dashboard.student.information.edit') }}">Profile</a>
+              </li>
+              <li><a class="nav-link drop-item" href="{{ route('dashboard.student.order') }}">Our Order</a>
+              </li>
+              @endrole
+              <li><a class="nav-link drop_item" href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+                 {{ __('Logout') }}
+             </a>
+            </li>
+            </ul>
+          </li>
+        </ul>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+          @csrf
+      </form>
+      @endauth
+      
         @guest()
         <a class="enroll_btn" href="{{ route('login') }}">Login</a>
         @endguest
-        
-       @auth
-       @role('student')
-        <a class="enroll_btn me-3" href="{{ route('frontend.cart') }}">View Cart</a>
-        @endrole
-       <form action="{{ route('logout') }}" method="POST" class="d-inline">
-         @csrf
-         <button class="enroll_btn" type="submit" style="border:none">Log Out</button>
-       </form>
-       
-       @endauth
       </div>
     </div>
   </nav>

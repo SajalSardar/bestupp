@@ -56,7 +56,7 @@ class StudentController extends Controller {
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->route('dashboard')
+            return redirect()->route('frontend.home')
                 ->with("success", "Registration Successfull!");
         }
     }

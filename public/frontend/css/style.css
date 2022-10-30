@@ -449,7 +449,6 @@ nav.navbar {
     border-radius: 5px;
     position: absolute;
     left: 0px;
-    bottom: -118px;
     z-index: 999;
     opacity: 0;
     visibility: hidden;
@@ -463,6 +462,7 @@ nav.navbar {
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+    margin-top: 30px;
 }
 
 .drop_item,
@@ -475,7 +475,7 @@ nav.navbar {
 .drop_down:hover .dropdown_menu {
     opacity: 1;
     visibility: visible;
-    bottom: -102px;
+    margin-top: 5px;
 }
 
 
