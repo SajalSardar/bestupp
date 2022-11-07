@@ -13,6 +13,7 @@ use App\Models\PrivacyPolicy;
 use App\Models\TermsCondition;
 use App\Models\AboutPageContent;
 use App\Http\Controllers\Controller;
+use App\Models\Offer;
 
 class FrontendController extends Controller {
     /**
@@ -26,7 +27,8 @@ class FrontendController extends Controller {
         $allFaqs     = Faq::where('status', 1)->get();
         $aboutHome   = About::firstOrFail();
         $themeoption = ThemeOptions::firstOrFail();
-        return view('frontend.index', compact('courses', 'banners', 'allFaqs', 'aboutHome', 'themeoption'));
+        $offer = Offer::where('status', 1)->orderBy('id', 'desc')->first();
+        return view('frontend.index', compact('courses', 'banners', 'allFaqs', 'aboutHome', 'themeoption','offer'));
     }
 
     public function allCourse() {

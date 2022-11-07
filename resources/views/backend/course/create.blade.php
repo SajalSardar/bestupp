@@ -70,14 +70,21 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label class="form-control-label">Course Fee:</label>
                         <input type="number"placeholder="Course Fee For BDT" name="course_fee" class="form-control">
                         @error('course_fee')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <label class="form-control-label">Discount:</label>
+                        <input type="number"placeholder="Discount" name="discount" class="form-control">
+                        @error('discount')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-4">
                         <label class="form-control-label">USD/EURO:</label>
                         <input type="text" placeholder="USD = $ 80, EURO = € 68" name="usdeuro" class="form-control">
                         @error('usdeuro')

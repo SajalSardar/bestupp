@@ -74,4 +74,27 @@
       @endforelse
 
   </div>
+
+  @if(Session::has('course_buy'))
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" style="background: #5BAD3F; padding: 10px">
+        <div class="modal-body" style="background: #5BAD3F">
+          <h4 class="text-white">{{ Session::get('course_buy') }}</h4>
+        </div>
+        <div class="modal-footer">
+          <a href="{{ route('frontend.home') }}" target="_blank" class="btn btn-primary">Back Home</a>
+          <button type="button" class="btn btn-secondary " style="cursor: pointer" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+@endif
+
+@endsection
+
+@section('dashboard_js')
+  <script>
+    $('.modal').modal('show')
+  </script>
 @endsection

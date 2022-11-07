@@ -18,16 +18,16 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NoticeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard')->middleware('verified');
 
-Route::name('dashboard.')->prefix('dashboard')->group(function () {
+Route::middleware('verified')->name('dashboard.')->prefix('dashboard')->group(function () {
     Route::get('/edit/profile', [HomeController::class, "editProfile"])->name('profile.edit');
     Route::post('/edit/profile/{id}', [HomeController::class, "updateProfile"])->name('profile.update');
 });
 
-Route::name('dashboard.')->prefix('dashboard')->group(function () {
+Route::name('dashboard.')->prefix('dashboard')->group( function () {
 
-    Route::group(['middleware' => ['role:super-admin', 'auth']], function () {
+    Route::group(['middleware' => ['role:super-admin', 'auth','verified']], function () {
         Route::resource('/banner', BannerController::class)->except(['show', 'create', 'update', 'edit']);
         Route::resource('/course', CourseController::class)->except(['show']);
         Route::get('/course/status/{course}', [CourseController::class, 'courseStatusUpdate'])->name('course.status.update');
@@ -118,9 +118,15 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/due/notification/query', [HomeController::class, "dueNotificationSubmit"])->name("due.notification.query");
 
         Route::get('/due-notification-send/{id}', [HomeController::class, "dueNotificationSend"])->name("due.notification.send");
+
+        //create offer 
+        Route::get('/create/offer', [HomeController::class, 'createOffer'])->name('create.offer');
+        Route::post('/create/offer', [HomeController::class, 'insertOffer'])->name('insert.offer');
+        Route::delete('/delete/offer/{offer}', [HomeController::class, 'deleteOffer'])->name('delete.offer');
+        Route::get('/status/offer/{offer}', [HomeController::class, 'statusOffer'])->name('status.offer');
     });
 
-    Route::group(['middleware' => ['role:student', 'auth']], function () {
+    Route::group(['middleware' => ['role:student', 'auth','verified']], function () {
         Route::get('/student/orders', [StudentController::class, 'showOrders'])->name('student.order');
         Route::get('/student/information/edit', [StudentController::class, 'studentInformationEdit'])->name('student.information.edit');
         Route::post('/student/information/edit/{id?}', [StudentController::class, 'studentInformationUpdate'])->name('student.information.update');
@@ -137,7 +143,7 @@ Route::name('dashboard.')->prefix('dashboard')->group(function () {
     });
 
 
-    Route::group(['middleware' => ['role:teacher', 'auth']], function () {
+    Route::group(['middleware' => ['role:teacher', 'auth', 'verified']], function () {
         Route::get('/teacher/information/edit', [TeacherController::class, 'teacherInformationEdit'])->name('teacher.information.edit');
         Route::post('/teacher/information/edit/{id}', [TeacherController::class, 'teacherInformationUpdate'])->name('teacher.information.update');
     });

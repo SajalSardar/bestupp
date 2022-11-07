@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Offer;
 use App\Models\Order;
-use App\Models\OrderInstallment;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Models\PrivacyPolicy;
+use App\Models\OrderInstallment;
 use App\Models\StudentRegistration;
 use App\Models\TeacherRegistration;
-use App\Models\User;
-use App\Notifications\DueNotification;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\DueNotification;
 
 class HomeController extends Controller {
     /**
@@ -143,6 +145,54 @@ class HomeController extends Controller {
         $OrderInstallment->send_notification = now();
         $OrderInstallment->save();
         return back()->with('success', "Notification Successfully Send!");
+    }
+
+
+    public function createOffer(){
+        $datas = Offer::all();
+        return view('backend.offer.index', compact('datas'));
+    }
+    public function insertOffer(Request $request){
+        $banner_photo = $request->file('offer_image');
+        $this->validate($request, [
+            'title' => 'required',
+            'offer_image' => 'mimes:jpeg,jpg,png|required|max:512',
+        ]);
+        if ($banner_photo) {
+            $_photo_name = Str::slug($request->title) . '.' . $banner_photo->getClientOriginalExtension();
+            //$photo_url   = URL::asset('storage/uploads/banner/' . $_photo_name);
+
+            $photo_uploades = $banner_photo->move(public_path('storage/uploads/offer/'), $_photo_name);
+
+            if ($photo_uploades) {
+                $data               = new Offer();
+                $data->title = $request->title;
+                $data->offer_image = $_photo_name;
+                $data->save();
+                return back()->with('success', "Successfully Uploaded Offer Image!");
+            }
+
+        }
+    }
+    public function deleteOffer(Offer $offer) {
+
+        $path = public_path('storage/uploads/offer/' . $offer->offer_image);
+        if (file_exists($path) && $offer->offer_image != null) {
+            unlink($path);
+        }
+        $offer->delete();
+        return back()->with('success', 'Delete Successfull!');
+    }
+    public function statusOffer(Offer $offer) {
+
+        if($offer->status == 1){
+            $offer->status = 2;
+            $offer->save(); 
+        }else{
+            $offer->status = 1;
+            $offer->save();
+        }
+        return back()->with('success', 'Status Update Successfull!');
     }
 
 }

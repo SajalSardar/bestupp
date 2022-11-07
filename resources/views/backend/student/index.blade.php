@@ -18,6 +18,7 @@
           <thead>
            <tr>    
              <th>Id</th>
+             <th>Student Id</th>
              <th>Name</th>
              <th>Email</th>
              <th>Created</th>
@@ -29,6 +30,7 @@
            @foreach ($students as $ustudent)
               <tr>    
                 <td>{{ $ustudent->id }}</td>
+                <td>{{ $ustudent->student->student_id ?? '--' }}</td>
                 <td>{{ $ustudent->name }}</td>
                 <td>{{ $ustudent->email }}</td>
                 <td>{{ $ustudent->created_at->diffForHumans() }}</td>

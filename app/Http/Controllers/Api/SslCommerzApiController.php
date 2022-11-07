@@ -79,7 +79,7 @@ class SslCommerzApiController extends Controller
             $order = Order::create([
                 "user_id"       => auth()->user()->id,
                 "course_id"     => $cartData->course->id,
-                "price"         => $cartData->course->course_fee,
+                "price"         =>  $cartData->course->discount ? ($cartData->course->course_fee) - ($cartData->course->discount): $cartData->course->course_fee,
                 "selected_day"  => $cartData->selected_day,
                 "selected_time" => $cartData->selected_time,
                 "created_at"    => now(),

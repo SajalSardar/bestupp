@@ -45,7 +45,15 @@
                             
                         </div>
                     </td>
-                    <td class="text-center"><span class="price_text">{{ $data->course->course_fee }} BDT</span></td>
+                    <td class="text-center"><span class="price_text">
+                        @if ($data->course->discount)
+                        Regular Price: <strike>{{ $data->course->course_fee }}</strike>
+                          <br>
+                          Offer Price: {{ ($data->course->course_fee) - ($data->course->discount) }} BDT
+                          @else
+                          {{ $data->course->course_fee }} BDT
+                          @endif
+                    </td>
                     <td>
                       <ul>
                         @foreach ($data->course->installments as $key => $installment)

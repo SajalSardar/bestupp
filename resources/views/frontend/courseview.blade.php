@@ -67,7 +67,15 @@
                         <i class="fa fa-hand-o-right" aria-hidden="true"></i>
                       </div>
                       <div class="text">
-                        <p>{{ $data->course_fee }} BDT<span>({{ $data->usdeuro }})</span></p>
+                        <p>
+                          @if ($data->discount)
+                          Regular Price: <strike>{{ $data->course_fee }}</strike>  
+                          <br>
+                          Offer Price: {{ ($data->course_fee) - ($data->discount) }} BDT
+                          @else
+                          {{ $data->course_fee }} BDT
+                          @endif
+                          <span>({{ $data->usdeuro }})</span></p>
                       </div>
                     </li>
                   </ul>

@@ -104,7 +104,7 @@ class SslCommerzPaymentController extends Controller {
             $order = Order::create([
                 "user_id"       => auth()->user()->id,
                 "course_id"     => $cartData->course->id,
-                "price"         => $cartData->course->course_fee,
+                "price"         => $cartData->course->discount ? ($cartData->course->course_fee) - ($cartData->course->discount): $cartData->course->course_fee,
                 "selected_day"  => $cartData->selected_day,
                 "selected_time" => $cartData->selected_time,
                 "created_at"    => now(),
@@ -157,7 +157,7 @@ class SslCommerzPaymentController extends Controller {
             $OrderInstallment->order->user->notify(new InvoicePaid($OrderInstallment));
         }
 
-        return redirect(route('dashboard.student.order'))->with('success', 'Transaction is successfully Completed!');
+        return redirect(route('dashboard.student.order'))->with('course_buy', 'Congratulations, Payment Successfully Done. Continue This Course.');
     }
 
     public function fail(Request $request) {

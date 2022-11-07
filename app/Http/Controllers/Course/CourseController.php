@@ -79,6 +79,7 @@ class CourseController extends Controller {
                 $course->course_fee   = $request->course_fee;
                 $course->usdeuro      = $request->usdeuro;
                 $course->banner_image = $_photo_name;
+                $course->discount = $request->discount;
                 $course->save();
 
                 if ($course->id && $request->installment) {
@@ -178,6 +179,7 @@ class CourseController extends Controller {
         $course->course_fee   = $request->course_fee;
         $course->usdeuro      = $request->usdeuro;
         $course->banner_image = $_photo_name;
+        $course->discount = $request->discount;
         $course->save();
 
         if ($course->id && $request->installment1) {

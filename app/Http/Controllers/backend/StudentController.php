@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderInstallment;
 use App\Models\StudentRegistration;
 use App\Models\User;
+use Faker\Core\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -35,10 +36,9 @@ class StudentController extends Controller {
         $insertUser->name              = $request->name;
         $insertUser->email             = $request->email;
         $insertUser->password          = Hash::make($request->password);
-        $insertUser->email_verified_at = now();
         $insertUser->save();
         $insertUser->assignRole(3);
-
+        $student_id = "std-". random_int(100000, 999999);
         if ($insertUser) {
             $data               = new StudentRegistration();
             $data->user_id      = $insertUser->id;
@@ -50,6 +50,7 @@ class StudentController extends Controller {
             $data->gender       = $request->gender;
             $data->address      = $request->address;
             $data->gnumber      = $request->gnumber;
+            $data->student_id = $student_id;
             $data->save();
 
         }

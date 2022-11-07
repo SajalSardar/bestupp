@@ -59,6 +59,12 @@
             </h5>
           </div>
         </div>
+        <div class="card mt-2">
+          <div class="card-body">
+            <h5>Your Student Id:  {{  auth()->user()->student->student_id}}
+            </h5>
+          </div>
+        </div>
         
       </div>
     </div>

@@ -15,21 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 require_once "roadmap/backend.php";
 require_once "roadmap/frontend.php";
 
 // SSLCOMMERZ Start
+Route::group(['middleware' => ['verified']], function () {
+  Route::get('/checkout', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+  Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
 
-Route::get('/checkout', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
-Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+  Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+  Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+  Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
 
-Route::post('/success', [SslCommerzPaymentController::class, 'success']);
-Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
-Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
-
-Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+  Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+});
 //SSLCOMMERZ END
 
 // Route::get('/tokens/create', function (Request $request) {
