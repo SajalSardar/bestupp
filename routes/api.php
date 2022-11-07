@@ -42,6 +42,7 @@ Route::post('/teacher/registration', [TeacherController::class, 'teacherRegistra
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/free-learning', [CommonController::class, 'freeLearning']);
 Route::post('/contact-us', [CommonController::class, 'contactUs']);
+Route::get('/offer', [CommonController::class, 'offer']);
 
 //prvate route
 

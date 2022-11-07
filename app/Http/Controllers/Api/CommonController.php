@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\About;
-use App\Models\AboutPageContent;
+use App\Models\Offer;
 use App\Models\Banner;
+use App\Models\Notice;
 use App\Models\Contact;
 use App\Models\DaySchedule;
 use App\Models\FreeLearning;
-use App\Models\Notice;
-use App\Models\PrivacyPolicy;
 use App\Models\ReturnPolicy;
-use App\Models\SocialNetwork;
-use App\Models\Teachereducation;
-use App\Models\TermsCondition;
 use App\Models\ThemeOptions;
 use Illuminate\Http\Request;
+use App\Models\PrivacyPolicy;
+use App\Models\SocialNetwork;
+use App\Models\TermsCondition;
+use App\Models\AboutPageContent;
+use App\Models\Teachereducation;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class CommonController extends Controller {
@@ -112,6 +113,10 @@ class CommonController extends Controller {
     public function returnRefund() {
         $returnPolicy = ReturnPolicy::first();
         return response($returnPolicy, 200);
+    }
+    public function offer() {
+        $offer = Offer::where('status', 1)->orderBy('id', 'desc')->first();
+        return response($offer, 201);
     }
 
 }
