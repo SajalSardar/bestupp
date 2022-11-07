@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label class="form-control-label">Offer Image: <span class="tx-danger">*</span></label>
                     <input class="form-control" type="file" name="offer_image">
-                    @error('image')
+                    @error('offer_image')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                   </div>
