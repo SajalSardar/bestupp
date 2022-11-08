@@ -46,7 +46,7 @@ Route::get('/offer', [CommonController::class, 'offer']);
 
 //prvate route
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     //cart
