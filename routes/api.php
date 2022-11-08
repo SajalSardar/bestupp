@@ -1,13 +1,14 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CommonController;
 use App\Http\Controllers\Api\CourseController;
-use App\Http\Controllers\Api\SslCommerzApiController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\TeacherController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\SslCommerzApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +80,12 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/installment/pay/{id}', [StudentController::class, 'installmentpay',
     ]);
 });
+
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return response([
+        'message' => 'Verification link sent!',
+    ]);
+})->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
