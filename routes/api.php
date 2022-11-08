@@ -88,4 +88,4 @@ Route::post('/email/verification-notification', function (Request $request) {
     return response([
         'message' => 'Verification link sent!',
     ]);
-})->middleware(['auth:sanctum', 'throttle:6,1'])->name('verification.send');
+})->middleware(['auth:sanctum', 'throttle:6,1']);
