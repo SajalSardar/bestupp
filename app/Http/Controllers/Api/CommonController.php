@@ -105,6 +105,14 @@ class CommonController extends Controller {
         $data = Auth::user()->notices;
         return response($data, 200);
     }
+    
+    function studentNoticeView(Notice $notice){
+        $notice->status = 2;
+        $notice->save();
+        return response([
+            "message" => 'Notice update status successfull!',
+        ]);
+    }
 
     public function termsCondition() {
         $policy = TermsCondition::orderBy('id', 'asc')->get();

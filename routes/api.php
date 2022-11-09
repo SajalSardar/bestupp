@@ -57,6 +57,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     //Notice
     Route::get('/notice', [CommonController::class, 'notice']);
+    Route::get('/notice/{notice}', [CommonController::class, 'studentNoticeView']);
 
     //student
     Route::get('/student/profile', [StudentController::class, 'studentProfile']);
