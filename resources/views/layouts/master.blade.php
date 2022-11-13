@@ -192,6 +192,13 @@
             @endif
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
+        <a href="{{ route('dashboard.student.notification') }}" class="sl-menu-link {{ Request::routeIs('dashboard.notice*') ? "active" : ""}}">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+            <span class="menu-item-label">Notification </span> 
+            
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
         <a href="{{ route('dashboard.profile.edit') }}" class="sl-menu-link {{ Request::routeIs('dashboard.profile.edit*') ? "active" : ""}}">
           <div class="sl-menu-item">
             <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>

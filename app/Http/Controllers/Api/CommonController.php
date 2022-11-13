@@ -123,7 +123,7 @@ class CommonController extends Controller {
         return response($returnPolicy, 200);
     }
     public function offer() {
-        $offer = Offer::where('status', 1)->orderBy('id', 'desc')->first();
+        $offer = Offer::where('status', 1)->orderBy('id', 'desc')->get();
         return response($offer, 201);
     }
 

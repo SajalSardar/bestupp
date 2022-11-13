@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOffersTable extends Migration
+class CreateEmailVerificationTokensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateOffersTable extends Migration
      */
     public function up()
     {
-        Schema::create('offers', function (Blueprint $table) {
+        Schema::create('email_verification_tokens', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->string("offer_image");
-            $table->longText("description")->nullable();
-            $table->boolean("home_popup")->nullable();
-            $table->integer("status")->default(1);
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('token')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateOffersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('offers');
+        Schema::dropIfExists('email_verification_tokens');
     }
 }

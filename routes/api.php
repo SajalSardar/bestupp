@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\EmailVerificationToken;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CommonController;
@@ -90,3 +91,6 @@ Route::post('/email/verification-notification', function (Request $request) {
         'message' => 'Verification link sent!',
     ]);
 })->middleware(['auth:sanctum', 'throttle:6,1']);
+
+
+Route::post('/verify-code-submit', [AuthController::class, 'submitToken'])->middleware(['auth:sanctum']);

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Models\EmailVerificationToken;
 
 class AuthController extends Controller {
 
@@ -65,4 +67,32 @@ class AuthController extends Controller {
 
         return response($userdata, 201);
     }
+
+    public function submitToken(Request $request){
+        $request->validate([
+            'verify_token' => 'required',
+        ]);
+    
+    
+       $data = EmailVerificationToken::where('user_id',auth()->user()->id)->first();
+       
+    
+       if($request->verify_token ===  $data->token){
+        
+        User::where('id', $data->user_id)->update([
+            "email_verified_at"=> Carbon::now(),
+        ]);
+        $data->delete();
+        return response([
+            'message' => 'Email Verification Successfully Done!',
+        ]);
+    
+       }else{
+        return response([
+            'message' => 'Invalid Verification Code!',
+        ]);
+       }
+        
+    }
+
 }

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Models\TeacherRegistration;
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\TeacherRegistration;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Models\EmailVerificationToken;
 
 class TeacherController extends Controller {
     public function teacherRegistration(Request $request) {
@@ -26,6 +27,11 @@ class TeacherController extends Controller {
             "password"          => Hash::make($request->password),
         ]);
         $insertUser->assignRole(2);
+
+        $verifyToken = new EmailVerificationToken();
+        $verifyToken->user_id = $insertUser->id;
+        $verifyToken->token = random_int(100000, 999999);;
+        $verifyToken->save();
 
         $token    = $insertUser->createToken('apptoken')->plainTextToken;
         $response = [

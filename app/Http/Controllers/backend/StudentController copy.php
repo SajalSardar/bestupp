@@ -5,7 +5,6 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\EmailVerificationToken;
-use App\Models\Offer;
 use App\Models\Order;
 use App\Models\OrderInstallment;
 use App\Models\StudentRegistration;
@@ -226,13 +225,10 @@ class StudentController extends Controller {
 
 
     public function studentNotification(){
-        $datas = Offer::where('status', 1)->orderBy('id', 'desc')->get();
-        return view('backend.offer.studentnotification', compact('datas'));
 
     }
     public function studentNotificationView($id){
-        $data = Offer::find($id);
-        return view('backend.offer.studennotificationview', compact('data'));
+
     }
 
 }

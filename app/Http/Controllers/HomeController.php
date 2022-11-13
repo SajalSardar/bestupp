@@ -160,7 +160,6 @@ class HomeController extends Controller {
         ]);
         if ($banner_photo) {
             $_photo_name = Str::slug($request->title) . '.' . $banner_photo->getClientOriginalExtension();
-            //$photo_url   = URL::asset('storage/uploads/banner/' . $_photo_name);
 
             $photo_uploades = $banner_photo->move(public_path('storage/uploads/offer/'), $_photo_name);
 
@@ -168,11 +167,43 @@ class HomeController extends Controller {
                 $data               = new Offer();
                 $data->title = $request->title;
                 $data->offer_image = $_photo_name;
+                $data->description = $request->description;
+                $data->home_popup = $request->home_popup ? true : null;
                 $data->save();
-                return back()->with('success', "Successfully Uploaded Offer Image!");
+                return back()->with('success', "Successfully Uploaded Offer!");
             }
 
         }
+    }
+    public function editOffer( $id){
+        $data  = Offer::find($id);
+        return view('backend.offer.edit', compact('data'));
+    }
+    public function updateOffer(Request $request, $id){
+        $data               = Offer::find($id);
+        $banner_photo = $request->file('offer_image');
+        $this->validate($request, [
+            'title' => 'required'
+        ]);
+        if($banner_photo){
+            $_photo_name = Str::slug($request->title) . '.' . $banner_photo->getClientOriginalExtension();
+
+            $photo_uploades = $banner_photo->move(public_path('storage/uploads/offer/'), $_photo_name);
+            if($photo_uploades){
+                $path = public_path('storage/uploads/offer/' . $data->offer_image);
+                if (file_exists($path) && $data->offer_image != null) {
+                    unlink($path);
+                }
+            }
+        }else{
+            $_photo_name = $data->offer_image;
+        }
+        $data->title = $request->title;
+        $data->offer_image = $_photo_name;
+        $data->description = $request->description;
+        $data->home_popup = $request->home_popup ? true : null;
+        $data->save();
+        return back()->with('success', "Successfully Update Offer!");
     }
     public function deleteOffer(Offer $offer) {
 

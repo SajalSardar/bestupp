@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Course;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use App\Models\Teachereducation;
 use App\Models\TeacherRegistration;
-use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Models\EmailVerificationToken;
 
 class TeacherController extends Controller {
     public function teacheRegistrationView() {
@@ -60,6 +61,11 @@ class TeacherController extends Controller {
         $insertUser->assignRole(2);
 
         if ($insertUser->id) {
+            $verifyToken = new EmailVerificationToken();
+            $verifyToken->user_id = $insertUser->id;
+            $verifyToken->token = random_int(100000, 999999);;
+            $verifyToken->save();
+            
             $data                    = new TeacherRegistration();
             $data->user_id           = $insertUser->id;
             $data->courses           = json_encode($request->courses);

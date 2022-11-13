@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\backend\AboutController;
 use App\Http\Controllers\backend\ConfigurationController;
 use App\Http\Controllers\backend\ContactController;
@@ -124,6 +125,8 @@ Route::name('dashboard.')->prefix('dashboard')->group( function () {
         Route::post('/create/offer', [HomeController::class, 'insertOffer'])->name('insert.offer');
         Route::delete('/delete/offer/{offer}', [HomeController::class, 'deleteOffer'])->name('delete.offer');
         Route::get('/status/offer/{offer}', [HomeController::class, 'statusOffer'])->name('status.offer');
+        Route::get('/edit/offer/{id}', [HomeController::class, 'editOffer'])->name('edit.offer');
+        Route::post('/edit/offer/{id}', [HomeController::class, 'updateOffer'])->name('update.offer');
     });
 
     Route::group(['middleware' => ['role:student', 'auth','verified']], function () {
@@ -140,12 +143,23 @@ Route::name('dashboard.')->prefix('dashboard')->group( function () {
         Route::get('/student/notice', [NoticeController::class, 'studentNotice'])->name('student.notice');
         Route::get('/student/notice/{notice}', [NoticeController::class, 'studentNoticeView'])->name('student.notice.view');
 
+        //Notification board
+        Route::get('/student/notification', [StudentController::class, 'studentNotification'])->name('student.notification');
+        Route::get('/student/notification/{id}', [StudentController::class, 'studentNotificationView'])->name('student.notification.view');
+
     });
 
 
     Route::group(['middleware' => ['role:teacher', 'auth', 'verified']], function () {
         Route::get('/teacher/information/edit', [TeacherController::class, 'teacherInformationEdit'])->name('teacher.information.edit');
         Route::post('/teacher/information/edit/{id}', [TeacherController::class, 'teacherInformationUpdate'])->name('teacher.information.update');
+    });
+
+    Route::group(['middleware' => ['role:teacher|student', 'auth']], function () {
+        
+        Route::get('verify-code-submit', [VerificationController::class, 'submitForm'])->name('verify.code.submit');
+
+        Route::post('verify-code-submit', [VerificationController::class, 'submitToken'])->name('verify.code.update');
     });
 
 });

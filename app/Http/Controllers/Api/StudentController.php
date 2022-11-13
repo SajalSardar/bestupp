@@ -11,6 +11,7 @@ use App\Models\StudentRegistration;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\EmailVerificationToken;
 
 class StudentController extends Controller {
     public function studentRegistration(Request $request) {
@@ -26,6 +27,11 @@ class StudentController extends Controller {
             "password"          => Hash::make($request->password),
         ]);
         $insertUser->assignRole(3);
+
+        $verifyToken = new EmailVerificationToken();
+        $verifyToken->user_id = $insertUser->id;
+        $verifyToken->token = random_int(100000, 999999);;
+        $verifyToken->save();
 
         $token    = $insertUser->createToken('apptoken')->plainTextToken;
         $response = [

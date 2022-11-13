@@ -29,6 +29,10 @@ class User extends Authenticatable implements MustVerifyEmail{
         return $this->belongsToMany(Notice::class);
     }
 
+    function verificationToken() {
+        return $this->hasOne(EmailVerificationToken::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

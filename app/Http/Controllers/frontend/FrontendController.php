@@ -27,7 +27,7 @@ class FrontendController extends Controller {
         $allFaqs     = Faq::where('status', 1)->get();
         $aboutHome   = About::firstOrFail();
         $themeoption = ThemeOptions::firstOrFail();
-        $offer = Offer::where('status', 1)->orderBy('id', 'desc')->first();
+        $offer = Offer::where('status', 1)->where('home_popup', true)->orderBy('id', 'desc')->first();
         return view('frontend.index', compact('courses', 'banners', 'allFaqs', 'aboutHome', 'themeoption','offer'));
     }
 
