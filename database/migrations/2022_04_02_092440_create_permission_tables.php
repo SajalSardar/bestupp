@@ -15,7 +15,7 @@ class CreatePermissionTables extends Migration
     public function up()
     {
 
-        Schema::defaultStringLength(191);
+        Schema::defaultStringLength(125);
 
         $tableNames = config('permission.table_names');
         $columnNames = config('permission.column_names');
