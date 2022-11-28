@@ -86,6 +86,7 @@ class TeacherController extends Controller {
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            $request->user()->sendEmailVerificationNotification();
             return redirect()->intended('dashboard')
                 ->withSuccess('You have Successfully loggedin');
         }
