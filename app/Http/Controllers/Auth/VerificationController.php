@@ -46,7 +46,7 @@ class VerificationController extends Controller
 
     public function resend(Request $request){
         $request->user()->sendEmailVerificationNotification();
-        return redirect(route('dashboard.verify.code.submit'));
+        return redirect()->back()->with('success', "Code Send Successfull!");
     }
     public function submitForm(){
         return view('auth.verifysubmit');

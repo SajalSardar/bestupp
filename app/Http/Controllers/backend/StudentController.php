@@ -10,13 +10,13 @@ use App\Models\Order;
 use App\Models\OrderInstallment;
 use App\Models\StudentRegistration;
 use App\Models\User;
-use Faker\Core\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class StudentController extends Controller {
+
 
     public function studentRegistrationView() {
         return view('frontend.student_registration');
@@ -63,9 +63,11 @@ class StudentController extends Controller {
             $data->save();
 
         }
+        
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            $request->user()->sendEmailVerificationNotification();
             return redirect()->route('frontend.home')
                 ->with("success", "Registration Successfull!");
         }

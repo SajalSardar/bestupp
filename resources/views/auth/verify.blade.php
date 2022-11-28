@@ -14,9 +14,11 @@
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
                     @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
+                    <form class="d-inline"  method="POST" action="{{ route('dashboard.verify.code.update') }}">
+                        @csrf
+                        <input type="text" class="form-control" placeholder="Enter Your Code" name="verify_token" required>
+                        <button type="submit" class="btn  btn-primary mt-3">{{ __('Submit') }}</button>.
+                    </form>
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
                         <button type="submit" class="btn  btn-primary mt-3">{{ __('click here to request another') }}</button>.

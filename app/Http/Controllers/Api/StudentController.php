@@ -30,7 +30,7 @@ class StudentController extends Controller {
 
         $verifyToken = new EmailVerificationToken();
         $verifyToken->user_id = $insertUser->id;
-        $verifyToken->token = random_int(100000, 999999);;
+        $verifyToken->token = random_int(100000, 999999);
         $verifyToken->save();
 
         $token    = $insertUser->createToken('apptoken')->plainTextToken;

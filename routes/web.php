@@ -21,7 +21,7 @@ require_once "roadmap/backend.php";
 require_once "roadmap/frontend.php";
 
 // SSLCOMMERZ Start
-Route::group(['middleware' => ['verified']], function () {
+Route::group(['middleware' => ['verified','auth']], function () {
   Route::get('/checkout', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
   Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
 
