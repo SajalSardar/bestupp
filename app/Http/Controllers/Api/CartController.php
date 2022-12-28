@@ -11,7 +11,7 @@ class CartController extends Controller {
     function index() {
 
         $cartDatas = Cart::where('user_id', auth()->user()->id)->with(['course' => function ($q) {
-            $q->select('id', 'name', 'slug', 'course_fee', 'discount', 'banner_image', )->with('installments');
+            $q->select('id', 'name', 'slug', 'course_fee', 'discount', 'banner_image')->with('installments');
         }])->get();
 
         $new = [];

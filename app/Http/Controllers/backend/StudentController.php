@@ -25,22 +25,23 @@ class StudentController extends Controller {
     public function studentRegistration(Request $request) {
         $this->validate($request, [
             'name'        => ['required', 'string', 'max:255'],
+            'mobile'      => ['required', 'string', 'min:11', 'unique:users'],
             'email'       => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password'    => ['required', 'string', 'min:8'],
-            "birthday"    => 'required',
-            "mobile"      => 'required',
-            "nationality" => 'required',
-            "fathername"  => 'required',
-            "gender"      => 'required',
-            "address"     => 'required',
+            "birthday"    => '',
+            "nationality" => '',
+            "fathername"  => '',
+            "gender"      => '',
+            "address"     => '',
         ]);
         $insertUser                    = new User();
         $insertUser->name              = $request->name;
+        $insertUser->mobile            = $request->mobile;
         $insertUser->email             = $request->email;
         $insertUser->password          = Hash::make($request->password);
         $insertUser->save();
         $insertUser->assignRole(3);
-        $student_id = "std-". random_int(100000, 999999);
+        $student_id = "EXN-". random_int(100000, 999999);
         if ($insertUser) {
 
             $verifyToken = new EmailVerificationToken();
@@ -59,7 +60,7 @@ class StudentController extends Controller {
             $data->gender       = $request->gender;
             $data->address      = $request->address;
             $data->gnumber      = $request->gnumber;
-            $data->student_id = $student_id;
+            $data->student_id   = $student_id;
             $data->save();
 
         }
@@ -82,7 +83,7 @@ class StudentController extends Controller {
             "fathername"    => 'required',
             "gender"        => 'required',
             "address"       => 'required',
-            'profile_photo' => 'required|mimes:jpeg,jpg,png|max:200',
+            'profile_photo' => 'required|mimes:jpeg,jpg,png|max:512',
         ]);
 
         $profile_photo = $request->file('profile_photo');
@@ -126,13 +127,13 @@ class StudentController extends Controller {
         $data          = StudentRegistration::find($id);
 
         $this->validate($request, [
-            "birthday"      => 'required',
-            "mobile"        => 'required',
-            "nationality"   => 'required',
-            "fathername"    => 'required',
-            "gender"        => 'required',
-            "address"       => 'required',
-            'profile_photo' => 'mimes:jpeg,jpg,png|max:200',
+            "birthday"      => '',
+            "mobile"        => '',
+            "nationality"   => '',
+            "fathername"    => '',
+            "gender"        => '',
+            "address"       => '',
+            'profile_photo' => 'mimes:jpeg,jpg,png|max:512',
         ]);
 
         if (!empty($profile_photo)) {

@@ -39,7 +39,7 @@ class BannerController extends Controller {
         $banner_photo = $request->file('banner_image');
         $this->validate($request, [
             'banner_title' => 'required',
-            'banner_image' => 'mimes:jpeg,jpg,png|required|max:5120',
+            'banner_image' => 'mimes:jpeg,jpg,png,gif,mp4|required|max:102400',
         ]);
         if ($banner_photo) {
             $_photo_name = Str::slug($request->banner_title) . '.' . $banner_photo->getClientOriginalExtension();

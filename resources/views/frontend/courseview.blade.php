@@ -75,7 +75,7 @@
                           @else
                           {{ $data->course_fee }} BDT
                           @endif
-                          <span>({{ $data->usdeuro }})</span></p>
+                          <!-- <span>({{ $data->usdeuro }})</span></p> -->
                       </div>
                     </li>
                   </ul>
