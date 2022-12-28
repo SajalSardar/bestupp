@@ -17,17 +17,19 @@ class StudentController extends Controller {
     public function studentRegistration(Request $request) {
         $this->validate($request, [
             'name'     => ['required', 'string', 'max:255'],
+            'mobile'   =>'required',
             'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
         ]);
 
         $insertUser = User::create([
             "name"              => $request->name,
+            "mobile"            => $request->mobile,
             "email"             => $request->email,
             "password"          => Hash::make($request->password),
         ]);
         $insertUser->assignRole(3);
-
+        
         $verifyToken = new EmailVerificationToken();
         $verifyToken->user_id = $insertUser->id;
         $verifyToken->token = random_int(100000, 999999);
@@ -156,3 +158,4 @@ class StudentController extends Controller {
 
 
 }
+

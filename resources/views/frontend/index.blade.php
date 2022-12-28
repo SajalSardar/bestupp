@@ -2,6 +2,7 @@
 @section('title', "Home")
 @section('content')
   <!-- Banaer Part Strat -->
+  <!--
   <section id="banner">
     <div class="swiper-container mySwiper">
       <div class="swiper-wrapper">
@@ -14,6 +15,15 @@
       <div class="swiper-scrollbar"></div>
     </div>
   </section>
+  -->
+  
+    <section id="banner">
+        <div class="view">
+           <video style="width:100%;max-height:100%" autoplay loop muted><source src="{{asset('storage/uploads/banner/'. $banner->banner_image)}}" type="video/mp4">Your browser does not support the video tag.</video>
+           <div class="mask rgba-black-strong"></div>
+        </div>
+    </section>
+   
   <!-- Banaer Part End -->
 
   <!-- FAQ Part Start -->
@@ -127,13 +137,14 @@
             <form action="{{ route('frontend.student.registration') }}" method="POST">
               @csrf
               <div class="row margin_top">
-                <div class="form-floating admission_input col-md-6">
+                <div class="form-floating admission_input col-md-12">
                   <input type="text" class="form-control" id="studentName" name="name" placeholder="Full Name">
                   <label for="studentName">Full Name</label>
                   @error('name')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
+                <!-- 
                 <div class="form-floating admission_input col-md-6">
                   <input type="text" class="form-control" id="regFatherName" name="fathername" placeholder="Father Name">
                   <label for="regFatherName">Father Name</label>
@@ -141,8 +152,17 @@
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
-
-                <div class="form-floating admission_input col-md-6">
+                -->
+                
+                <div class="form-floating admission_input col-md-12">
+                  <input type="number" name="mobile" class="form-control" id="studentWhatsappNumber" placeholder="Mobile Number">
+                  <label for="studentWhatsappNumber">Mobile Number</label>
+                  @error('mobile')
+                    <p class="text-danger">{{ $message }}</p>
+                  @enderror
+                </div>
+                
+                <div class="form-floating admission_input col-md-12">
                   <input type="text" class="form-control" id="semail" name="email" placeholder="Student Email">
                   <label for="semail">Email</label>
                   @error('email')
@@ -150,14 +170,15 @@
                   @enderror
                 </div>
 
-                <div class="form-floating admission_input col-md-6">
+                <div class="form-floating admission_input col-md-12">
                   <input type="password" class="form-control" id="spass" name="password" placeholder="Password">
                   <label for="spass">Password</label>
                   @error('password')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
-
+                
+                <!--
                 <div class="form-floating admission_input col-md-6">
                   <input type="date" name="birthday" class="form-control" id="studentDateOfBirth" placeholder="Date of Birth">
                   <label for="studentDateOfBirth">Date of Birth</label>
@@ -165,7 +186,9 @@
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
-
+                -->
+                
+                <!--
                 <div class="form-floating admission_input col-md-6">
                   <select class="form-select" name="gender" id="regGender" aria-label="Floating label select example">
                     <option selected disabled>-Select One-</option>
@@ -177,14 +200,11 @@
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
+                -->
 
-                <div class="form-floating admission_input col-md-6">
-                  <input type="number" name="mobile" class="form-control" id="studentWhatsappNumber" placeholder="Mobile Number">
-                  <label for="studentWhatsappNumber">Whatsapp Number</label>
-                  @error('mobile')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
+                
+                
+                <!--
                 <div class="form-floating admission_input col-md-6">
                   <input type="text" name="address" class="form-control" id="studentAddress" placeholder="Address">
                   <label for="studentAddress">Address</label>
@@ -192,7 +212,9 @@
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
-
+                -->
+                
+                <!--
                 <div class="form-floating admission_input col-md-6">
                   <input type="text" class="form-control" id="studentNationality" name="nationality" placeholder="Nationality">
                   <label for="studentNationality">Nationality</label>
@@ -200,7 +222,9 @@
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
-
+                -->
+                
+                <!--
                 <div class="form-floating admission_input col-md-6">
                   <input type="text" name="guardianname" class="form-control" id="studentGuardianName" placeholder="Guardian Name">
                   <label for="studentGuardianName">Guardian Name</label>
@@ -208,6 +232,9 @@
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
+                -->
+                
+                <!--
                 <div class="form-floating admission_input col-md-6">
                   <input type="number" name="gnumber" class="form-control" id="studentGuardianNumber"
                     placeholder="Guardian Phone Number">
@@ -216,6 +243,7 @@
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
                 </div>
+                -->
 
             <div class="col-12">
               <div class="student_reg_bnt">
@@ -251,12 +279,13 @@
   <!-- Modal -->
   @isset($offer->id)
   <div class="modal fade" id="loadmodal">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-body">
-          <img width="100%" src="{{ asset('storage/uploads/offer/'.$offer->offer_image) }}" alt="{{ $offer->title }}">
+    <div class="modal-dialog modal-sm">
+        <div class="float-end">
+            <button type="button" data-bs-dismiss="modal fade" aria-label="Close" class="btn btn-success">X</button>
         </div>
-      </div>
+        <div class="modal-body">
+            <img width="100%" src="{{ asset('storage/uploads/offer/'.$offer->offer_image) }}" alt="{{ $offer->title }}">
+        </div>
     </div>
   </div>
   @endisset

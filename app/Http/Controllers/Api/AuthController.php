@@ -14,6 +14,7 @@ class AuthController extends Controller {
     //login
     public function login(Request $request) {
         $request->validate([
+            'mobile'   => 'required',
             'email'    => 'required',
             'password' => 'required',
         ]);
@@ -55,10 +56,12 @@ class AuthController extends Controller {
         $userdata = User::find(auth()->user()->id);
         $this->validate($request, [
             'name'  => 'required|string|max:255',
+            'mobile'=> 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $userdata->id,
         ]);
 
         $userdata->name  = $request->name;
+        $userdata->mobile = $request->mobile;
         $userdata->email = $request->email;
         if ($request->password) {
             $userdata->password = Hash::make($request->password);
