@@ -4,9 +4,11 @@ namespace App\Http\Controllers\backend;
 
 use App\Models\User;
 use App\Models\Course;
+use App\Services\SendSMS;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Teachereducation;
+use App\Models\VerificationCode;
 use App\Models\TeacherRegistration;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +27,15 @@ class TeacherController extends Controller {
         $photo       = $request->file('photo');
         $certificate = $request->file('certificate');
 
+        $username = $this->userName($request->username);
+        $request['phone'] = $username['phone'];
+        $request['email'] = $username['email'];
+
         $this->validate($request, [
+            'username'         => ['required'],
             'name'             => ['required', 'string', 'max:255'],
-            'email'            => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone'            => ['nullable', 'string', 'min:11', 'unique:users'],
+            'email'            => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
             'password'         => ['required', 'string', 'min:8'],
             "birthday"         => "required",
             "mobile"           => "required",
@@ -56,6 +64,7 @@ class TeacherController extends Controller {
         $insertUser                    = new User();
         $insertUser->name              = $request->name;
         $insertUser->email             = $request->email;
+        $insertUser->phone             = $request->phone;
         $insertUser->password          = Hash::make($request->password);
         $insertUser->save();
         $insertUser->assignRole(2);
@@ -65,7 +74,7 @@ class TeacherController extends Controller {
             $verifyToken->user_id = $insertUser->id;
             $verifyToken->token = random_int(100000, 999999);;
             $verifyToken->save();
-            
+
             $data                    = new TeacherRegistration();
             $data->user_id           = $insertUser->id;
             $data->courses           = json_encode($request->courses);
@@ -84,13 +93,53 @@ class TeacherController extends Controller {
             $data->save();
         }
 
-        $credentials = $request->only('email', 'password');
+        if($username['email']){
+            $credentials = $request->only('email', 'password');
+        }else{
+            $credentials = $request->only('phone', 'password');
+        }
+
         if (Auth::attempt($credentials)) {
-            $request->user()->sendEmailVerificationNotification();
+            if($request->email){
+                $request->user()->sendEmailVerificationNotification();
+            }else{
+                $otpModel = VerificationCode::updateOrCreate([
+                    'user_id' => $insertUser->id,
+                ], [
+                    'otp' => $this->generateUniqueOtp()
+                ]);
+
+                $message = "Your Verification OTP is " .$otpModel->otp;
+                (new SendSMS())->send_sms($request->phone, $message);
+            }
             return redirect()->intended('dashboard')
                 ->withSuccess('You have Successfully loggedin');
         }
 
+    }
+
+    private function generateUniqueOtp(): int
+    {
+        do {
+            $otp = mt_rand(123400, 999999);
+        } while (VerificationCode::where('otp', $otp)->exists());
+
+        return $otp;
+    }
+
+    private function userName($username)
+    {
+        if(filter_var($username, FILTER_VALIDATE_EMAIL)){
+            return [
+                'email' => $username,
+                'phone' => null,
+            ];
+        }else {
+            return [
+                'email' => null,
+                'phone' => $username
+            ];
+        }
     }
 
     function showAll() {

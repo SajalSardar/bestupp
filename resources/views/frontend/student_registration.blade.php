@@ -35,8 +35,8 @@
                         <p class="text-danger">{{ $message }}</p>
                       @enderror
                     </div>
-                    
-                    <!-- 
+
+                    <!--
                     <div class="form-floating admission_input col-md-6">
                       <input type="text" class="form-control" id="regFatherName" name="fathername" placeholder="Father Name">
                       <label for="regFatherName">Father Name</label>
@@ -45,19 +45,14 @@
                       @enderror
                     </div>
                     -->
-                    
-                    <div class="form-floating admission_input col-md-12">
-                      <input type="number" name="mobile" class="form-control" id="studentWhatsappNumber" placeholder="Mobile Number">
-                      <label for="studentWhatsappNumber">Mobile Number</label>
-                      @error('mobile')
-                        <p class="text-danger">{{ $message }}</p>
-                      @enderror
-                    </div>
 
                     <div class="form-floating admission_input col-md-12">
-                      <input type="text" class="form-control" id="semail" name="email" placeholder="Student Email">
-                      <label for="semail">Email</label>
+                      <input type="text" class="form-control" id="semail" name="username" placeholder="Student email / phone">
+                      <label for="semail">Email / Phone</label>
                       @error('email')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                      @error('phone')
                         <p class="text-danger">{{ $message }}</p>
                       @enderror
                     </div>
@@ -69,8 +64,8 @@
                         <p class="text-danger">{{ $message }}</p>
                       @enderror
                     </div>
-                    
-                    <!-- 
+
+                    <!--
                     <div class="form-floating admission_input col-md-6">
                       <input type="date" name="birthday" class="form-control" id="studentDateOfBirth" placeholder="Date of Birth">
                       <label for="studentDateOfBirth">Date of Birth</label>
@@ -79,8 +74,8 @@
                       @enderror
                     </div>
                     -->
-                    
-                    <!-- 
+
+                    <!--
                     <div class="form-floating admission_input col-md-6">
                       <select class="form-select" name="gender" id="regGender" aria-label="Floating label select example">
                         <option selected disabled>-Select One-</option>
@@ -93,8 +88,8 @@
                       @enderror
                     </div>
                     -->
-                    
-                    <!-- 
+
+                    <!--
                     <div class="form-floating admission_input col-md-6">
                       <input type="text" name="address" class="form-control" id="studentAddress" placeholder="Address">
                       <label for="studentAddress">Address</label>
@@ -103,8 +98,8 @@
                       @enderror
                     </div>
                     -->
-                    
-                    <!-- 
+
+                    <!--
                     <div class="form-floating admission_input col-md-6">
                       <input type="text" class="form-control" id="studentNationality" name="nationality" placeholder="Nationality">
                       <label for="studentNationality">Nationality</label>
@@ -113,8 +108,8 @@
                       @enderror
                     </div>
                     -->
-                    
-                    <!-- 
+
+                    <!--
                     <div class="form-floating admission_input col-md-6">
                       <input type="text" name="guardianname" class="form-control" id="studentGuardianName" placeholder="Guardian Name">
                       <label for="studentGuardianName">Guardian Name</label>
@@ -123,8 +118,8 @@
                       @enderror
                     </div>
                     -->
-                    
-                    <!-- 
+
+                    <!--
                     <div class="form-floating admission_input col-md-6">
                       <input type="number" name="gnumber" class="form-control" id="studentGuardianNumber"
                         placeholder="Guardian Phone Number">
@@ -149,7 +144,7 @@
   </section>
   <!-- Student Ragistration Part End -->
 
-  
+
 @if ($message = Session::get('success'))
 <div class="toast-container position-absolute top-0 end-0 p-3" style="z-index:9999;">
 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="10000">

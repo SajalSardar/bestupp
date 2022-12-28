@@ -60,9 +60,12 @@
                       </div>
 
                       <div class="form-floating admission_input col-md-6">
-                        <input type="email" class="form-control" id="regEmail" placeholder="Email" name="email">
-                        <label for="regEmail">Email</label>
+                        <input type="email" class="form-control" id="regEmail" placeholder="Email / Phone" name="username">
+                        <label for="regEmail">Email / Phone</label>
                         @error('email')
+                        <p class="text-danger">{{ $message }}</p>
+                        @enderror
+                        @error('phone')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
@@ -73,7 +76,7 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
-    
+
                       <div class="form-floating admission_input col-md-6">
                         <input type="date" name="birthday" class="form-control" id="regDateOfBirth" placeholder="Date of Birth">
                         <label for="regDateOfBirth">Date of Birth</label>
@@ -81,7 +84,7 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
-    
+
                       <div class="form-floating admission_input col-md-6">
                         <input type="text" class="form-control" id="regMobNumber" placeholder="Mobile Number" name="mobile">
                         <label for="regMobNumber">Mobile Number</label>
@@ -96,7 +99,7 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
-    
+
                       <div class="form-floating admission_input col-md-6">
                         <input type="text" class="form-control" id="regPreAddress" placeholder="Present Address" name="address">
                         <label for="regPreAddress">Present Address</label>
@@ -136,7 +139,7 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
-    
+
                       <div class=" admission_input col-md-6">
                         <label for="regNameCourse" class="select_2_label">Select Course</label>
                         <select class="form-select select_2" id="regNameCourse"  name="courses[]" multiple aria-label="Name of Course">
@@ -144,7 +147,7 @@
                           <option value="{{ strip_tags($course->name) }}">{{ strip_tags($course->name) }}</option>
                           @endforeach
                         </select>
-                        
+
                         @error('courses')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
@@ -157,7 +160,7 @@
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                       </div>
-    
+
 
                 </div>
               </div>
@@ -196,7 +199,7 @@
   </section>
   <!-- Registration Part End -->
 
-  
+
 @if ($message = Session::get('success'))
 <div class="toast-container position-absolute top-0 end-0 p-3" style="z-index:9999;">
 <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true" data-bs-delay="10000">
@@ -220,7 +223,7 @@
 @section('frontend_js')
 <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
-  
+
   $('.select_2').select2();
 
 window.onload = (event)=> {

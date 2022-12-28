@@ -14,17 +14,15 @@ class AuthController extends Controller {
     //login
     public function login(Request $request) {
         $request->validate([
-            'mobile'   => 'required',
-            'email'    => 'required',
+            'username'    => 'required',
             'password' => 'required',
         ]);
 
         //email check
-        $user = User::where('email', $request->email)->with('roles')->first();
+        $user = User::where('email', $request->username)->orWhere('phone', $request->username)->with('roles')->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response([
-
                 'error'   => true,
                 'message' => "Invalid User",
 

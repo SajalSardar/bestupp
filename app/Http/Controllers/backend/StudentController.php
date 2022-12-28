@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Http\Controllers\Controller;
-use App\Library\SslCommerz\SslCommerzNotification;
-use App\Models\EmailVerificationToken;
+use App\Models\User;
 use App\Models\Offer;
 use App\Models\Order;
-use App\Models\OrderInstallment;
-use App\Models\StudentRegistration;
-use App\Models\User;
+use App\Services\SendSMS;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\OrderInstallment;
+use App\Models\VerificationCode;
+use App\Models\StudentRegistration;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Models\EmailVerificationToken;
+use App\Library\SslCommerz\SslCommerzNotification;
 
 class StudentController extends Controller {
 
@@ -23,10 +25,16 @@ class StudentController extends Controller {
     }
 
     public function studentRegistration(Request $request) {
+
+        $username = $this->userName($request->username);
+        $request['phone'] = $username['phone'];
+        $request['email'] = $username['email'];
+
         $this->validate($request, [
+            'username'         => ['required'],
             'name'        => ['required', 'string', 'max:255'],
-            'mobile'      => ['required', 'string', 'min:11', 'unique:users'],
-            'email'       => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone'       => ['nullable', 'string', 'min:11', 'unique:users'],
+            'email'       => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
             'password'    => ['required', 'string', 'min:8'],
             "birthday"    => '',
             "nationality" => '',
@@ -34,14 +42,16 @@ class StudentController extends Controller {
             "gender"      => '',
             "address"     => '',
         ]);
+
         $insertUser                    = new User();
         $insertUser->name              = $request->name;
-        $insertUser->mobile            = $request->mobile;
+        $insertUser->phone             = $request->phone;
         $insertUser->email             = $request->email;
         $insertUser->password          = Hash::make($request->password);
         $insertUser->save();
         $insertUser->assignRole(3);
         $student_id = "EXN-". random_int(100000, 999999);
+
         if ($insertUser) {
 
             $verifyToken = new EmailVerificationToken();
@@ -53,7 +63,7 @@ class StudentController extends Controller {
             $data               = new StudentRegistration();
             $data->user_id      = $insertUser->id;
             $data->birthday     = $request->birthday;
-            $data->mobile       = $request->mobile;
+            $data->mobile       = $request->phone;
             $data->nationality  = $request->nationality;
             $data->guardianname = $request->guardianname;
             $data->fathername   = $request->fathername;
@@ -64,13 +74,54 @@ class StudentController extends Controller {
             $data->save();
 
         }
-        
 
-        $credentials = $request->only('email', 'password');
+        if($username['email']){
+            $credentials = $request->only('email', 'password');
+        }else{
+            $credentials = $request->only('phone', 'password');
+        }
+
         if (Auth::attempt($credentials)) {
-            $request->user()->sendEmailVerificationNotification();
+
+            if($request->email){
+                $request->user()->sendEmailVerificationNotification();
+            }else{
+                $otpModel = VerificationCode::updateOrCreate([
+                    'user_id' => $insertUser->id,
+                ], [
+                    'otp' => $this->generateUniqueOtp()
+                ]);
+
+                $message = "Your Verification OTP is " .$otpModel->otp;
+                (new SendSMS())->send_sms($request->phone, $message);
+            }
+
             return redirect()->route('frontend.home')
                 ->with("success", "Registration Successfull!");
+        }
+    }
+
+    private function generateUniqueOtp(): int
+    {
+        do {
+            $otp = mt_rand(123400, 999999);
+        } while (VerificationCode::where('otp', $otp)->exists());
+
+        return $otp;
+    }
+
+    private function userName($username)
+    {
+        if(filter_var($username, FILTER_VALIDATE_EMAIL)){
+            return [
+                'email' => $username,
+                'phone' => null,
+            ];
+        }else {
+            return [
+                'email' => null,
+                'phone' => $username
+            ];
         }
     }
 

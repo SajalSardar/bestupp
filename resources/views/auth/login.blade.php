@@ -27,13 +27,21 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form-group">
-                <input id="email" type="email" placeholder="Enter Your Email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <input id="email" type="text" placeholder="Enter Your Email" class="form-control" name="username" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
+
+                @error('phone')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+
+                {{ session('errors') }}
             </div><!-- form-group -->
             <div class="form-group">
                 <input id="password" type="password" placeholder="Enter Your Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
@@ -49,7 +57,7 @@
                 </a>
                 @endif
             </div><!-- form-group -->
-            
+
             <button type="submit" class="btn btn-info btn-block">
                 {{ __('Login') }}
             </button>

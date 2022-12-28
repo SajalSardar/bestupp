@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,7 @@ Auth::routes(['verify' => true]);
 require_once "roadmap/backend.php";
 require_once "roadmap/frontend.php";
 
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 // SSLCOMMERZ Start
 Route::group(['middleware' => ['verified','auth']], function () {
   Route::get('/checkout', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
