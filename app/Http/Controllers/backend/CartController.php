@@ -32,7 +32,7 @@ class CartController extends Controller {
         return view('frontend.cart', compact('cartDatas', 'days', 'installmentSum'));
     }
 
-    function enroll(Request $request, $id) {
+    function enroll($id) {
         $cartDatas = Cart::where('user_id', auth()->user()->id)->get();
 
         foreach (auth()->user()->roles as $role) {
@@ -41,25 +41,26 @@ class CartController extends Controller {
             }
         }
 
-        if(empty(auth()->user()->student->id)){
-            return redirect(route('dashboard.student.information.edit'))->with('warning', "Set Your Student information!");
-        }
+        // if(empty(auth()->user()->student->id)){
+        //     return redirect(route('dashboard.student.information.edit'))->with('warning', "Set Your Student information!");
+        // }
 
         foreach ($cartDatas as $data) {
             if ($data->course_id == $id) {
                 return redirect(route('frontend.cart'));
             }
         }
-        $this->validate($request, [
-            'studentDay'  => 'required',
-            'studenttime' => 'required',
-        ]);
+
+        // $this->validate($request, [
+        //     'studentDay'  => 'required',
+        //     'studenttime' => 'required',
+        // ]);
 
         $data                = new Cart();
         $data->user_id       = auth()->user()->id;
         $data->course_id     = $id;
-        $data->selected_day  = $request->studentDay;
-        $data->selected_time = $request->studenttime;
+        // $data->selected_day  = $request->studentDay;
+        // $data->selected_time = $request->studenttime;
         $data->save();
         return redirect(route('frontend.cart'));
     }

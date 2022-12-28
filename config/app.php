@@ -69,6 +69,10 @@ return [
 
     'timezone'        => 'Asia/Dhaka',
 
+    'smsBaseUrl' => env('SMS_BASE_URI'),
+    'smsApiKey' => env('SMS_API_KEY'),
+    'smsSenderId' => env('SMS_SENDER_ID'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

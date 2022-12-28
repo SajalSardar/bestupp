@@ -72,13 +72,11 @@ class AuthController extends Controller {
         $request->validate([
             'verify_token' => 'required',
         ]);
-    
-    
+
        $data = EmailVerificationToken::where('user_id',auth()->user()->id)->first();
-       
-    
+
        if($request->verify_token ===  $data->token){
-        
+
         User::where('id', $data->user_id)->update([
             "email_verified_at"=> Carbon::now(),
         ]);
@@ -86,13 +84,13 @@ class AuthController extends Controller {
         return response([
             'message' => 'Email Verification Successfully Done!',
         ]);
-    
+
        }else{
         return response([
             'message' => 'Invalid Verification Code!',
         ]);
        }
-        
+
     }
 
 }

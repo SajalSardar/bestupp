@@ -20,12 +20,16 @@ class TeacherController extends Controller {
             'password' => ['required', 'string', 'min:8'],
 
         ]);
+        
+        $username = $this->userName($request->email);
 
         $insertUser = User::create([
             "name"              => $request->name,
-            "email"             => $request->email,
+            "email"             => $username['email'],
+            "phone"             => $username['phone'],
             "password"          => Hash::make($request->password),
         ]);
+
         $insertUser->assignRole(2);
 
         $verifyToken = new EmailVerificationToken();
@@ -40,6 +44,21 @@ class TeacherController extends Controller {
         ];
 
         return response($response, 201);
+    }
+
+    private function userName($username)
+    {
+        if(filter_var($username, FILTER_VALIDATE_EMAIL)){
+            return [
+                'email' => $username,
+                'phone' => null,
+            ];
+        }else {
+            return [
+                'email' => null,
+                'phone' => $username
+            ];
+        }
     }
 
     public function teacherProfile() {

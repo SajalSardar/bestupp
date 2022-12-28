@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\EmailVerificationToken;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CommonController;
@@ -10,6 +9,8 @@ use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\StudentController;
 use App\Http\Controllers\Api\TeacherController;
 use App\Http\Controllers\Api\SslCommerzApiController;
+use App\Http\Controllers\OtpController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -84,9 +85,12 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 });
 
 
+Route::post('/send-otp', [OtpController::class, 'sendOTP']);
+Route::post('/verify-otp', [OtpController::class, 'verifyOTP']);
+
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
- 
+
     return response([
         'message' => 'Verification link sent!',
     ]);

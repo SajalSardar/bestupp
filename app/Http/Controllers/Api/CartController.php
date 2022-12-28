@@ -38,8 +38,6 @@ class CartController extends Controller {
 
     function enroll(Request $request) {
         $this->validate($request, [
-            'studentDay'  => 'required',
-            'studenttime' => 'required',
             'course_id'   => 'required',
         ]);
         $cartDatas = Cart::where('user_id', auth()->user()->id)->get();
@@ -63,8 +61,8 @@ class CartController extends Controller {
         $data                = new Cart();
         $data->user_id       = auth()->user()->id;
         $data->course_id     = $request->course_id;
-        $data->selected_day  = $request->studentDay;
-        $data->selected_time = $request->studenttime;
+        // $data->selected_day  = $request->studentDay;
+        // $data->selected_time = $request->studenttime;
         $data->save();
         return response($data, 200);
     }

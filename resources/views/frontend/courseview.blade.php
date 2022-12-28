@@ -69,7 +69,7 @@
                       <div class="text">
                         <p>
                           @if ($data->discount)
-                          Regular Price: <strike>{{ $data->course_fee }}</strike>  
+                          Regular Price: <strike>{{ $data->course_fee }}</strike>
                           <br>
                           Offer Price: {{ ($data->course_fee) - ($data->discount) }} BDT
                           @else
@@ -98,14 +98,14 @@
                       @endforeach
 
                   </ul>
-                  
+
                 </div>
-                <button type="button" class="enroll_btn btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Buy Now</button>
+                <a href="{{ route('frontend.enroll',$data->id) }}" class="enroll_btn btn" >Buy Now</a>
               </div>
-              
+
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" style="z-index: 9999">
+{{-- <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" style="z-index: 9999">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -127,9 +127,9 @@
                   @endphp
                   @if ($data->class_days == $day_length)
                   <option value="{{ $day->name }}">{{ $day->name }}</option>
-                 
+
                   @endif
-                 
+
                   @endforeach
                 </select>
                 @error('studentDay')
@@ -151,7 +151,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 
             </div>

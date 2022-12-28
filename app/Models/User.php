@@ -33,6 +33,10 @@ class User extends Authenticatable implements MustVerifyEmail{
         return $this->hasOne(EmailVerificationToken::class);
     }
 
+    function verificationOTP() {
+        return $this->hasOne(VerificationCode::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -43,6 +47,8 @@ class User extends Authenticatable implements MustVerifyEmail{
         'email',
         'password',
         'status',
+        'phone',
+        'phone_verified_at',
     ];
 
     /**

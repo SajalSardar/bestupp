@@ -17,13 +17,15 @@ class StudentController extends Controller {
     public function studentRegistration(Request $request) {
         $this->validate($request, [
             'name'     => ['required', 'string', 'max:255'],
-            'email'    => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'email'    => ['required', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
         ]);
+        $username = $this->userName($request->email);
 
         $insertUser = User::create([
             "name"              => $request->name,
-            "email"             => $request->email,
+            "email"             => $username['email'],
+            "phone"             => $username['phone'],
             "password"          => Hash::make($request->password),
         ]);
         $insertUser->assignRole(3);
@@ -41,6 +43,21 @@ class StudentController extends Controller {
 
         return response($response, 201);
 
+    }
+
+    private function userName($username)
+    {
+        if(filter_var($username, FILTER_VALIDATE_EMAIL)){
+            return [
+                'email' => $username,
+                'phone' => null,
+            ];
+        }else {
+            return [
+                'email' => null,
+                'phone' => $username
+            ];
+        }
     }
 
     public function showOrders() {
@@ -151,7 +168,7 @@ class StudentController extends Controller {
         return response([
             "pay_info" => $post_data,
         ]);
-        
+
     }
 
 
