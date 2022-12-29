@@ -65,6 +65,7 @@ class TeacherController extends Controller {
         $insertUser->name              = $request->name;
         $insertUser->email             = $request->email;
         $insertUser->phone             = $request->phone;
+        $insertUser->mobile             = $request->phone;
         $insertUser->password          = Hash::make($request->password);
         $insertUser->save();
         $insertUser->assignRole(2);

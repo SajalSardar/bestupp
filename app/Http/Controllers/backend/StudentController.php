@@ -46,6 +46,7 @@ class StudentController extends Controller {
         $insertUser                    = new User();
         $insertUser->name              = $request->name;
         $insertUser->phone             = $request->phone;
+        $insertUser->mobile             = $request->phone;
         $insertUser->email             = $request->email;
         $insertUser->password          = Hash::make($request->password);
         $insertUser->save();
