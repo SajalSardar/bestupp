@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Services\SendSMS;
 use Illuminate\Http\Request;
+use App\Models\VerificationCode;
 use App\Http\Controllers\Controller;
 use App\Models\EmailVerificationToken;
 use App\Providers\RouteServiceProvider;
-use Carbon\Carbon;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 
 class VerificationController extends Controller
@@ -45,9 +47,34 @@ class VerificationController extends Controller
     }
 
     public function resend(Request $request){
-        $request->user()->sendEmailVerificationNotification();
-        return redirect()->back()->with('success', "Code Send Successfull!");
+        $user = auth()->user();
+        if($user->email){
+            $request->user()->sendEmailVerificationNotification();
+            return redirect()->back()->with('success', "Code Send Successfull!");
+        }
+
+        if($user->phone){
+            $otpModel = VerificationCode::updateOrCreate([
+                'user_id' => $user->id,
+            ],[
+                'otp' => $this->generateUniqueOtp()
+            ]);
+            $message = "Your Verification OTP is " .$otpModel->otp;
+            (new SendSMS())->send_sms($user->phone, $message);
+
+            return redirect()->back()->with('success', "Code Send Successfull!");
+        }
     }
+
+    private function generateUniqueOtp(): int
+    {
+        do {
+            $otp = mt_rand(123400, 999999);
+        } while (VerificationCode::where('otp', $otp)->exists());
+
+        return $otp;
+    }
+
     public function submitForm(){
         return view('auth.verifysubmit');
     }
@@ -55,24 +82,32 @@ class VerificationController extends Controller
         $request->validate([
             'verify_token' => 'required',
         ]);
+        $user = auth()->user();
+        if($user->email){
+            $data = EmailVerificationToken::where('user_id',$user->id)->first();
+            if($request->verify_token ===  $data->token){
 
-    
-       $data = EmailVerificationToken::where('user_id',auth()->user()->id)->first();
-       
+                User::where('id', $data->user_id)->update([
+                    "email_verified_at"=> Carbon::now(),
+                ]);
+                $data->delete();
+                return redirect(route('frontend.home'))->with('success', "Email Verification Successfully Done!");
+            }
+        }
+        if($user->phone){
+            $hasOtp = $user->verificationOTP;
+            if($hasOtp && $hasOtp->otp == $request->verify_token){
+                $user->update([
+                    "email_verified_at"=> Carbon::now(),
+                    'phone_verified_at' => now()
+                ]);
 
-       if($request->verify_token ===  $data->token){
-        
-        User::where('id', $data->user_id)->update([
-            "email_verified_at"=> Carbon::now(),
-        ]);
-        $data->delete();
-        return redirect(route('frontend.home'))->with('success', "Email Verification Successfully Done!");
+                $hasOtp->delete();
 
-       }else{
+                return redirect(route('frontend.home'))->with('success', "Phone Verification Successfully Done!");
+            }
+        }
+
         return "<h2>Invalid Verification Code!<h2>";
-       }
-
-        
-        
     }
 }

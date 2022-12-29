@@ -9,7 +9,7 @@
                 <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
                 <div class="card-body mt-3">
-                   
+
                     <form  method="POST" action="{{ route('dashboard.verify.code.update') }}">
                         @csrf
                         <input type="text" class="form-control" placeholder="Enter Your Code" name="verify_token" required>

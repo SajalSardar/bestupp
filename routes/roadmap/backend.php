@@ -120,7 +120,7 @@ Route::name('dashboard.')->prefix('dashboard')->group( function () {
 
         Route::get('/due-notification-send/{id}', [HomeController::class, "dueNotificationSend"])->name("due.notification.send");
 
-        //create offer 
+        //create offer
         Route::get('/create/offer', [HomeController::class, 'createOffer'])->name('create.offer');
         Route::post('/create/offer', [HomeController::class, 'insertOffer'])->name('insert.offer');
         Route::delete('/delete/offer/{offer}', [HomeController::class, 'deleteOffer'])->name('delete.offer');
@@ -156,7 +156,7 @@ Route::name('dashboard.')->prefix('dashboard')->group( function () {
     });
 
     Route::group(['middleware' => ['role:teacher|student', 'auth']], function () {
-        
+
         Route::get('verify-code-submit', [VerificationController::class, 'submitForm'])->name('verify.code.submit');
 
         Route::post('verify-code-submit', [VerificationController::class, 'submitToken'])->name('verify.code.update');
