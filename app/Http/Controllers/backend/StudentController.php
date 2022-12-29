@@ -46,7 +46,7 @@ class StudentController extends Controller {
         $insertUser                    = new User();
         $insertUser->name              = $request->name;
         $insertUser->phone             = $request->phone;
-        $insertUser->mobile             = $request->phone;
+        $insertUser->mobile            = $request->phone;
         $insertUser->email             = $request->email;
         $insertUser->password          = Hash::make($request->password);
         $insertUser->save();
@@ -63,14 +63,14 @@ class StudentController extends Controller {
 
             $data               = new StudentRegistration();
             $data->user_id      = $insertUser->id;
-            $data->birthday     = $request->birthday;
+            $data->birthday     = '2022-01-01';
             $data->mobile       = $request->phone;
-            $data->nationality  = $request->nationality;
-            $data->guardianname = $request->guardianname;
-            $data->fathername   = $request->fathername;
-            $data->gender       = $request->gender;
-            $data->address      = $request->address;
-            $data->gnumber      = $request->gnumber;
+            $data->nationality  = '$request->nationality';
+            $data->guardianname = '$request->guardianname';
+            $data->fathername   = '$request->fathername';
+            $data->gender       = '$request->gender';
+            $data->address      = '$request->address';
+            $data->gnumber      = '$request->gnumber';
             $data->student_id   = $student_id;
             $data->save();
 
