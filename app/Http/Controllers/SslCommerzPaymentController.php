@@ -34,7 +34,7 @@ class SslCommerzPaymentController extends Controller {
     }
 
     public function index(Request $request) {
-       
+
 
         $request->validate([
             'check' => "required",
