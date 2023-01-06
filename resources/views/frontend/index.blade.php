@@ -137,120 +137,114 @@
             <form action="{{ route('frontend.student.registration') }}" method="POST">
               @csrf
               <div class="row margin_top">
-                <div class="form-floating admission_input col-md-12">
-                  <input type="text" class="form-control" id="studentName" name="name" placeholder="Full Name">
-                  <label for="studentName">Full Name</label>
-                  @error('name')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                <!-- 
-                <div class="form-floating admission_input col-md-6">
-                  <input type="text" class="form-control" id="regFatherName" name="fathername" placeholder="Father Name">
-                  <label for="regFatherName">Father Name</label>
-                  @error('fathername')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                -->
-                
-                <div class="form-floating admission_input col-md-12">
-                  <input type="number" name="mobile" class="form-control" id="studentWhatsappNumber" placeholder="Mobile Number">
-                  <label for="studentWhatsappNumber">Mobile Number</label>
-                  @error('mobile')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                
-                <div class="form-floating admission_input col-md-12">
-                  <input type="text" class="form-control" id="semail" name="email" placeholder="Student Email">
-                  <label for="semail">Email</label>
-                  @error('email')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
+                    <div class="form-floating admission_input col-md-12">
+                      <input type="text" class="form-control" id="studentName" name="name" placeholder="Full Name">
+                      <label for="studentName">Full Name</label>
+                      @error('name')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
 
-                <div class="form-floating admission_input col-md-12">
-                  <input type="password" class="form-control" id="spass" name="password" placeholder="Password">
-                  <label for="spass">Password</label>
-                  @error('password')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                
-                <!--
-                <div class="form-floating admission_input col-md-6">
-                  <input type="date" name="birthday" class="form-control" id="studentDateOfBirth" placeholder="Date of Birth">
-                  <label for="studentDateOfBirth">Date of Birth</label>
-                  @error('birthday')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                -->
-                
-                <!--
-                <div class="form-floating admission_input col-md-6">
-                  <select class="form-select" name="gender" id="regGender" aria-label="Floating label select example">
-                    <option selected disabled>-Select One-</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                  <label for="regGender">Gender</label>
-                  @error('gender')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                -->
+                    <!--
+                    <div class="form-floating admission_input col-md-6">
+                      <input type="text" class="form-control" id="regFatherName" name="fathername" placeholder="Father Name">
+                      <label for="regFatherName">Father Name</label>
+                      @error('fathername')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                    -->
 
-                
-                
-                <!--
-                <div class="form-floating admission_input col-md-6">
-                  <input type="text" name="address" class="form-control" id="studentAddress" placeholder="Address">
-                  <label for="studentAddress">Address</label>
-                  @error('address')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                -->
-                
-                <!--
-                <div class="form-floating admission_input col-md-6">
-                  <input type="text" class="form-control" id="studentNationality" name="nationality" placeholder="Nationality">
-                  <label for="studentNationality">Nationality</label>
-                  @error('nationality')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                -->
-                
-                <!--
-                <div class="form-floating admission_input col-md-6">
-                  <input type="text" name="guardianname" class="form-control" id="studentGuardianName" placeholder="Guardian Name">
-                  <label for="studentGuardianName">Guardian Name</label>
-                  @error('guardianname')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                -->
-                
-                <!--
-                <div class="form-floating admission_input col-md-6">
-                  <input type="number" name="gnumber" class="form-control" id="studentGuardianNumber"
-                    placeholder="Guardian Phone Number">
-                  <label for="studentGuardianNumber">Guardian Phone Number</label>
-                  @error('gnumber')
-                    <p class="text-danger">{{ $message }}</p>
-                  @enderror
-                </div>
-                -->
+                    <div class="form-floating admission_input col-md-12">
+                      <input type="text" class="form-control" id="semail" name="username" placeholder="Student email / phone">
+                      <label for="semail">Email / Phone</label>
+                      @error('email')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                      @error('phone')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
 
-            <div class="col-12">
-              <div class="student_reg_bnt">
-                <button type="submit" class="main_btn">Registration</button>
+                    <div class="form-floating admission_input col-md-12">
+                      <input type="password" class="form-control" id="spass" name="password" placeholder="Password">
+                      <label for="spass">Password</label>
+                      @error('password')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+
+                    <!--
+                    <div class="form-floating admission_input col-md-6">
+                      <input type="date" name="birthday" class="form-control" id="studentDateOfBirth" placeholder="Date of Birth">
+                      <label for="studentDateOfBirth">Date of Birth</label>
+                      @error('birthday')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                    -->
+
+                    <!--
+                    <div class="form-floating admission_input col-md-6">
+                      <select class="form-select" name="gender" id="regGender" aria-label="Floating label select example">
+                        <option selected disabled>-Select One-</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select>
+                      <label for="regGender">Gender</label>
+                      @error('gender')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                    -->
+
+                    <!--
+                    <div class="form-floating admission_input col-md-6">
+                      <input type="text" name="address" class="form-control" id="studentAddress" placeholder="Address">
+                      <label for="studentAddress">Address</label>
+                      @error('address')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                    -->
+
+                    <!--
+                    <div class="form-floating admission_input col-md-6">
+                      <input type="text" class="form-control" id="studentNationality" name="nationality" placeholder="Nationality">
+                      <label for="studentNationality">Nationality</label>
+                      @error('nationality')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                    -->
+
+                    <!--
+                    <div class="form-floating admission_input col-md-6">
+                      <input type="text" name="guardianname" class="form-control" id="studentGuardianName" placeholder="Guardian Name">
+                      <label for="studentGuardianName">Guardian Name</label>
+                      @error('guardianname')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                    -->
+
+                    <!--
+                    <div class="form-floating admission_input col-md-6">
+                      <input type="number" name="gnumber" class="form-control" id="studentGuardianNumber"
+                        placeholder="Guardian Phone Number">
+                      <label for="studentGuardianNumber">Guardian Phone Number</label>
+                      @error('gnumber')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                    </div>
+                    -->
+
+                <div class="col-12">
+                  <div class="student_reg_bnt">
+                    <button type="submit" class="main_btn">Registration</button>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
             </form>
           </div>
         </div>
