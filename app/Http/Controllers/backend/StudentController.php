@@ -36,11 +36,6 @@ class StudentController extends Controller {
             'phone'       => ['nullable', 'string', 'min:11', 'unique:users,phone'],
             'email'       => ['nullable', 'string', 'email', 'max:255', 'unique:users,email'],
             'password'    => ['required', 'string', 'min:8'],
-            "birthday"    => '',
-            "nationality" => '',
-            "fathername"  => '',
-            "gender"      => '',
-            "address"     => '',
         ]);
 
         $insertUser                    = new User();
@@ -54,7 +49,6 @@ class StudentController extends Controller {
         $student_id = "EXN-". random_int(100000, 999999);
 
         if ($insertUser) {
-
             $verifyToken = new EmailVerificationToken();
             $verifyToken->user_id = $insertUser->id;
             $verifyToken->token = random_int(100000, 999999);;
@@ -63,14 +57,14 @@ class StudentController extends Controller {
 
             $data               = new StudentRegistration();
             $data->user_id      = $insertUser->id;
-            $data->birthday     = '2022-01-01';
+            $data->birthday     = null;
             $data->mobile       = $request->phone;
-            $data->nationality  = '$request->nationality';
-            $data->guardianname = '$request->guardianname';
-            $data->fathername   = '$request->fathername';
-            $data->gender       = '$request->gender';
-            $data->address      = '$request->address';
-            $data->gnumber      = '$request->gnumber';
+            $data->nationality  = null;
+            $data->guardianname = null;
+            $data->fathername   = null;
+            $data->gender       = null;
+            $data->address      = null;
+            $data->gnumber      = null;
             $data->student_id   = $student_id;
             $data->save();
 

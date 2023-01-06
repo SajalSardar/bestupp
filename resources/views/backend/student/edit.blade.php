@@ -14,7 +14,7 @@
 
   <div class="card p-4">
       @if (isset($information->id))
-          
+
     <form action="{{ route('dashboard.student.information.update',$information->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-layout row">
@@ -27,7 +27,7 @@
             </div>
             <div class="form-group col-sm-6">
                 <label class="form-control-label">Birth Day:</label>
-               <input type="text"  name="birthday" class="form-control" value="{{ $information->birthday->isoFormat('Y-M-D') }}">
+               <input type="text"  name="birthday" class="form-control" value="{{ $information->birthday ? $information->birthday->isoFormat('Y-M-D') : '' }}">
                 @error('birthday')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -86,7 +86,7 @@
                 @enderror
                 <img src="{{ asset('storage/uploads/profiles/'. $information->profile_photo) }}" width="100" alt="">
               </div>
-  
+
             <div class="form-layout-footer col-12">
               <button class="btn btn-info mg-r-5">Uplode</button>
             </div>
@@ -163,13 +163,13 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
               </div>
-  
+
             <div class="form-layout-footer col-12">
               <button class="btn btn-info mg-r-5">Submit</button>
             </div>
           </div>
     </form>
     @endif
-  </div> 
+  </div>
 </div>
 @endsection
