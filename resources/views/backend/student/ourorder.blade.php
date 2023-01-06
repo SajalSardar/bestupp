@@ -8,7 +8,7 @@
 
   <div class="sl-pagebody">
     <div class="sl-page-title">
-      <h5>Our Courses 
+      <h5>Our Courses
         <a href="{{ route('frontend.all.course') }}" target="_blank" class="float-right btn btn-primary btn-sm">Buy Course</a></h5>
     </div>
       @forelse ( $ourOrders as $order)
@@ -16,14 +16,14 @@
         <div class="card mb-5">
           <div class="card-header">
             <h5>
-              {{ strip_tags($order->course->name) }} 
+              {{ strip_tags($order->course->name) }}
               <span class="ml-2" style="font-weight: 400; font-size: 16px">Free: {{ $order->price }}</span>
-              <span class="ml-2" style="font-weight: 400; font-size: 16px">Day: {{ $order->selected_day }}</span>
-              <span class="ml-2" style="font-weight: 400; font-size: 16px">Time: {{ $order->selected_time->isoFormat('H:MM:SS A') }}</span>
+              <span class="ml-2" style="font-weight: 400; font-size: 16px">Day: {{ $order->selected_day ?? 'N\A' }}</span>
+              <span class="ml-2" style="font-weight: 400; font-size: 16px">Time: {{ $order->selected_time ? $order->selected_time->isoFormat('H:MM:SS A') : 'N\A' }}</span>
               <span class="ml-2" style="font-weight: 400; font-size: 16px">Join Date: {{ $order->created_at->isoFormat('Do MMM  YY') }} </span>
               @foreach ($order->OrderInstallments as $OrderInstallment)
                 @if ($OrderInstallment->installment==1 && $OrderInstallment->status == 1)
-                <span class="float-right badge badge-danger">Pending</span>
+            <span class="float-right badge badge-danger">Pending</span>
                   @elseif ($OrderInstallment->installment==1 && $OrderInstallment->status == 2)
                   <span class="float-right badge badge-{{$order->status ==1 ? "primary": ($order->status ==2 ? "danger" : "success" )  }}">{{$order->status ==1 ? "Running": ($order->status ==2 ? "Drop Out" : "Complete" )  }}</span>
                 @endif

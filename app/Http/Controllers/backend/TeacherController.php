@@ -34,8 +34,8 @@ class TeacherController extends Controller {
         $this->validate($request, [
             'username'         => ['required'],
             'name'             => ['required', 'string', 'max:255'],
-            'phone'            => ['nullable', 'string', 'min:11', 'unique:users'],
-            'email'            => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
+            'phone'            => ['nullable', 'string', 'min:11', 'unique:users,phone'],
+            'email'            => ['nullable', 'string', 'email', 'max:255', 'unique:users,email'],
             'password'         => ['required', 'string', 'min:8'],
             "birthday"         => "required",
             "mobile"           => "required",
