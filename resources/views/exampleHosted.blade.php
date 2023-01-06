@@ -46,7 +46,7 @@
                         <div class="col-md-12 mb-3">
                             <label for="firstName">Full name</label>
                             <input type="text" name="customer_name" class="form-control" id="customer_name" placeholder=""
-                                   value="{{ auth()->user()->name }}" required>
+                                   value="{{ auth()->user()->name }}" optional>
                             <div class="invalid-feedback">
                                 Valid customer name is required.
                             </div>
@@ -60,7 +60,7 @@
                                 <span class="input-group-text">+88</span>
                             </div>
                             <input type="text" name="customer_mobile" class="form-control" id="mobile" placeholder="Mobile"
-                                   value="{{ auth()->user()->student->mobile }}" required>
+                                   value="{{ auth()->user()->student->mobile }}" optional>
                             <div class="invalid-feedback" style="width: 100%;">
                                 Your Mobile number is required.
                             </div>
@@ -70,7 +70,7 @@
                     <div class="mb-3">
                         <label for="email">Email <span class="text-muted"></span></label>
                         <input type="email" name="customer_email" class="form-control" id="email"
-                               placeholder="you@example.com" value="{{ auth()->user()->email }}" required>
+                               placeholder="you@example.com" value="{{ auth()->user()->email }}" optional>
                         <div class="invalid-feedback">
                             Please enter a valid email address for shipping updates.
                         </div>
@@ -79,7 +79,7 @@
                     <div class="mb-3">
                         <label for="address">Address</label>
                         <input type="text" class="form-control" id="address" placeholder="1234 Main St"
-                               value="{{ auth()->user()->student->address }}" required>
+                               value="{{ auth()->user()->student->address }}" optional>
                         <div class="invalid-feedback">
                             Please enter your shipping address.
                         </div>
