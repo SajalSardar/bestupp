@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\SendSMS;
 use Illuminate\Http\Request;
 use App\Models\VerificationCode;
+use App\Events\ResetPasswordEvent;
 use App\Http\Controllers\Controller;
 use App\Models\EmailVerificationToken;
 use App\Providers\RouteServiceProvider;

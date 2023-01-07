@@ -69,7 +69,6 @@ class HomeController extends Controller {
         $userdata->email = $request->email;
         if ($request->password) {
             if(!Hash::check($request->current_password, $userdata->password)){
-                dd('ok')
                 return back()->withErrors(['current_password' => 'Sorry, Your old password does not match.'])->withInput();
             }
             $userdata->password = Hash::make($request->password);

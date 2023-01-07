@@ -11,7 +11,7 @@
       <div class="sl-page-title">
         <h5>Edit Profile</h5>
       </div>
-
+      {{ session('errors') }}
       <div class="card pd-20 pd-sm-40">
         <form action="{{ route('dashboard.profile.update',auth()->user()->id) }}" method="POST" >
             @csrf
