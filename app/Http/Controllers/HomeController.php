@@ -53,9 +53,15 @@ class HomeController extends Controller {
     public function updateProfile(Request $request, $id) {
 
         $userdata = User::find($id);
+        $username = $this->userName($request->username);
+        $request['phone'] = $username['phone'];
+        $request['email'] = $username['email'];
+
         $rules = [
+            'username' => 'required',
             'name'     => 'required|string|max:255',
-            'email'    => 'required|email|max:255|unique:users,email,' . $userdata->id,
+            'email'    => 'nullable|email|max:255|unique:users,email,' . $userdata->id,
+            'pone'    => 'nullable|email|max:255|unique:users,phone,' . $userdata->id,
             'password' => 'confirmed',
         ];
 
@@ -66,7 +72,8 @@ class HomeController extends Controller {
         $this->validate($request, $rules);
 
         $userdata->name  = $request->name;
-        $userdata->email = $request->email;
+        $userdata->email = $request->email ?? null ;
+        $userdata->phone = $request->phone ?? null;
         if ($request->password) {
             if(!Hash::check($request->current_password, $userdata->password)){
                 return back()->withErrors(['current_password' => 'Sorry, Your old password does not match.'])->withInput();
@@ -77,6 +84,21 @@ class HomeController extends Controller {
 
         return back()->with('success', "Profile Update Successfull!");
 
+    }
+
+    private function userName($username)
+    {
+        if(filter_var($username, FILTER_VALIDATE_EMAIL)){
+            return [
+                'email' => $username,
+                'phone' => null,
+            ];
+        }else {
+            return [
+                'email' => null,
+                'phone' => $username
+            ];
+        }
     }
 
     //Privacy Policy

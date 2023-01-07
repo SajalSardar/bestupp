@@ -26,15 +26,27 @@
                     @enderror
                 </div>
 
+                @if (auth()->user()->email)
                 <div class="form-group">
-                  <label class="form-control-label">Email: <span class="tx-danger">*</span></label>
-                  <input class="form-control" type="text" name="email" value="{{ auth()->user()->email }}" placeholder="Enter Your Email">
-                  @error('email')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
-                </div>
+                    <label class="form-control-label">Email: <span class="tx-danger">*</span></label>
+                    <input class="form-control" type="text" name="username" value="{{ auth()->user()->email }}" placeholder="Enter Your Email">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                  </div>
+                @else
+                <div class="form-group">
+                    <label class="form-control-label">Phone: <span class="tx-danger">*</span></label>
+                    <input class="form-control" type="text" name="username" value="{{ auth()->user()->phone }}" placeholder="Enter Your Phone">
+                    @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                  </div>
+                @endif
 
                 <div class="form-group">
                     <label class="form-control-label">Current Password: </label>

@@ -35,6 +35,24 @@ class StudentController extends Controller {
         $verifyToken->token = random_int(100000, 999999);
         $verifyToken->save();
 
+        $student_id = "EXN-". random_int(100000, 999999);
+
+        if ($insertUser) {
+            $data               = new StudentRegistration();
+            $data->user_id      = $insertUser->id;
+            $data->birthday     = null;
+            $data->mobile       = $request->phone;
+            $data->nationality  = null;
+            $data->guardianname = null;
+            $data->fathername   = null;
+            $data->gender       = null;
+            $data->address      = null;
+            $data->gnumber      = null;
+            $data->student_id   = $student_id;
+            $data->save();
+
+        }
+
         $token    = $insertUser->createToken('apptoken')->plainTextToken;
         $response = [
             'user'  => $insertUser,
