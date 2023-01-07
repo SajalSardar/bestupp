@@ -37,9 +37,20 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-control-label">Current Password: </label>
+                    <input id="password" type="password" placeholder="Enter Your Current Password" class="form-control @error('current_password') is-invalid @enderror" name="current_password"  >
+
+                    @error('current_password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                   <label class="form-control-label">New Password: </label>
                   <input id="password" type="password" placeholder="Enter Your New Password" class="form-control @error('password') is-invalid @enderror" name="password"  >
-      
+
                   @error('password')
                       <span class="invalid-feedback" role="alert">
                           <strong>{{ $message }}</strong>
@@ -49,16 +60,16 @@
               <div class="form-group">
                   <input id="password-confirm" type="password" placeholder="Enter Your Confirm Password" class="form-control" name="password_confirmation" >
               </div><!-- form-group -->
-                
-      
+
+
                 <div class="form-layout-footer">
                   <button class="btn btn-info mg-r-5">Submit</button>
                 </div>
               </div>
         </form>
-      </div> 
+      </div>
     </div>
-    
+
 @endsection
 
 @section('dashboard_js')

@@ -53,15 +53,25 @@ class HomeController extends Controller {
     public function updateProfile(Request $request, $id) {
 
         $userdata = User::find($id);
-        $this->validate($request, [
+        $rules = [
             'name'     => 'required|string|max:255',
             'email'    => 'required|email|max:255|unique:users,email,' . $userdata->id,
             'password' => 'confirmed',
-        ]);
+        ];
+
+        if($request->password){
+            $rules['current_password'] = 'required|min:8';
+        }
+
+        $this->validate($request, $rules);
 
         $userdata->name  = $request->name;
         $userdata->email = $request->email;
         if ($request->password) {
+            if(!Hash::check($request->current_password, $userdata->password)){
+                dd('ok')
+                return back()->withErrors(['current_password' => 'Sorry, Your old password does not match.'])->withInput();
+            }
             $userdata->password = Hash::make($request->password);
         }
         $userdata->save();
@@ -218,7 +228,7 @@ class HomeController extends Controller {
 
         if($offer->status == 1){
             $offer->status = 2;
-            $offer->save(); 
+            $offer->save();
         }else{
             $offer->status = 1;
             $offer->save();
