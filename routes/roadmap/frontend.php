@@ -9,7 +9,7 @@ use App\Http\Controllers\frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('frontend.')->group(function () {
-    Route::get('/', [FrontendController::class, 'index'])->name('home')->middleware('verified');
+    Route::get('/', [FrontendController::class, 'index'])->name('home');
 
     Route::get('/teacher/registration', [TeacherController::class, 'teacheRegistrationView'])->name('teacher.registration.view');
     Route::post('/teacher/registration', [TeacherController::class, 'teacheRegistrationStore'])->name('teacher.registration.store');

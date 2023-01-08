@@ -91,7 +91,7 @@ class StudentController extends Controller {
                 (new SendSMS())->send_sms($request->phone, $message);
             }
 
-            return redirect()->route('frontend.home')
+            return redirect()->route('dashboard')
                 ->with("success", "Registration Successfull!");
         }
     }

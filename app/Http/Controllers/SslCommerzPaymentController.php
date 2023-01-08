@@ -34,8 +34,6 @@ class SslCommerzPaymentController extends Controller {
     }
 
     public function index(Request $request) {
-
-
         $request->validate([
             'check' => "required",
         ]);
@@ -69,7 +67,7 @@ class SslCommerzPaymentController extends Controller {
         $post_data['cus_state']    = "";
         $post_data['cus_postcode'] = "";
         $post_data['cus_country']  = "Bangladesh";
-        $post_data['cus_phone']    = $request->customer_mobile;
+        $post_data['cus_phone']    = auth()->user()->phone;
         $post_data['cus_fax']      = "";
 
         # SHIPMENT INFORMATION
