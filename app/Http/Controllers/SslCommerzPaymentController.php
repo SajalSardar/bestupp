@@ -161,15 +161,18 @@ class SslCommerzPaymentController extends Controller {
     public function fail(Request $request) {
         $tran_id = $request->input('tran_id');
 
-        $order_detials = OrderInstallment::where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status','bdt')->first();
+        $order_detials = OrderInstallment::where('transaction_id', $tran_id)->first();
+        $order = $order_detials->order;
 
         if (1 == $order_detials->status) {
-            $order_detials->update(['status' => 1]);
+            $order_detials->delete();
+            $order->delete();
             return redirect(route('dashboard.student.order'))->with('error', 'Transaction is Falied');
         } else if ($order_detials->status == 2) {
             return redirect(route('dashboard.student.order'))->with('info', 'Transaction is already Successful');
         } else {
+            $order_detials->delete();
+            $order->delete();
             return redirect(route('dashboard.student.order'))->with('error', 'Invalid Transaction');
         }
 
@@ -178,18 +181,22 @@ class SslCommerzPaymentController extends Controller {
     public function cancel(Request $request) {
         $tran_id = $request->input('tran_id');
 
-        $order_detials = OrderInstallment::where('transaction_id', $tran_id)
-            ->select('transaction_id', 'status','bdt')->first();
+        $order_detials = OrderInstallment::where('transaction_id', $tran_id)->first();
+        $order = $order_detials->order;
 
         if (1 == $order_detials->status) {
-            $order_detials->update(['status' => 1]);
-            return redirect(route('dashboard.student.order'))->with('error', 'Transaction is cancel');
+            $order_detials->delete();
+            $order->delete();
+            $redirect = redirect(route('dashboard.student.order'))->with('error', 'Transaction is cancel');
         } else if ($order_detials->status == 2) {
-            return redirect(route('dashboard.student.order'))->with('info', 'Transaction is already Successful');
+            $redirect = redirect(route('dashboard.student.order'))->with('info', 'Transaction is already Successful');
         } else {
-            return redirect(route('dashboard.student.order'))->with('error', 'Invalid Transaction');
+            $order_detials->delete();
+            $order->delete();
+            $redirect = redirect(route('dashboard.student.order'))->with('error', 'Invalid Transaction');
         }
 
+        return $redirect;
     }
 
     public function ipn(Request $request) {
