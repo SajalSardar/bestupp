@@ -148,17 +148,13 @@ class ResetPasswordController extends Controller
         ]);
 
         $data = PasswordReset::where('email', $request->email)->first();
-        
-        if(Carbon::parse($data->created_at)->addMinutes(59)->format('Y-m-d H:i') < now()->format('Y-m-d H:i')){
-            $user = User::where('email', $request->email)->first();
-            $user->update([
-                'password' => Hash::make($request->password)
-            ]);
-            $data->delete();
-            return redirect()->route('login');
-        }
 
-        return back();
+        $user = User::where('email', $request->email)->first();
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+        $data->delete();
+        return redirect()->route('login');
     }
 
 }
