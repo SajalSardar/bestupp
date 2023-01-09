@@ -42,8 +42,9 @@ class ResetPasswordController extends Controller
 
         if($username['email']){
             $token = Str::random(60);
-            $this->createOrFindEmail($username['email'], $token);
-            ResetPasswordEvent::dispatch($username['email'], $token);
+            $reset =  $this->createOrFindEmail($username['email'], $token);
+
+            ResetPasswordEvent::dispatch($username['email'], $reset->token);
 
             return back()->with('status', 'Please check your email for reset password link');
         }
@@ -147,7 +148,7 @@ class ResetPasswordController extends Controller
         ]);
 
         $data = PasswordReset::where('email', $request->email)->first();
-
+        
         if(Carbon::parse($data->created_at)->addMinutes(59)->format('Y-m-d H:i') < now()->format('Y-m-d H:i')){
             $user = User::where('email', $request->email)->first();
             $user->update([
