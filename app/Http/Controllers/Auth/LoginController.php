@@ -22,6 +22,7 @@ class LoginController extends Controller {
             'username' => 'required',
             'email' => 'nullable|email|exists:users,email',
             'phone' => 'nullable|exists:users,phone',
+            'password' => 'required'
         ]);
 
         if($username['email']){
@@ -35,6 +36,7 @@ class LoginController extends Controller {
                 ->withSuccess('You have Successfully loggedin');
         }
 
+        return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
     private function userName($username)

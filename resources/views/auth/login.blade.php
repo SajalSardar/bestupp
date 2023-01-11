@@ -30,18 +30,12 @@
                 <input id="email" type="text" placeholder="Enter Your Email / Phone" class="form-control" name="username" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                 @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    <strong class="text-danger">{{ $message }}</strong>
                 @enderror
 
                 @error('phone')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
+                    <strong>{{ $message }}</strong>
                 @enderror
-
-                {{ session('errors') }}
             </div><!-- form-group -->
             <div class="form-group">
                 <input id="password" type="password" placeholder="Enter Your Password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
